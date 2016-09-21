@@ -91,7 +91,7 @@ controller.hears(['compare','contrast', 'difference','opposed'], ['direct_messag
     color: '#F5B279'
   }]
       convo.reply(message, {
-    attachments: attachments
+    attachments: mainAttachments
   }, function (err, resp) {0
     console.log(err, resp)
   })
