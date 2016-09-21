@@ -31,16 +31,58 @@ controller.on('bot_channel_join', function (bot, message) {
 })
 
 controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function (bot, message) {
-  //bot.reply(message, 'Hello.')
-
   controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
             bot.reply(message, 'Hi, <@'+ message.user + '>! I hope you\'re doing well today.');
         } else {
-            bot.reply(message, 'Hi, <@'+ message.user + '>! I hope you\'re doing well today. \n What can I help you with?');
+            bot.reply(message, 'Hi, <@'+ message.user + '>!  What do you want to do?')
         }
     });
 })
+
+controller.hears(['track','change', 'changed','rate','grow','growth'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Bar Chart or Line Chart',
+    text: 'You will require either a bar chart or a line chart to better convey this information.',
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+})
+
+controller.hears(['compare','contrast', 'difference','opposed'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Bubble or Scatter',
+    text: 'You will require a Bar Mekko, Bubble or Scatter graph to better convey this information.',
+    color: '#F5B279'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+})
+
+controller.hears(['market share','segment', 'market','share', 'each'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Marimekko or 100% Stacked Bar Graph',
+    text: 'You will require a 100% Stacked bar graph or a Marimekko graph to better convey this information.',
+    color: '#EF84B6'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+})
+
+
 
 controller.hears('.*', ['direct_message', 'direct_mention'], function (bot, message) {
   bot.reply(message, 'Sorry <@' + message.user + '>, I don\'t understand. \n')
