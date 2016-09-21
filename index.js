@@ -84,17 +84,9 @@ controller.hears(['compare','contrast', 'difference','opposed'], ['direct_messag
     };
 
     var displayChart = function(response, convo) {
-       var mainAttachments = [{
-    title: 'Bubble or Scatter',
-    text: 'Here it is.',
-    image_url:'http://www.mekkographics.com/wp-content/uploads/2012/07/Bar-Mekko1.png',
-    color: '#F5B279'
-  }]
-      convo.reply(message, {
-    attachments: mainAttachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
+       
+      convo.say('I will have your chart ready momentarily.')
+      convo.next();
     }
     bot.startConversation(message, askNumber);
 
