@@ -78,12 +78,24 @@ controller.hears(['compare','contrast', 'difference','opposed'], ['direct_messag
     var askRegion = function(response, convo) {
       convo.ask('What region would you like the result comparison for? (Domestic or Global)', function(response, convo) {
         convo.say('Understood.')
+        displayChart(response, convo);
         convo.next();
       });
     };
 
-
-
+    var displayChart = function(response, convo) {
+       var mainAttachments = [{
+    title: 'Bubble or Scatter',
+    text: 'Here it is.',
+    image_url:'http://www.mekkographics.com/wp-content/uploads/2012/07/Bar-Mekko1.png',
+    color: '#F5B279'
+  }]
+      convo.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+    }
     bot.startConversation(message, askNumber);
 
 });
