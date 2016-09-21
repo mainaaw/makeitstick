@@ -66,7 +66,27 @@ controller.hears(['compare','contrast', 'difference','opposed'], ['direct_messag
   }, function (err, resp) {0
     console.log(err, resp)
   })
-})
+
+
+  var askNumber = function(err, convo) {
+      convo.ask('How many companies would you like? (max. 5)', function(response, convo) {
+        convo.say('Great.');
+        askRegion(response, convo);
+        convo.next();
+      });
+    };
+    var askRegion = function(response, convo) {
+      convo.ask('What region would you like the result comparison for? (Domestic or Global)', function(response, convo) {
+        convo.say('Understood.')
+        convo.next();
+      });
+    };
+
+
+
+    bot.startConversation(message, askNumber);
+
+});
 
 controller.hears(['market share','segment', 'market','share', 'each'], ['direct_message', 'direct_mention'], function (bot, message) {
   var attachments = [{
@@ -80,10 +100,14 @@ controller.hears(['market share','segment', 'market','share', 'each'], ['direct_
   }, function (err, resp) {0
     console.log(err, resp)
   })
+
 })
 
 
-
-controller.hears('.*', ['direct_message', 'direct_mention'], function (bot, message) {
-  bot.reply(message, 'Sorry <@' + message.user + '>, I don\'t understand. \n')
+controller.hears(['thanks','thx','thank you'], ['direct_message', 'direct_mention'], function (bot, message) {
+  bot.reply(message, 'No problem <@' + message.user + '>!')
 })
+
+// controller.hears('.*', ['direct_message', 'direct_mention'], function (bot, message) {
+//   bot.reply(message, 'Sorry <@' + message.user + '>, I don\'t understand. \n')
+// })
