@@ -68,6 +68,69 @@ controller.hears(['compare','contrast', 'difference','opposed'], ['direct_messag
   })
 
 
+
+
+  controller.hears(['comic book'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    "text": "Comic Book Attachment Test! :tada:",
+    "attachments": [
+        {
+            "title": "The Further Adventures of Slackbot",
+            "author_name": "Stanford S. Strickland",
+            "author_icon": "https://api.slack.com/img/api/homepage_custom_integrations-2x.png",
+            "image_url": "http://i.imgur.com/OJkaVOI.jpg?1"
+        },
+        {
+            "fields": [
+                {
+                    "title": "Volume",
+                    "value": "1",
+                    "short": true
+                },
+                {
+                    "title": "Issue",
+                    "value": "3",
+                    "short": true
+                }
+            ]
+        },
+        {
+            "title": "Sypnopsis",
+            "text": "After @episod pushed exciting changes to a devious new branch back in Issue 1, Slackbot notifies @don about an unexpected deploy..."
+        },
+        {
+            "fallback": "Would you recommend it to customers?",
+            "title": "Would you recommend it to customers?",
+            "callback_id": "comic_1234_xyz",
+            "color": "#3AA3E3",
+            "attachment_type": "default",
+            "actions": [
+                {
+                    "name": "recommend",
+                    "text": "Recommend",
+                    "type": "button",
+                    "value": "recommend"
+                },
+                {
+                    "name": "no",
+                    "text": "No",
+                    "type": "button",
+                    "value": "bad"
+                }
+            ]
+        }
+    ]
+}]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+
+})
+
+
   var askNumber = function(err, convo) {
       convo.ask('How many companies would you like? (max. 5)', function(response, convo) {
         convo.say('Great.');
