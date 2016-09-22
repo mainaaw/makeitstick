@@ -122,7 +122,7 @@ controller.hears(['compare','contrast', 'difference','opposed','list'], ['direct
       convo.say('Here is your complex hierarchy chart comparison..')
     };
 
-    bot.startConversation(message, askNumber);
+    bot.startConversation(message, askTypeOfComparison);
 
 });
 
