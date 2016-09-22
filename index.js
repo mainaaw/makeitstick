@@ -119,12 +119,23 @@ var askType = function(err, convo) {
     };
 
 var showNonCyclical = function(response, convo) {
-      convo.ask('Here is a non-cyclical chart that would be appropriate for displaying this information.', function(response, convo) {
-        convo.say('Understood.');
-        endConvo(response, convo);
-        convo.next();
-      });
-     
+    //convo.say('Here is the best chart to convey this information.');
+
+    var attachments = [{
+    fallback: 'Sample Non-Cyclical Process Chart',
+    title: 'NonCyclical Process Chart',
+    text: 'Here is the best chart to convey this information.',
+    image_url: 'https://thumb1.shutterstock.com/display_pic_with_logo/1083515/124682863/stock-vector-colorful-process-chart-module-vector-illustration-124682863.jpg',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+
     };
 
   var endConvo = function(response,convo) {
@@ -154,22 +165,6 @@ var showNonCyclical = function(response, convo) {
   };
 
  bot.startConversation(message, askType);
-
-
-
-
-
-  //   var attachments = [{
-  //   title: 'Bar Chart or Line Chart',
-  //   text: 'You will require either a bar chart or a line chart to better convey this information.',
-  //   color: '#FF0000'
-  // }]
-
-  // bot.reply(message, {
-  //   attachments: attachments
-  // }, function (err, resp) {0
-  //   console.log(err, resp)
-  // })
 
 })
 
