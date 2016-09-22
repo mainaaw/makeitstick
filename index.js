@@ -134,24 +134,22 @@ var showNonCyclical = function(response, convo) {
 
   var displayCorrectChart = function(response, convo) {
     var chartNum = parseInt(response.text, 10);
-    convo.say('You picked ' + chartNum);
+    if(chartNum == 1) {
+      convo.say('You picked 1.');
 
-    // if(chartNum = 1) {
-    //   convo.say('You picked 1.');
+    } else if(chartNum == 2) {
+      convo.say('You picked 2.');
 
-    // } else if(chartNum = 2) {
-    //   convo.say('You picked 2.');
+    } else if(chartNum == 3) {
+      convo.say('You picked 3.');
 
-    // } else if(chartNum = 3) {
-    //   convo.say('You picked 3.');
+    } else if(chartNum == 4) {
 
-    // } else if(chartNum = 4) {
+      convo.say('You picked 4.');
 
-    //   convo.say('You picked 4.');
-
-    // } else if(chartNum = 5) {
-    //   convo.say('You picked 5.');
-    // }
+    } else if(chartNum == 5) {
+      convo.say('You picked 5.');
+    }
 
   };
 
