@@ -63,14 +63,24 @@ controller.hears(['compare','contrast', 'difference','opposed','list'], ['direct
         pickNatureOfSeparate(response, convo);
         convo.next();
       } else if (response.text == 'Overlapping' || response.text == 'overlapping') {
-        convo.say('Here is a chart with overlapping components.');
+        convo.say('Understood.');
+        displayOverlappingChart(response,convo);
+        convo.next();
       } else {
-      convo.say('Here is a chart with a network of components.');
-
+      convo.say('Understood');
+      displayNetworkedChart(response,convo);
+      convo.next();
       }
-
       });
     }; 
+
+    var displayOverlappingChart = function(response, convo) {
+      convo.say('Here is a chart with overlapping components.');
+    };
+
+    var displayNetworkedChart = function(response, convo) {
+      convo.say('Here is a chart with a network of components.');
+    };
 
 
     var pickNatureOfSeparate = function(response, convo) {
