@@ -40,20 +40,6 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
     });
 })
 
-controller.hears(['track','change', 'changed','rate','grow','growth'], ['direct_message', 'direct_mention'], function (bot, message) {
-  var attachments = [{
-    title: 'Bar Chart or Line Chart',
-    text: 'You will require either a bar chart or a line chart to better convey this information.',
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-})
-
 controller.hears(['compare','contrast', 'difference','opposed'], ['direct_message', 'direct_mention'], function (bot, message) {
   var attachments = [{
     title: 'Bubble or Scatter',
@@ -106,6 +92,61 @@ controller.hears(['market share','segment', 'market','share', 'each'], ['direct_
   })
 
 })
+
+
+
+controller.hears(['track','change', 'changed','rate','grow','growth','process'], ['direct_message', 'direct_mention'], function (bot, message) {
+  
+
+var askType = function(err, convo) {
+      convo.ask('Would you like to show this in a cylical or non-cyclical manner?', function(response, convo) {
+        convo.say('Great.');
+        if (response.text == 'cyclical') {
+        askRegion(response, convo);
+        convo.next();
+      } else {
+        showNonCyclical(response, convo);
+        convo.next();
+        }
+      });
+    };
+    var askSteps = function(response, convo) {
+      convo.ask('How many steps are there in this process?', function(response, convo) {
+        convo.say('Understood.')
+        displayChart(response, convo);
+        convo.next();
+      });
+    };
+
+var showNonCyclical = function(response, convo) {
+      convo.ask('Here is a non-cyclical chart that would be appropriate for displaying this information.', function(response, convo) {
+        convo.say('Understood.')
+        convo.next();
+      });
+    };
+
+ bot.startConversation(message, askType);
+
+
+
+
+
+  //   var attachments = [{
+  //   title: 'Bar Chart or Line Chart',
+  //   text: 'You will require either a bar chart or a line chart to better convey this information.',
+  //   color: '#FF0000'
+  // }]
+
+  // bot.reply(message, {
+  //   attachments: attachments
+  // }, function (err, resp) {0
+  //   console.log(err, resp)
+  // })
+
+})
+
+
+
 
 
 controller.hears(['comic book'], ['direct_message', 'direct_mention'], function (bot, message) {
