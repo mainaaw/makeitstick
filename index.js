@@ -102,7 +102,7 @@ var askType = function(err, convo) {
       convo.ask('Would you like to show this in a cylical or non-cyclical manner?', function(response, convo) {
         convo.say('Great.');
         if (response.text == 'cyclical') {
-        askRegion(response, convo);
+        askSteps(response, convo);
         convo.next();
       } else {
         showNonCyclical(response, convo);
@@ -121,10 +121,15 @@ var askType = function(err, convo) {
 var showNonCyclical = function(response, convo) {
       convo.ask('Here is a non-cyclical chart that would be appropriate for displaying this information.', function(response, convo) {
         convo.say('Understood.');
-         convo.stop();
+        endConvo(response, convo);
+        convo.next();
       });
      
     };
+
+  var endConvo = function(response,convo) {
+         convo.stop();
+  };
 
  bot.startConversation(message, askType);
 
