@@ -134,7 +134,7 @@ var showNonCyclical = function(response, convo) {
 
   var displayCorrectChart = function(response, convo) {
     var chartNum = parseInt(response.text, 10);
-    convo.say('You picked ' + response.text);
+    convo.say('You picked ' + chartNum);
 
     // if(chartNum = 1) {
     //   convo.say('You picked 1.');
