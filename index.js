@@ -164,7 +164,7 @@ var askType = function(err, convo) {
         askSteps(response, convo);
         convo.next();
       } else {
-        convo.say('Great.');
+        
         showNonCyclical(response, convo);
         convo.next();
         }
