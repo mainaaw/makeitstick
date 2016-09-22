@@ -49,8 +49,9 @@ controller.hears(['compare','contrast', 'difference','opposed','list'], ['direct
         askSimplicity(response, convo);
         convo.next();
       } else {
-
-
+        convo.say('Great.');
+        askNatureOfEqualParts(response, convo);
+        convo.next();
       }
       });
     };
