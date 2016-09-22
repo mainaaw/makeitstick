@@ -111,9 +111,9 @@ var askType = function(err, convo) {
       });
     };
     var askSteps = function(response, convo) {
-      convo.ask('How many steps are there in this process?', function(response, convo) {
+      convo.ask('How many steps are there in this process?(max. 5)', function(response, convo) {
         convo.say('Understood.')
-        displayChart(response, convo);
+        displayCorrectChart(response, convo);
         convo.next();
       });
     };
@@ -129,6 +129,28 @@ var showNonCyclical = function(response, convo) {
 
   var endConvo = function(response,convo) {
          convo.stop();
+  };
+
+
+  var displayCorrectChart = function(response, convo) {
+    if(response.text = '1') {
+      convo.say('You picked 1.');
+    } else if(response.text = '2') {
+
+      convo.say('You picked 2.');
+
+    } else if(response.text = '3') {
+      convo.say('You picked 3.');
+
+
+    } else if(response.text = '4') {
+
+      convo.say('You picked 4.');
+
+    } else if(response.text = '5') {
+      convo.say('You picked 5.');
+    }
+
   };
 
  bot.startConversation(message, askType);
