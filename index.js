@@ -40,40 +40,88 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
     });
 })
 
-controller.hears(['compare','contrast', 'difference','opposed'], ['direct_message', 'direct_mention'], function (bot, message) {
-  var attachments = [{
-    title: 'Bubble or Scatter',
-    text: 'You will require a Bar Mekko, Bubble or Scatter graph to better convey this information.',
-    color: '#F5B279'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-
-
-  var askNumber = function(err, convo) {
-      convo.ask('How many companies would you like? (max. 5)', function(response, convo) {
+controller.hears(['compare','contrast', 'difference','opposed','list'], ['direct_message', 'direct_mention'], function (bot, message) {
+ 
+ var askTypeOfComparison = function(err, convo) {
+      convo.ask('Is the relationship a hierarchy or of equal parts?', function(response, convo) {
+        if (response.text == 'hierarchy' || response.text == 'Hierarchy') {
         convo.say('Great.');
-        askRegion(response, convo);
+        askSimplicity(response, convo);
         convo.next();
-      });
-    };
-    var askRegion = function(response, convo) {
-      convo.ask('What region would you like the result comparison for? (Domestic or Global)', function(response, convo) {
-        convo.say('Understood.')
-        displayChart(response, convo);
-        convo.next();
+      } else {
+
+
+      }
       });
     };
 
-    var displayChart = function(response, convo) {
-       
-      convo.say('I will have your chart ready momentarily.')
-      convo.next();
-    }
+    var askNatureOfEqualParts = function(response, convo) {
+      convo.ask('What is the nature of the individual parts? (Separate, Overlapping or Network)', function(response, convo) {
+        if (response.text == 'separate' || response.text == 'Separate') {
+        convo.say('Understood.')
+        pickNatureOfSeparate(response, convo);
+        convo.next();
+      } else if (response.text == 'Overlapping' || response.text == 'overlapping') {
+        convo.say('Here is a chart with overlapping components.');
+      } else {
+      convo.say('Here is a chart with a network of components.');
+
+      }
+
+      });
+    }; 
+
+
+    var pickNatureOfSeparate = function(response, convo) {
+
+      convo.ask('Does it contain a central idea or not? (yes or no)',[
+      {
+        pattern: bot.utterances.yes,
+        callback: function(response,convo) {
+          convo.say('Great! Here is a chart to best portray info with a central idea.');
+          convo.next();
+ 
+        }
+      },
+      {
+        pattern: bot.utterances.no,
+        callback: function(response,convo) {
+          convo.say('Great! Here is a chart to best portray info composed of several independent ideas.');
+          convo.next();
+        }
+      }, 
+      {
+        default: true,
+        callback: function(response,convo) {
+          convo.repeat();
+          convo.next();
+        }
+      }
+      ]);
+    };
+
+
+    var askSimplicity = function(response, convo) {
+      convo.ask('What is the complexity of this hierarchy? (Simple or Complex)', function(response, convo) {
+        if (response.text == 'simple' || response.text == 'Simple') {
+        convo.say('Understood.')
+        displaySimpleHierarchy(response, convo);
+        convo.next();
+      } else {
+        convo.say('Understood.')
+        displayComplexHierarchy(response, convo);
+        convo.next();
+      }
+      });
+    };
+    var displaySimpleHierarchy = function(response, convo) {   
+      convo.say('Here is your simple hierarchy chart comparison.')
+    };
+
+    var displayComplexHierarchy = function(response, convo) {   
+      convo.say('Here is your complex hierarchy chart comparison..')
+    };
+
     bot.startConversation(message, askNumber);
 
 });
@@ -100,11 +148,12 @@ controller.hears(['track','change', 'changed','rate','grow','growth','process'],
 
 var askType = function(err, convo) {
       convo.ask('Would you like to show this in a cylical or non-cyclical manner?', function(response, convo) {
-        convo.say('Great.');
+        
         if (response.text == 'cyclical') {
         askSteps(response, convo);
         convo.next();
       } else {
+        convo.say('Great.');
         showNonCyclical(response, convo);
         convo.next();
         }
@@ -119,8 +168,6 @@ var askType = function(err, convo) {
     };
 
 var showNonCyclical = function(response, convo) {
-    //convo.say('Here is the best chart to convey this information.');
-
     var attachments = [{
     fallback: 'Sample Non-Cyclical Process Chart',
     title: 'NonCyclical Process Chart',
@@ -136,7 +183,7 @@ var showNonCyclical = function(response, convo) {
     console.log(err, resp)
   })
 
-    };
+  };
 
   var endConvo = function(response,convo) {
          convo.stop();
