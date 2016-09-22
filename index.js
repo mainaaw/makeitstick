@@ -121,7 +121,6 @@ var askType = function(err, convo) {
 var showNonCyclical = function(response, convo) {
       convo.ask('Here is a non-cyclical chart that would be appropriate for displaying this information.', function(response, convo) {
         convo.say('Understood.')
-        convo.next();
       });
     };
 
