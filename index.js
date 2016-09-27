@@ -213,6 +213,25 @@ controller.hears(['compare','comparison', 'Comparison','compare', 'criteria', 'C
     })
   });
 
+controller.hears(['before','after', 'change of state','change', 'problem', 'solution'], ['direct_message', 'direct_mention'], function (bot, message) {
+    var attachments = [
+    {
+    fallback: 'Before + After',
+    title: 'Before + After',
+    text: 'Here is a sample chart ideal for explaining a change of state i.e problem and solution',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC3.jpg?alt=media&token=e648194f-f021-4376-bd37-fd5bf5bfc4d3',
+    unfurl_media: true,
+    color: '#FF0000'
+  }
+  ]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  });
+
 controller.hears(['decision','Decision', 'alternative','Alternative', 'alternatives', 'Alternatives'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('Are you making a decision between 2 or 3 alternatives?', function(response, convo) {
@@ -267,13 +286,6 @@ var showTwoOptions = function(response, convo) {
 
  bot.startConversation(message, askType);
 });
-
-
-
-
-
-
-
 
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
