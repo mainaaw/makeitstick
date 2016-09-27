@@ -214,7 +214,7 @@ controller.hears(['compare','comparison', 'Comparison','compare', 'criteria', 'C
   }, function (err, resp) {0
     console.log(err, resp)
     })
-  };
+  });
 
 
   controller.hears(['decision','Decision', 'alternative','Alternative', 'alternatives', 'Alternatives'], ['direct_message', 'direct_mention'], function (bot, message) {
@@ -241,7 +241,7 @@ controller.hears(['compare','comparison', 'Comparison','compare', 'criteria', 'C
   }, function (err, resp) {0
     console.log(err, resp)
     })
-  };
+  });
 
 
 
