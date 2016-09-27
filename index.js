@@ -40,6 +40,8 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
     });
 })
 
+
+//Section B1 - B2.6
 controller.hears(['capture','brainstorming', 'brainstorm','Brainstorm'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('How many ideas are you working with?', function(response, convo) {
@@ -193,6 +195,60 @@ var showFewIdeas = function(response, convo) {
 
   })
 
+
+//Section C1 - C3
+controller.hears(['compare','comparison', 'Comparison','compare', 'criteria', 'Criteria'], ['direct_message', 'direct_mention'], function (bot, message) {
+    var attachments = [
+    {
+    fallback: '2x2 Comparison',
+    title: '2x2 Comparison',
+    text: 'Here is a sample chart to capture comparison of multiple criteria.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC1.jpg?alt=media&token=c2795e6b-a320-45e9-b189-71b5613960fd',
+    unfurl_media: true,
+    color: '#FF0000'
+  }
+  ]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+
+  controller.hears(['decision','Decision', 'alternative','Alternative', 'alternatives', 'Alternatives'], ['direct_message', 'direct_mention'], function (bot, message) {
+    var attachments = [
+    {
+    fallback: 'Decision Making',
+    title: 'Decision Making - 2 options',
+    text: 'Here is a sample chart to help decision making with 2 options.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.2.jpg?alt=media&token=4aa98f4a-f580-400c-8c28-289f3bf96935',
+    unfurl_media: true,
+    color: '#FF0000'
+  },
+  {
+    fallback: 'Decision Making',
+    title: 'Decision Making - 3 options',
+    text: 'Here is a sample chart to help decision making with 3 options.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.3.jpg?alt=media&token=13cec4f2-7197-4f22-a386-cb7c1843ea93',
+    unfurl_media: true,
+    color: '#FF0000'
+  }
+  ]
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+
+
+
+
+
+
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
@@ -284,9 +340,7 @@ var showThreePillars = function(response, convo) {
     console.log(err, resp)
     })
   };
-
  bot.startConversation(message, askType);
-
 })
 
 
