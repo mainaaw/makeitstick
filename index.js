@@ -213,32 +213,67 @@ controller.hears(['compare','comparison', 'Comparison','compare', 'criteria', 'C
     })
   });
 
+controller.hears(['decision','Decision', 'alternative','Alternative', 'alternatives', 'Alternatives'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('Are you making a decision between 2 or 3 alternatives?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum == 2) {
+        showTwoOptions(response, convo);
+        convo.next();
+      } else if (ideasNum == 3) {
+        showThreeOptions(response, convo);
+        convo.next();
+        } else  {
+          
+          convo.say('Let me connect you to an expert');
+        }
+      });
+    };
 
-  controller.hears(['decision','Decision', 'alternative','Alternative', 'alternatives', 'Alternatives'], ['direct_message', 'direct_mention'], function (bot, message) {
-    var attachments = [
-    {
+var showTwoOptions = function(response, convo) {
+    var attachments = [{
     fallback: 'Decision Making',
-    title: 'Decision Making - 2 options',
-    text: 'Here is a sample chart to help decision making with 2 options.',
+    title: 'Decision Making',
+    text: 'Here is the best chart to capture '+ response.text + ' structuring ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.2.jpg?alt=media&token=4aa98f4a-f580-400c-8c28-289f3bf96935',
-    unfurl_media: true,
+    unfurl_media:true,
     color: '#FF0000'
-  },
-  {
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showThreeOptions = function(response, convo) {
+    var attachments = [{
     fallback: 'Decision Making',
-    title: 'Decision Making - 3 options',
-    text: 'Here is a sample chart to help decision making with 3 options.',
+    title: 'Decision Making',
+    text: 'Here is the best chart to capture ' + response.text + ' structuring ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.3.jpg?alt=media&token=13cec4f2-7197-4f22-a386-cb7c1843ea93',
     unfurl_media: true,
     color: '#FF0000'
-  }
-  ]
+  }]
+
   bot.reply(message, {
     attachments: attachments
   }, function (err, resp) {0
     console.log(err, resp)
     })
-  });
+  };
+
+ bot.startConversation(message, askType);
+});
+
+
+
+
+
+
+
 
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
