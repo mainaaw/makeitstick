@@ -235,7 +235,7 @@ var showTwoOptions = function(response, convo) {
     var attachments = [{
     fallback: 'Decision Making',
     title: 'Decision Making',
-    text: 'Here is the best chart to capture '+ response.text + ' structuring ideas.',
+    text: 'Here is the best chart to make a decision between ' + response.text + ' options.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.2.jpg?alt=media&token=4aa98f4a-f580-400c-8c28-289f3bf96935',
     unfurl_media:true,
     color: '#FF0000'
@@ -252,7 +252,7 @@ var showTwoOptions = function(response, convo) {
     var attachments = [{
     fallback: 'Decision Making',
     title: 'Decision Making',
-    text: 'Here is the best chart to capture ' + response.text + ' structuring ideas.',
+    text: 'Here is the best chart to make a decision between ' + response.text + ' options.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.3.jpg?alt=media&token=13cec4f2-7197-4f22-a386-cb7c1843ea93',
     unfurl_media: true,
     color: '#FF0000'
