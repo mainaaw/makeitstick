@@ -141,6 +141,8 @@ controller.hears(['market share','segment', 'market','share', 'each'], ['direct_
   var attachments = [{
     title: 'Marimekko or 100% Stacked Bar Graph',
     text: 'You will require a 100% Stacked bar graph or a Marimekko graph to better convey this information.',
+    image_url: 'http://cdn.www.duarte.com/wp-content/uploads/2014/02/SHO-0627-2DA-6N-128x96.png',
+    unfurl_media:true,
     color: '#EF84B6'
   }]
 
@@ -155,8 +157,6 @@ controller.hears(['market share','segment', 'market','share', 'each'], ['direct_
 
 
 controller.hears(['track','change', 'changed','rate','grow','growth','process'], ['direct_message', 'direct_mention'], function (bot, message) {
-  
-
 var askType = function(err, convo) {
       convo.ask('Would you like to show this in a cylical or non-cyclical manner?', function(response, convo) {
         
@@ -178,7 +178,7 @@ var askType = function(err, convo) {
       });
     };
 
-var showNonCyclical = function(response, convo) {
+var showNonCyclical = function(response, convo) {showNonCyclical
     var attachments = [{
     fallback: 'Sample Non-Cyclical Process Chart',
     title: 'NonCyclical Process Chart',
@@ -199,7 +199,6 @@ var showNonCyclical = function(response, convo) {
   var endConvo = function(response,convo) {
          convo.stop();
   };
-
 
   var displayCorrectChart = function(response, convo) {
     var chartNum = parseInt(response.text, 10);
@@ -226,75 +225,10 @@ var showNonCyclical = function(response, convo) {
 
 })
 
-
-
-
-
-controller.hears(['comic book'], ['direct_message', 'direct_mention'], function (bot, message) {
-  var attachments = [{
-    text: 'Comic Book Attachment Test! :tada:',
-    attachments: [
-        {
-            title: 'The Further Adventures of Slackbot',
-            author_name: 'Stanford S. Strickland',
-            author_icon: 'https://api.slack.com/img/api/homepage_custom_integrations-2x.png',
-            image_url: 'http://i.imgur.com/OJkaVOI.jpg?1'
-        },
-        {
-            fields: [
-                {
-                    title: 'Volume',
-                    value: '1',
-                    short: true
-                },
-                {
-                    title: 'Issue',
-                    value: '3',
-                    short: true
-                }
-            ]
-        },
-        {
-            title: 'Sypnopsis',
-            text: 'After @episod pushed exciting changes to a devious new branch back in Issue 1, Slackbot notifies @don about an unexpected deploy...'
-        },
-        {
-            fallback: 'Would you recommend it to customers?',
-            title: 'Would you recommend it to customers?',
-            callback_id: 'comic_1234_xyz',
-            color: '#3AA3E3',
-            attachment_type: 'default',
-            actions: [
-                {
-                    name: 'recommend',
-                    text: 'Recommend',
-                    type: 'button',
-                    value: 'recommend'
-                },
-                {
-                    name: 'no',
-                    text: 'No',
-                    type: 'button',
-                    value: 'bad'
-                }
-            ]
-        }
-    ]
-}]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-
-})
-
-
 controller.hears(['thanks','thx','thank you'], ['direct_message', 'direct_mention'], function (bot, message) {
   bot.reply(message, 'No problem <@' + message.user + '>!')
 })
 
-// controller.hears('.*', ['direct_message', 'direct_mention'], function (bot, message) {
-//   bot.reply(message, 'Sorry <@' + message.user + '>, I don\'t understand. \n')
-// })
+controller.hears('.*', ['direct_message', 'direct_mention'], function (bot, message) {
+  bot.reply(message, 'Sorry <@' + message.user + '>, I don\'t understand. \n')
+})
