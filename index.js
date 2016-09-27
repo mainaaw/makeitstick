@@ -193,6 +193,101 @@ var showFewIdeas = function(response, convo) {
 
   })
 
+// Structure S1~S5
+controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many structures are you working with?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 3) {
+        showThreePillars(response, convo);
+        convo.next();
+      } else if (ideasNum == 4) {
+        showFourPillars(response, convo);
+        convo.next();
+        } else if (ideasNum == 5) {
+          showFivePillars(response, convo);
+          convo.next();
+        }
+         else {
+          showSixPillars(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showThreePillars = function(response, convo) {
+    var attachments = [{
+    fallback: 'Pillars',
+    title: 'Pillars',
+    text: 'Here is the best chart to capture '+ response.text + ' structuring ideas.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.3.jpg?alt=media&token=0675895e-091f-4524-b60f-713583948b14',
+    unfurl_links: true,
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showFourPillars = function(response, convo) {
+    var attachments = [{
+    fallback: 'Pillars',
+    title: 'Pillars',
+    text: 'Here is the best chart to capture ' + response.text + ' structuring ideas.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.4.jpg?alt=media&token=7b188f17-fbba-44ee-b660-39bde5e39ada',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+    var showFivePillars = function(response, convo) {
+    var attachments = [{
+    fallback: 'Pillars',
+    title: 'Pillars',
+    text: 'Here is the best chart to capture ' + response.text + ' structuring ideas.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.5.jpg?alt=media&token=6006ff18-6386-485c-86b6-412234a13ff8',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showSixPillars = function(response, convo) {
+    var attachments = [{
+    fallback: 'Pillars',
+    title: 'Pillars',
+    text: 'Here is the best chart to capture ' + response.text + ' structuring ideas.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.6.jpg?alt=media&token=45285394-fb98-44ea-9110-1cf1362361d7',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
 
 
 controller.hears(['thanks','thx','thank you'], ['direct_message', 'direct_mention'], function (bot, message) {
