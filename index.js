@@ -141,7 +141,7 @@ controller.hears(['market share','segment', 'market','share', 'each'], ['direct_
   var attachments = [{
     title: 'Marimekko or 100% Stacked Bar Graph',
     text: 'You will require a 100% Stacked bar graph or a Marimekko graph to better convey this information.',
-    image_url: 'https://drive.google.com/file/d/0B236v3C6xybvSmQyX1d6aG9FaWs/view',
+    image_url: 'https://lh5.googleusercontent.com/13NK89olH44_y-AB3pG76WCQq_eNtSCJU1OGkzKkNVeROL_Yw5AxAqF1PRFtR4kkQVs3fZCadw2GqhM=w1157-h816',
     unfurl_media:true,
     color: '#EF84B6'
   }]
