@@ -64,7 +64,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     var attachments = [{
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
-    text: 'Here is the best chart to capture brainstorming ideas.',
+    text: 'Here is the best chart to capture'+ response.text + 'brainstorming ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
     unfurl_links: true,
     unfurl_media:true,
@@ -82,7 +82,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     var attachments = [{
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
-    text: 'Here is the best chart to capture brainstorming ideas.',
+    text: 'Here is the best chart to capture' + response.text + 'brainstorming ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
     unfurl_media: true,
     color: '#FF0000'
@@ -99,7 +99,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     var attachments = [{
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
-    text: 'Here is the best chart to capture brainstorming ideas.',
+    text: 'Here is the best chart to capture' + response.text + ' brainstorming ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
     unfurl_media: true,
     color: '#FF0000'
