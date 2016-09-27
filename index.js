@@ -65,7 +65,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
     text: 'Here is the best chart to capture brainstorming ideas.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/ember-beaa6.appspot.com/o/images%2FuAxkOGLzUaRUJkCQ7Siyx4AC7Yy2%2F2016-08-29%2008%3A44%3A12%20-0500.jpeg?alt=media&token=6c2256cd-9ae8-4c78-9041-fac81fcbaf0b',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
     unfurl_links: true,
     unfurl_media:true,
     color: '#FF0000'
@@ -83,7 +83,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
     text: 'Here is the best chart to capture brainstorming ideas.',
-    image_url: 'https://lh4.googleusercontent.com/nCD-bnDRkllysrSFk1TKDJ3pL61Ylq92Y9rI_K0qHQrrMtBQAv6zHBK_673hiDvdQ9atV9OROkJr7js=w1157-h816',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
     unfurl_media: true,
     color: '#FF0000'
   }]
@@ -100,7 +100,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
     text: 'Here is the best chart to capture brainstorming ideas.',
-    image_url: 'https://lh5.googleusercontent.com/SUoZvZtOrYt65mNAJORs-WxEEznE1J03bVb1cNW42lmGqH19RqmR-HehzWlVSkJ-Y9vDtzYEZQIrnSQ=w1157-h816',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
     unfurl_media: true,
     color: '#FF0000'
   }]
