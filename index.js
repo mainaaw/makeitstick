@@ -66,7 +66,6 @@ var showFewIdeasHoneyComb = function(response, convo) {
     title: 'Honeycomb Brainstorm',
     text: 'Here is the best chart to capture '+ response.text + ' brainstorming ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
-    unfurl_links: true,
     unfurl_media:true,
     color: '#FF0000'
   }]
@@ -143,7 +142,6 @@ var showFewIdeas = function(response, convo) {
     title: 'Concept Map',
     text: 'Here is the best chart to capture '+ response.text + ' brainstorming ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.3.jpg?alt=media&token=1d8da986-bb09-4e2c-a7d9-8340ab0df91b',
-    unfurl_links: true,
     unfurl_media:true,
     color: '#EF84B6'
   }]
@@ -193,7 +191,7 @@ var showFewIdeas = function(response, convo) {
 
   })
 
-// Structure S1~S5
+// Structure S1 ~ S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('How many structures are you working with?', function(response, convo) {
@@ -222,7 +220,6 @@ var showThreePillars = function(response, convo) {
     title: 'Pillars',
     text: 'Here is the best chart to capture '+ response.text + ' structuring ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.3.jpg?alt=media&token=0675895e-091f-4524-b60f-713583948b14',
-    unfurl_links: true,
     unfurl_media:true,
     color: '#FF0000'
   }]
@@ -289,6 +286,98 @@ var showThreePillars = function(response, convo) {
 
 })
 
+// Structure S2
+controller.hears(['meeting','agenda','schedule','Meeting', 'Agenda', 'Schedule'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Agenda chart',
+    text: 'Try an agenda chart to better convey this information.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS2.jpg?alt=media&token=c99df5c7-0509-44cc-999b-af3d545a20f9',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+
+})
+
+// Structure S3.2 ~ S3.5
+controller.hears(['user','group', 'User','Group'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many groups are you working with?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 2) {
+        showTwoGroups(response, convo);
+        convo.next();
+      } else if (ideasNum == 3) {
+        showThreeGroups(response, convo);
+        convo.next();
+        } 
+         else {
+          showFourGroups(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showTwoGroups = function(response, convo) {
+    var attachments = [{
+    fallback: 'Groups',
+    title: 'Groups',
+    text: 'Here is the best chart to capture '+ response.text + ' groups.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.2.jpg?alt=media&token=38761a80-7f32-4344-a47e-986a524e7eca',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showThreeGroups = function(response, convo) {
+    var attachments = [{
+    fallback: 'Groups',
+    title: 'Groups',
+    text: 'Here is the best chart to capture ' + response.text + ' groups.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.3.jpg?alt=media&token=91428c1a-93e4-45af-9dca-e86ba9b60cf7',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+    var showFourGroups = function(response, convo) {
+    var attachments = [{
+    fallback: 'Groups',
+    title: 'Groups',
+    text: 'Here is the best chart to capture ' + response.text + ' groups.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.4.jpg?alt=media&token=f2d7a575-661c-4114-88bc-d15b8e9e7d50',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
 
 controller.hears(['thanks','thx','thank you'], ['direct_message', 'direct_mention'], function (bot, message) {
   bot.reply(message, 'No problem <@' + message.user + '>!')
