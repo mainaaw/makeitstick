@@ -65,8 +65,9 @@ var showFewIdeasHoneyComb = function(response, convo) {
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
     text: 'Here is the best chart to capture brainstorming ideas.',
-    image_url: 'https://lh4.googleusercontent.com/2sQ2Kx19wYnwLA47KXVX_adcF4Zil8X0y8JZ4VTxVQQDCucAc2LkSPEwh1FLOKE4wakcWqf0Q-InP_A=w1157-h816',
-    unfurl_media: true,
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/ember-beaa6.appspot.com/o/images%2FuAxkOGLzUaRUJkCQ7Siyx4AC7Yy2%2F2016-08-29%2008%3A44%3A12%20-0500.jpeg?alt=media&token=6c2256cd-9ae8-4c78-9041-fac81fcbaf0b',
+    unfurl_links: true,
+    unfurl_media:true,
     color: '#FF0000'
   }]
 
