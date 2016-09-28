@@ -474,7 +474,7 @@ var showTwoGroups = function(response, convo) {
 })
 
 // Structure S4.1 ~ S4.5
-controller.hears(['user', 'need', 'finding', 'User','Need', 'Finding'], ['direct_message', 'direct_mention'], function (bot, message) {
+controller.hears(['need', 'finding','Need', 'Finding'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('Which level of needs do you require?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
