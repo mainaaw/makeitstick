@@ -587,6 +587,60 @@ var askType = function(err, convo) {
 
 })
 
+// Structure S5.3 ~ S5.4
+controller.hears(['segment', 'customer', 'Segment','Customer'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many segments of customers do you have?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum <= 3) {
+        showThreeSegments(response, convo);
+        convo.next();
+      } else if (ideasNum >= 4) {
+        showFourSegments(response, convo);
+        convo.next();
+      } 
+    });
+  };
+
+  var showThreeSegments = function(response, convo) {
+    var attachments = [{
+    fallback: 'Customer Segmentation',
+    title: 'Customer Segmentation',
+    text: 'Here is the best chart to capture '+ response.text + ' segments.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS5.3.jpg?alt=media&token=cc5e96e5-84bb-409c-9a41-15bc5ef2d7de',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showFourSegments = function(response, convo) {
+    var attachments = [{
+    fallback: 'Customer Segmentation',
+    title: 'Customer Segmentation',
+    text: 'Here is the best chart to capture '+ response.text + ' segments.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS5.4.jpg?alt=media&token=20b0cce1-3c90-408f-97a1-4f6e745ca509',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 controller.hears(['thanks','thx','thank you'], ['direct_message', 'direct_mention'], function (bot, message) {
   bot.reply(message, 'No problem <@' + message.user + '>!')
 })
