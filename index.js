@@ -287,6 +287,80 @@ var showTwoOptions = function(response, convo) {
  bot.startConversation(message, askType);
 });
 
+// List L1.3 ~ L1.5
+controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'Theme'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many themes do you have?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 3) {
+        showThreeThemes(response, convo);
+        convo.next();
+      } else if (ideasNum == 4) {
+        showFourThemes(response, convo);
+        convo.next();
+        } 
+         else {
+          showFiveThemes(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showThreeThemes = function(response, convo) {
+    var attachments = [{
+    fallback: 'Interview Themes',
+    title: 'Interview Themes',
+    text: 'Here is the best chart to capture '+ response.text + ' themes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.3.jpg?alt=media&token=856baf7b-05c7-4451-8a4b-f78edb31bf05',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+var showFourThemes = function(response, convo) {
+    var attachments = [{
+    fallback: 'Interview Themes',
+    title: 'Interview Themes',
+    text: 'Here is the best chart to capture ' + response.text + ' themes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.4.jpg?alt=media&token=a15f2896-617c-4a4e-9478-fdfaed0cc730',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+var showFiveThemes = function(response, convo) {
+    var attachments = [{
+    fallback: 'Interview Themes',
+    title: 'Interview Themes',
+    text: 'Here is the best chart to capture ' + response.text + ' themes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.5.jpg?alt=media&token=fe1f7c75-d9e5-46ed-86e4-b6fa7b4c4ba7',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
@@ -377,7 +451,9 @@ var showThreePillars = function(response, convo) {
     console.log(err, resp)
     })
   };
+
  bot.startConversation(message, askType);
+
 })
 
 // Structure S2
