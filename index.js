@@ -473,6 +473,120 @@ var showTwoGroups = function(response, convo) {
 
 })
 
+// Structure S4.1 ~ S4.5
+controller.hears(['user', 'need', 'finding', 'User','Need', 'Finding'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('Which level of needs do you require?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum == 1) {
+        showOneNeeds(response, convo);
+        convo.next();
+      } else if (ideasNum == 2) {
+        showTwoNeeds(response, convo);
+        convo.next();
+      } else if (ideasNum == 3) {
+        showThreeNeeds(response, convo);
+        convo.next();
+      } else if (ideasNum == 4) {
+        showFourNeeds(response, convo);
+        convo.next();
+      } else {
+        showFiveNeeds(response,convo);
+        convo.next();
+       }
+    });
+  };
+
+  var showOneNeeds = function(response, convo) {
+    var attachments = [{
+    fallback: 'Needs Diagram',
+    title: 'Needs Diagram',
+    text: 'Here is the best chart to capture '+ response.text + ' need.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.1.jpg?alt=media&token=f2064cc3-e465-4fe4-8faf-4d11fcf699d3',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showTwoNeeds = function(response, convo) {
+    var attachments = [{
+    fallback: 'Needs Diagram',
+    title: 'Needs Diagram',
+    text: 'Here is the best chart to capture '+ response.text + ' needs.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.2.jpg?alt=media&token=dc6cdd87-963f-4259-83dc-213f3514c450',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showThreeNeeds = function(response, convo) {
+    var attachments = [{
+    fallback: 'Needs Diagram',
+    title: 'Needs Diagram',
+    text: 'Here is the best chart to capture ' + response.text + ' needs.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.3.jpg?alt=media&token=08864d63-b6e6-4e65-a03f-78554be19c21',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showFourNeeds = function(response, convo) {
+    var attachments = [{
+    fallback: 'Needs Diagram',
+    title: 'Needs Diagram',
+    text: 'Here is the best chart to capture ' + response.text + ' needs.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.4.jpg?alt=media&token=a681be0f-edb6-475c-9e47-4b78e7847186',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showFiveNeeds = function(response, convo) {
+    var attachments = [{
+    fallback: 'Needs Diagram',
+    title: 'Needs Diagram',
+    text: 'Here is the best chart to capture ' + response.text + ' needs.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.5.jpg?alt=media&token=4b9d10ed-fee3-4f60-ad26-3c66069e774a',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 controller.hears(['thanks','thx','thank you'], ['direct_message', 'direct_mention'], function (bot, message) {
   bot.reply(message, 'No problem <@' + message.user + '>!')
 })
