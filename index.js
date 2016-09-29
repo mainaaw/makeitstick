@@ -383,9 +383,9 @@ var askType = function(err, convo) {
 
 var showTwoIdeas = function(response, convo) {
     var attachments = [{
-    fallback: 'List',
-    title: 'List',
-    text: 'Here is the best chart to capture '+ response.text + ' lists.',
+    fallback: 'Big Ideas',
+    title: 'Big Ideas',
+    text: 'Here is the best chart to capture '+ response.text + ' big ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.2.jpg?alt=media&token=721a958d-9f3f-407b-837d-4ab6225efd79',
     unfurl_media:true,
     color: '#FF0000'
@@ -399,9 +399,9 @@ var showTwoIdeas = function(response, convo) {
   };
 var showThreeIdeas = function(response, convo) {
     var attachments = [{
-    fallback: 'List',
-    title: 'List',
-    text: 'Here is the best chart to capture ' + response.text + ' lists.',
+    fallback: 'Big Ideas',
+    title: 'Big Ideas',
+    text: 'Here is the best chart to capture ' + response.text + ' big ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.3.jpg?alt=media&token=7c3a4ade-0a7b-4f10-9a14-9f455b66421a',
     unfurl_media: true,
     color: '#FF0000'
@@ -416,9 +416,9 @@ var showThreeIdeas = function(response, convo) {
 
 var showFourIdeas = function(response, convo) {
     var attachments = [{
-    fallback: 'List',
-    title: 'List',
-    text: 'Here is the best chart to capture ' + response.text + ' lists.',
+    fallback: 'Big Ideas',
+    title: 'Big Ideas',
+    text: 'Here is the best chart to capture ' + response.text + ' big ideas.',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.4.jpg?alt=media&token=e2dc50a6-d07a-4ec2-a99b-b7b117c8577a',
     unfurl_media: true,
     color: '#FF0000'
@@ -434,6 +434,7 @@ var showFourIdeas = function(response, convo) {
  bot.startConversation(message, askType);
 
 })
+
 
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
