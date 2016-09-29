@@ -825,7 +825,7 @@ controller.hears(['hypothesis', 'experiment', 'lean', 'methodology', 'Hypothesis
 
 })
 
-// Process P5
+// Process P5 
 controller.hears(['use case', 'case', 'Use case', 'Case'], ['direct_message', 'direct_mention'], function (bot, message) {
   var attachments = [{
     title: 'Use Case',
