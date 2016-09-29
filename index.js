@@ -526,7 +526,7 @@ var showSixTeams = function(response, convo) {
 
 })
 
-// List L5.1~L5.2
+// List L5.1 ~ L5.2
 controller.hears(['test', 'testing', 'research', 'Test', 'Testing', 'Research'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('Do you want a "high level" or "detailed" chart?', function(response, convo) {
@@ -597,7 +597,102 @@ controller.hears(['product', 'spec', 'market', 'Product', 'Spec', 'Market'], ['d
 
 })
 
-// Structure S1~S5
+// Structure P1.3 ~ P1.6
+controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'Linear', 'Flow', 'Series', 'Action'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many steps are you working with?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 3) {
+        showThreeSteps(response, convo);
+        convo.next();
+      } else if (ideasNum == 4) {
+        showFourSteps(response, convo);
+        convo.next();
+        } else if (ideasNum == 5) {
+          showFiveSteps(response, convo);
+          convo.next();
+        }
+         else {
+          showSixSteps(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showThreeSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Linear Process',
+    title: 'Linear Process',
+    text: 'Here is the best chart to capture '+ response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.3.jpg?alt=media&token=ce9bf061-4c38-4ce5-a89f-d32a7111a9da',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showFourSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Linear Process',
+    title: 'Linear Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.4.jpg?alt=media&token=513331ea-00af-44db-8c51-f94c55265249',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+    var showFiveSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Linear Process',
+    title: 'Linear Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.5.jpg?alt=media&token=fbfa6ffe-8d90-4b58-be8c-cc8e54b05724',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showSixSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Linear Process',
+    title: 'Linear Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.6.jpg?alt=media&token=244ca743-7bba-49a2-b43d-ca3645294269',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
+// Structure S1 ~ S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('How many pillars are you working with?', function(response, convo) {
