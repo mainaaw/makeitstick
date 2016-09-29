@@ -527,6 +527,59 @@ var showSixTeams = function(response, convo) {
 
 })
 
+// List L5.1~L5.2
+controller.hears(['test', 'testing', 'research', 'Test', 'Testing', 'Research'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('Do you want a high level or detailed chart?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum == 'high level') {
+        showHighLevel(response, convo);
+        convo.next();
+      } else if (ideasNum == 'detailed') {
+        showDetailed(response, convo);
+        convo.next();
+        }
+      });
+    };
+
+var showHighLevel = function(response, convo) {
+    var attachments = [{
+    fallback: 'User Test Summary',
+    title: 'User Test Summary',
+    text: 'Here is the best chart to capture '+ response.text + ' research/test summaries.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL5.1.jpg?alt=media&token=d3b45c96-8cbb-4fef-8000-0ca1f6914a0a',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+var showDetailed = function(response, convo) {
+    var attachments = [{
+    fallback: 'User Test Summary',
+    title: 'User Test Summary',
+    text: 'Here is the best chart to capture ' + response.text + ' research/test summaries.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL5.2.jpg?alt=media&token=b2b58fb3-abce-489f-86e2-d0ee28e4fe05',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
