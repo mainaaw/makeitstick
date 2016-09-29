@@ -579,6 +579,24 @@ var showDetailed = function(response, convo) {
 
 })
 
+// List L6
+controller.hears(['product', 'spec', 'market', 'Product', 'Spec', 'Market'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Product User Impact',
+    text: 'Try an product user impact chart to better convey this information.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL6.jpg?alt=media&token=e78f741a-059c-4965-8bf9-3933afbe5e24',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+
+})
+
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
