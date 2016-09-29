@@ -843,6 +843,101 @@ controller.hears(['use case', 'case', 'Use case', 'Case'], ['direct_message', 'd
 
 })
 
+// Process P6.3 ~ P6.6
+controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 'Progress'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many milestones are you working with?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 3) {
+        showThreeMilestones(response, convo);
+        convo.next();
+      } else if (ideasNum == 4) {
+        showFourMilestones(response, convo);
+        convo.next();
+        } else if (ideasNum == 5) {
+          showFiveMilestones(response, convo);
+          convo.next();
+        }
+         else {
+          showSixMilestones(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showThreeMilestones = function(response, convo) {
+    var attachments = [{
+    fallback: 'Milestone Timeline',
+    title: 'Milestone Timeline',
+    text: 'Here is the best chart to capture '+ response.text + ' milestones.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.3.jpg?alt=media&token=0062c3d5-1e53-4976-8f50-d742cb5997f7',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showFourMilestones = function(response, convo) {
+    var attachments = [{
+    fallback: 'Milestone Timeline',
+    title: 'Milestone Timeline',
+    text: 'Here is the best chart to capture ' + response.text + ' milestones.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.4.jpg?alt=media&token=3fb223ce-dbdb-41e7-a6f0-9dc330e50cb6',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+    var showFiveMilestones = function(response, convo) {
+    var attachments = [{
+    fallback: 'Milestone Timeline',
+    title: 'Milestone Timeline',
+    text: 'Here is the best chart to capture ' + response.text + ' milestones.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.5.jpg?alt=media&token=f992f3d5-c6d2-4286-b548-cf8c85ad979e',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showSixMilestones = function(response, convo) {
+    var attachments = [{
+    fallback: 'Milestone Timeline',
+    title: 'Milestone Timeline',
+    text: 'Here is the best chart to capture ' + response.text + ' milestones.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.6.jpg?alt=media&token=3fdd8305-0690-421c-8fc9-951297a9dda3',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 // Structure S1 ~ S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
