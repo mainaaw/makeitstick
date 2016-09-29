@@ -244,7 +244,6 @@ var askType = function(err, convo) {
         showThreeOptions(response, convo);
         convo.next();
         } else  {
-          
           convo.say('Let me connect you to an expert');
         }
       });
@@ -364,7 +363,7 @@ var showFiveThemes = function(response, convo) {
 // List L2.2 ~ L2.4
 controller.hears(['big idea', 'vision', 'Big idea', 'Vision'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('How many big ideas or visions do you have?', function(response, convo) {
+      convo.ask('How many supporting ideas do you have?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum > 0 && ideasNum <= 2) {
@@ -456,7 +455,7 @@ controller.hears(['feature', 'benefit', 'impact', 'Featuer', 'Benefit', 'Impact'
 // List L4.3 ~ L4.6
 controller.hears(['team', 'member', 'Team', 'Member'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('How many teams do you have?', function(response, convo) {
+      convo.ask('How many team members do you have?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum > 0 && ideasNum <= 3) {
@@ -583,7 +582,7 @@ var showDetailed = function(response, convo) {
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('How many structures are you working with?', function(response, convo) {
+      convo.ask('How many pillars are you working with?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum > 0 && ideasNum <= 3) {
@@ -696,7 +695,7 @@ controller.hears(['meeting','agenda','schedule','Meeting', 'Agenda', 'Schedule']
 // Structure S3.2 ~ S3.5
 controller.hears(['user','group', 'User','Group'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('How many groups are you working with?', function(response, convo) {
+      convo.ask('How many attributes are you working with?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum > 0 && ideasNum <= 2) {
@@ -771,7 +770,7 @@ var showTwoGroups = function(response, convo) {
 // Structure S4.1 ~ S4.5
 controller.hears(['need', 'finding','Need', 'Finding'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('Which level of needs do you require?', function(response, convo) {
+      convo.ask('Which level of need (5 - self-actualization, esteem, safety, 1 - physiological) do you require?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum == 1) {
@@ -885,7 +884,7 @@ var askType = function(err, convo) {
 // Structure S5.3 ~ S5.4
 controller.hears(['segment', 'customer', 'Segment','Customer'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('How many segments of customers do you have?', function(response, convo) {
+      convo.ask('How many segments do you have?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum <= 3) {
