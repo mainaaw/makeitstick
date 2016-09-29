@@ -597,7 +597,7 @@ controller.hears(['product', 'spec', 'market', 'Product', 'Spec', 'Market'], ['d
 
 })
 
-// Structure P1.3 ~ P1.6
+// Process P1.3 ~ P1.6
 controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'Linear', 'Flow', 'Series', 'Action'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('How many steps are you working with?', function(response, convo) {
@@ -692,7 +692,7 @@ var showThreeSteps = function(response, convo) {
 
 })
 
-// Structure P3.2 ~ P3.6
+// Process P3.2 ~ P3.6
 controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('How many steps are you working with?', function(response, convo) {
@@ -804,6 +804,24 @@ var askType = function(err, convo) {
   };
 
  bot.startConversation(message, askType);
+
+})
+
+// Process P4
+controller.hears(['hypothesis', 'experiment', 'lean', 'methodology', 'Hypothesis', 'Experiment', 'Lean', 'Methodology'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Hypothesis Testing Result',
+    text: 'Try a hypothesis testing result to better convey this information.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP4.jpg?alt=media&token=2f351250-70a2-4762-8908-800a346dc324',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
 
 })
 
