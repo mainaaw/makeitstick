@@ -435,6 +435,23 @@ var showFourIdeas = function(response, convo) {
 
 })
 
+// List L3
+controller.hears(['feature', 'benefit', 'impact', 'Featuer', 'Benefit', 'Impact'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Feature Benefit Impact Map',
+    text: 'Try an impact map to better convey this information.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL3.jpg?alt=media&token=d57a6914-0aa5-414e-a9b0-0840a5d4e5dc',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+
+})
 
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
