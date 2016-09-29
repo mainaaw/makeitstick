@@ -361,6 +361,80 @@ var showFiveThemes = function(response, convo) {
 
 })
 
+// List L2.2 ~ L2.4
+controller.hears(['big idea', 'vision', 'Big idea', 'Vision'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many big ideas or visions do you have?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 2) {
+        showTwoIdeas(response, convo);
+        convo.next();
+      } else if (ideasNum == 3) {
+        showThreeIdeas(response, convo);
+        convo.next();
+        } 
+         else {
+          showFourIdeas(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showTwoIdeas = function(response, convo) {
+    var attachments = [{
+    fallback: 'List',
+    title: 'List',
+    text: 'Here is the best chart to capture '+ response.text + ' lists.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.2.jpg?alt=media&token=721a958d-9f3f-407b-837d-4ab6225efd79',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+var showThreeIdeas = function(response, convo) {
+    var attachments = [{
+    fallback: 'List',
+    title: 'List',
+    text: 'Here is the best chart to capture ' + response.text + ' lists.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.3.jpg?alt=media&token=7c3a4ade-0a7b-4f10-9a14-9f455b66421a',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+var showFourIdeas = function(response, convo) {
+    var attachments = [{
+    fallback: 'List',
+    title: 'List',
+    text: 'Here is the best chart to capture ' + response.text + ' lists.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.4.jpg?alt=media&token=e2dc50a6-d07a-4ec2-a99b-b7b117c8577a',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
