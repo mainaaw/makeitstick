@@ -531,12 +531,12 @@ var showSixTeams = function(response, convo) {
 controller.hears(['test', 'testing', 'research', 'Test', 'Testing', 'Research'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
       convo.ask('Do you want a high level or detailed chart?', function(response, convo) {
-        var ideasNum = '';
+        var ideasNum = response.text;
         
-        if (ideasNum === 'high level') {
+        if (ideasNum == 'high level') {
         showHighLevel(response, convo);
         convo.next();
-      } else if (ideasNum === 'detailed') {
+      } else if (ideasNum == 'detailed') {
         showDetailed(response, convo);
         convo.next();
         }
