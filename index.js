@@ -453,6 +453,80 @@ controller.hears(['feature', 'benefit', 'impact', 'Featuer', 'Benefit', 'Impact'
 
 })
 
+// List L4.3 ~ L4.6
+controller.hears(['team', 'member', 'Team', 'Member'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many teams do you have?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 3) {
+        showThreeTeams(response, convo);
+        convo.next();
+      } else if (ideasNum == 4) {
+        showFourTeams(response, convo);
+        convo.next();
+        } 
+         else {
+          showSixTeams(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+var showThreeTeams = function(response, convo) {
+    var attachments = [{
+    fallback: 'Team',
+    title: 'Team',
+    text: 'Here is the best chart to capture '+ response.text + ' teams.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.3.jpg?alt=media&token=5a7aee79-a12f-48a6-bcfa-3b7cbb7d7496',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+var showFourTeams = function(response, convo) {
+    var attachments = [{
+    fallback: 'Team',
+    title: 'Team',
+    text: 'Here is the best chart to capture ' + response.text + ' teams.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.4.jpg?alt=media&token=e7623b89-5661-402f-b78d-ae4269ee0e85',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+var showSixTeams = function(response, convo) {
+    var attachments = [{
+    fallback: 'Team',
+    title: 'Team',
+    text: 'Here is the best chart to capture ' + response.text + ' teams.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.6.jpg?alt=media&token=97a1a0ae-1e82-42d0-a29d-3ab2c92de311',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 // Structure S1~S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
