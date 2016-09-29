@@ -692,6 +692,121 @@ var showThreeSteps = function(response, convo) {
 
 })
 
+// Structure P3.2 ~ P3.6
+controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle'], ['direct_message', 'direct_mention'], function (bot, message) {
+var askType = function(err, convo) {
+      convo.ask('How many steps are you working with?', function(response, convo) {
+        var ideasNum = parseInt(response.text, 10);
+        
+        if (ideasNum > 0 && ideasNum <= 2) {
+        showTwoSteps(response, convo);
+        convo.next();
+      } else if (ideasNum == 3) {
+        showThreeSteps(response, convo);
+        convo.next();
+        } else if (ideasNum == 4) {
+          showFourSteps(response, convo);
+          convo.next();
+        } else if (ideasNum == 5) {
+          showFiveSteps(response, convo);
+          convo.next();
+        }
+         else {
+          showSixSteps(response,convo);
+          convo.next();
+         }
+      });
+    };
+
+  var showTwoSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Cyclical Process',
+    title: 'Cyclical Process',
+    text: 'Here is the best chart to capture '+ response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.2.jpg?alt=media&token=ef04d847-72c4-4e71-a1c5-4c9753bedd43',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+  };
+
+  var showThreeSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Cyclical Process',
+    title: 'Cyclical Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.3.jpg?alt=media&token=e3d22d26-f40f-49a6-b8c2-196e81e42c4f',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showFourSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Cyclical Process',
+    title: 'Cyclical Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.4.jpg?alt=media&token=3adff828-ffff-4e54-ae26-9d4030bc813f',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showFiveSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Cyclical Process',
+    title: 'Cyclical Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.5.jpg?alt=media&token=14efcce6-c4c7-41b5-a33b-ca9691fd1e22',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+  var showSixSteps = function(response, convo) {
+    var attachments = [{
+    fallback: 'Cyclical Process',
+    title: 'Cyclical Process',
+    text: 'Here is the best chart to capture ' + response.text + ' processes.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.6.jpg?alt=media&token=414ecce0-1bd2-410d-b83f-ff3ea2b916e7',
+    unfurl_media: true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+    })
+  };
+
+ bot.startConversation(message, askType);
+
+})
+
 // Structure S1 ~ S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
