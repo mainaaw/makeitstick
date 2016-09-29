@@ -530,7 +530,7 @@ var showSixTeams = function(response, convo) {
 // List L5.1~L5.2
 controller.hears(['test', 'testing', 'research', 'Test', 'Testing', 'Research'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('Do you want a high level or detailed chart?', function(response, convo) {
+      convo.ask('Do you want a "high level" or "detailed" chart?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum == 'high level') {
