@@ -825,6 +825,24 @@ controller.hears(['hypothesis', 'experiment', 'lean', 'methodology', 'Hypothesis
 
 })
 
+// Process P5
+controller.hears(['use case', 'case', 'Use case', 'Case'], ['direct_message', 'direct_mention'], function (bot, message) {
+  var attachments = [{
+    title: 'Use Case',
+    text: 'Try a use case chart to better convey this information.',
+    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP5.jpg?alt=media&token=e8601a64-c69f-4669-aa85-325516b6f195',
+    unfurl_media:true,
+    color: '#FF0000'
+  }]
+
+  bot.reply(message, {
+    attachments: attachments
+  }, function (err, resp) {0
+    console.log(err, resp)
+  })
+
+})
+
 // Structure S1 ~ S5
 controller.hears(['parts','whole', 'value','culture', 'program', 'Parts', 'Whole', 'Value', 'Culture', 'Program'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
