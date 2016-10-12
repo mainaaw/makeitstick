@@ -236,7 +236,8 @@ controller.hears(['decision','Decision', 'alternative','Alternative', 'alternati
 var askType = function(err, convo) {
       convo.ask('Are you making a decision between 2 or 3 alternatives?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
-        
+        var xhr = new XMLHttpRequest();
+
         if (ideasNum == 2) {
         showTwoOptions(response, convo);
         convo.next();
@@ -246,6 +247,17 @@ var askType = function(err, convo) {
         } else  {
           convo.say('Let me connect you to an expert');
           convo.next();
+          xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
+          xhr.send();
+
+          xhr.addEventListener("readystatechange", processRequest, false);
+
+          function processRequest(e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              var response = JSON.parse(xhr.responseText);
+              alert(response);
+            };
+          }
         }
       });
     };
