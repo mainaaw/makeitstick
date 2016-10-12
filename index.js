@@ -245,6 +245,7 @@ var askType = function(err, convo) {
         convo.next();
         } else  {
           convo.say('Let me connect you to an expert');
+          convo.next();
         }
       });
     };
