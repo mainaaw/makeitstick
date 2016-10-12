@@ -233,10 +233,11 @@ controller.hears(['before','after', 'change of state','change', 'problem', 'solu
   });
 
 controller.hears(['decision','Decision', 'alternative','Alternative', 'alternatives', 'Alternatives'], ['direct_message', 'direct_mention'], function (bot, message) {
+var xhr = new XMLHttpRequest();
+
 var askType = function(err, convo) {
       convo.ask('Are you making a decision between 2 or 3 alternatives?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
-        // var xhr = new XMLHttpRequest();
 
         if (ideasNum == 2) {
         showTwoOptions(response, convo);
@@ -247,17 +248,18 @@ var askType = function(err, convo) {
         } else  {
           convo.say('Let me connect you to an expert');
           convo.next();
-          // xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
-          // xhr.send();
+          
+          xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
+          xhr.send();
 
-          // xhr.addEventListener("readystatechange", processRequest, false);
+          xhr.addEventListener("readystatechange", processRequest, false);
 
-          // function processRequest(e) {
-          //   if (xhr.readyState == 4 && xhr.status == 200) {
-          //     var response = JSON.parse(xhr.responseText);
-          //     alert(response);
-          //   };
-          // }
+          function processRequest(e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              var response = JSON.parse(xhr.responseText);
+              alert(response);
+            };
+          }
         }
       });
     };
@@ -304,24 +306,12 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'Theme'],
 var askType = function(err, convo) {
       convo.ask('How many themes do you have?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
-        var xhr = new XMLHttpRequest();
         
         if (ideasNum > 0 && ideasNum <= 3) {
         showThreeThemes(response, convo);
         convo.next();
       } else if (ideasNum == 4) {
         showFourThemes(response, convo);
-                  xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
-          xhr.send();
-
-          xhr.addEventListener("readystatechange", processRequest, false);
-
-          function processRequest(e) {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              var response = JSON.parse(xhr.responseText);
-              alert(response);
-            };
-          }
         convo.next();
         } 
          else {
