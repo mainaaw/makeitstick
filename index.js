@@ -246,18 +246,18 @@ var askType = function(err, convo) {
         convo.next();
         } else  {
           convo.say('Let me connect you to an expert');
-          xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
-          xhr.send();
-
-          xhr.addEventListener("readystatechange", processRequest, false);
-
-          function processRequest(e) {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              var response = JSON.parse(xhr.responseText);
-              alert(response);
-            };
-          }
           convo.next();
+          // xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
+          // xhr.send();
+
+          // xhr.addEventListener("readystatechange", processRequest, false);
+
+          // function processRequest(e) {
+          //   if (xhr.readyState == 4 && xhr.status == 200) {
+          //     var response = JSON.parse(xhr.responseText);
+          //     alert(response);
+          //   };
+          // }
         }
       });
     };
