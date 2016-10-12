@@ -247,6 +247,7 @@ var askType = function(err, convo) {
         } else  {
           convo.say('Let me connect you to an expert');
           convo.next();
+          alert('hello world');
           // xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
           // xhr.send();
 
