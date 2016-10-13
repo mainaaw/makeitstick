@@ -162,9 +162,9 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
             } else {
                 showHighNumIdeas(response, convo);
                 convo.next();
+                }
             }
         }
-     }
     },
     {
         pattern: bot.utterances.no,
@@ -177,7 +177,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         callback: function(response,convo) {
         convo.say('Let me connect you to an expert');
         convo.next();
-    }
+        }
     }
     ]);
 };
