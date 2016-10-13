@@ -63,7 +63,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                             showFewIdeasHoneyComb(response, convo);
                             convo.next();
                         } else if (ideasNum > 5 && ideasNum < 13) {
-
                             showMediumNumIdeasHoneyComb(response, convo);
                             convo.next();
                         } else {
@@ -74,7 +73,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 );
 
             } else if (answer == 'no' || 'No' || 'NO') {
-                convo.say('Hmm... Could you try describing it a different way?')
+                convo.ask('Hmm... Could you try describing it a different way?')
                 convo.next();
             } else {
                 convo.say('Let me connect you to an expert');
@@ -107,7 +106,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
             text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas. What do you think?',
-            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
             unfurl_media: true,
             color: '#FF0000'
         }]
