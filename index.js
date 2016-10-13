@@ -301,9 +301,6 @@ var showComparison = function(response, convo) {
         console.log(err, resp)
     })
 }
-
-
-
 bot.startConversation(message, askType);
 
 });
