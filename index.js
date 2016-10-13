@@ -53,10 +53,12 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
     var askType = function(err, convo) {
         convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', function(response, convo) {
-            var answer = response.text
+            var answer = response.text;
             var ideasNum = parseInt(response.text, 10);
 
             if (answer == 'yes' || 'Yes' || 'YES') {
+                convo.ask('About how many ideas are you working with?');
+              
                 if (ideasNum < 6) {
                     showFewIdeasHoneyComb(response, convo);
                     convo.next();
