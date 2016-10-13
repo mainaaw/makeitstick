@@ -50,14 +50,14 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 //if no = "try describing it a different way" or route to expert
 
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
-    var example = [{
+
+    var askType = function(err, convo) {
+        var example = [{
                 image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb',
                 unfurl_media: true,
                 color: '#FF0000'
             }]
-    var askType = function(err, convo) {
-        
-
+        convo.say(example);
         convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. About how many ideas are you working with?', function(response, convo) {
             var ideasNum = parseInt(response.text, 10);
 
@@ -130,12 +130,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
     };
 
     bot.startConversation(message, askType);
-    bot.reply(message, {
-            attachments: example
-        }, function(err, resp) {
-            0
-            console.log(err, resp)
-        })
 
 })
 
