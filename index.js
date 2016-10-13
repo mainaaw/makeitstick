@@ -259,7 +259,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to capture a comparison. Is this true?',[
+        convo.ask('It sounds like you\'re going for a 2x2. Is this true?',[
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
@@ -288,7 +288,7 @@ var showComparison = function(response, convo) {
     var attachments = [{
         fallback: '2x2 Comparison',
         title: '2x2 Comparison',
-        text: 'It sounds like you\'re going for a 2x2. Here is a chart that might work well to capture comparison of multiple criteria. What do you think?',
+        text: 'Here is a chart that might work well to capture comparison of multiple criteria. What do you think?',
         image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC1.jpg?alt=media&token=c2795e6b-a320-45e9-b189-71b5613960fd',
         unfurl_media: true,
         color: '#FF0000'
