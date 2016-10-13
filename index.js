@@ -146,7 +146,10 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas or concepts. Is this true?', [
+
+
+        convo.ask('It sounds like you want to organize ideas or concepts. Is this true?',[
+
         {
             pattern: bot.utterances.yes,
             callback: function(response,convo) {
@@ -162,16 +165,16 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
             } else {
                 showHighNumIdeas(response, convo);
                 convo.next();
-                }
+                    }
+             });
             }
-        }
-    },
+        },
     {
         pattern: bot.utterances.no,
         callback: function(response,convo) {
         convo.say('Hmm... Could you try describing it a different way?');
         convo.next();
-    }
+        }
     },
     {
         callback: function(response,convo) {
@@ -180,6 +183,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         }
     }
     ]);
+
 };
 
     var showFewIdeas = function(response, convo) {
