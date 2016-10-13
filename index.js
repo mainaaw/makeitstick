@@ -42,7 +42,7 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 
 //Section B1 - B2.6
 
-//Section B1
+//Section B1 
 //insert example into initial response
 //https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb
 //Ask whether this is right
