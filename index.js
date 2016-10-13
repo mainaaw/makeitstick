@@ -149,6 +149,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         convo.ask('It sounds like you want to organize ideas or concepts. Is this true?', [
         {
             pattern: bot.utterances.yes,
+            callback: function(response,convo) {
             convo.ask('About how many ideas are you working with?',function(response, convo) { 
             var ideasNum = parseInt(response.text, 10);
             if (ideasNum < 4) {
@@ -163,15 +164,20 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
                 convo.next();
             }
         }
+     }
     },
     {
         pattern: bot.utterances.no,
+        callback: function(response,convo) {
         convo.say('Hmm... Could you try describing it a different way?');
         convo.next();
+    }
     },
     {
-    convo.say('Let me connect you to an expert');
-    convo.next();
+        callback: function(response,convo) {
+        convo.say('Let me connect you to an expert');
+        convo.next();
+    }
     }
     ]);
 };
