@@ -54,28 +54,31 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
     var askType = function(err, convo) {
         convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', function(response, convo) {
             var answer = response.text;
-            var ideasNum = parseInt(response.text, 10);
 
             if (answer == 'yes' || 'Yes' || 'YES') {
-                convo.ask('About how many ideas are you working with?');
-              
-                if (ideasNum < 6) {
-                    showFewIdeasHoneyComb(response, convo);
-                    convo.next();
-                } else if (ideasNum > 5 && ideasNum < 13) {
+                convo.ask('About how many ideas are you working with?',
+                    function(response, convo) {
+                        var ideasNum = parseInt(response.text, 10);
+                        if (ideasNum < 6) {
+                            showFewIdeasHoneyComb(response, convo);
+                            convo.next();
+                        } else if (ideasNum > 5 && ideasNum < 13) {
 
-                    showMediumNumIdeasHoneyComb(response, convo);
-                    convo.next();
-                } else {
-                    showHighNumIdeasHoneyComb(response, convo);
-                    convo.next();
-                }
+                            showMediumNumIdeasHoneyComb(response, convo);
+                            convo.next();
+                        } else {
+                            showHighNumIdeasHoneyComb(response, convo);
+                            convo.next();
+                        }
+                    }
+                );
+
             } else if (answer == 'no' || 'No' || 'NO') {
-              convo.say('Hmm... Could you try describing it a different way?')
-              convo.next();
+                convo.say('Hmm... Could you try describing it a different way?')
+                convo.next();
             } else {
-              convo.say('Let me connect you to an expert');
-              convo.next();
+                convo.say('Let me connect you to an expert');
+                convo.next();
             }
 
         });
