@@ -56,6 +56,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 color: '#FF0000'
             }]
     var askType = function(err, convo) {
+        
+
         convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. About how many ideas are you working with?', function(response, convo) {
             var ideasNum = parseInt(response.text, 10);
 
@@ -127,7 +129,13 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         })
     };
 
-    bot.startConversation(message, askType, example);
+    bot.startConversation(message, askType);
+    bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
 
 })
 
