@@ -52,27 +52,30 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. About how many ideas are you working with?', function(response, convo) {
+        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', function(response, convo) {
+            var answer = response.text
             var ideasNum = parseInt(response.text, 10);
-            var example = [{
-                fallback: 'Test',
-                title: 'Test',
-                text: 'Test',
-                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb',
-                unfurl_media: true,
-                color: '#FF0000'
-            }];
-            if (ideasNum < 6) {
-                showFewIdeasHoneyComb(response, convo);
-                convo.say(example);
-            } else if (ideasNum > 5 && ideasNum < 13) {
 
-                showMediumNumIdeasHoneyComb(response, convo);
-                convo.next();
+            if (answer == 'yes' || 'Yes' || 'YES') {
+                if (ideasNum < 6) {
+                    showFewIdeasHoneyComb(response, convo);
+                    convo.next();
+                } else if (ideasNum > 5 && ideasNum < 13) {
+
+                    showMediumNumIdeasHoneyComb(response, convo);
+                    convo.next();
+                } else {
+                    showHighNumIdeasHoneyComb(response, convo);
+                    convo.next();
+                }
+            } else if (answer == 'no' || 'No' || 'NO') {
+              convo.say('Hmm... Could you try describing it a different way?')
+              convo.next();
             } else {
-                showHighNumIdeasHoneyComb(response, convo);
-                convo.next();
+              convo.say('Let me connect you to an expert');
+              convo.next();
             }
+
         });
     };
 
