@@ -73,21 +73,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 );
 
             } else if (answer == 'no' || 'No' || 'NO') {
-                convo.ask('Hmm... Could you try describing it a different way?',
-                    function(response, convo) {
-                        var ideasNum = parseInt(response.text, 10);
-                        if (ideasNum < 6) {
-                            showFewIdeasHoneyComb(response, convo);
-                            convo.next();
-                        } else if (ideasNum > 5 && ideasNum < 13) {
-                            showMediumNumIdeasHoneyComb(response, convo);
-                            convo.next();
-                        } else {
-                            showHighNumIdeasHoneyComb(response, convo);
-                            convo.next();
-                        }
-                    }
-                );
+                convo.say('Hmm... Could you try describing it a different way?');
                 convo.next();
             } else {
                 convo.say('Let me connect you to an expert');
