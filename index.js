@@ -48,6 +48,8 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 //if yes = ask for number of ideas and display the blank template
 //if no = "try describing it a different way" or route to expert
 
+// test reboot
+
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var askType = function(err, convo) {
