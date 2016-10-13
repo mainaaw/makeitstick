@@ -53,7 +53,7 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', [
+        convo.ask('It sounds like you want to organize ideas from a brainstorm. Is this correct?', [
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
@@ -153,7 +153,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('It sounds like you want to organize ideas or concepts. Is this true?',[
-
         {
             pattern: bot.utterances.yes,
             callback: function(response,convo) {
@@ -163,7 +162,6 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
                 showFewIdeas(response, convo);
                 convo.next();
             } else if (ideasNum > 3 && ideasNum < 6) {
-
                 showMediumNumIdeas(response, convo);
                 convo.next();
             } else {
@@ -259,6 +257,34 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 //if no = "try describing it a different way" or route to expert
 
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var askType = function(err, convo) {
+        convo.ask('It sounds like you want to capture a comparison. Is this true?',[
+        {
+            pattern:bot.utterances.yes,
+            callback: function(response,convo) {
+            showComparison(response, convo);
+            convo.next();
+            }
+        },
+        {
+            pattern:bot.utterances.no,
+            callback: function(response,convo) {
+            convo.say('Hmm... Could you try describing it a different way?');
+            convo.next();
+            }
+        },
+        {
+            default:true,
+            callback: function(response,convo) {
+            convo.say('Let me connect you to an expert');
+            convo.next();
+            }
+        }
+    ])
+    }
+
+var showComparison = function(response, convo) {
     var attachments = [{
         fallback: '2x2 Comparison',
         title: '2x2 Comparison',
@@ -274,6 +300,12 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
         0
         console.log(err, resp)
     })
+}
+
+
+
+bot.startConversation(message, askType);
+
 });
 
 //Comparison C3
