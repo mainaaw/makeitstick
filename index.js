@@ -131,7 +131,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
     bot.startConversation(message, askType);
     bot.reply(message, {
-            attachments: attachments
+            attachments: example
         }, function(err, resp) {
             0
             console.log(err, resp)
