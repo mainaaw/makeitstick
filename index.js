@@ -53,7 +53,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
     var askType = function(err, convo) {
         convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', function(response, convo) {
             var answer = response.text;
-            convo.next();
+            //convo.next();
             if (answer == 'yes' || 'Yes' || 'YES') {
                 convo.ask('About how many ideas are you working with?',
                     function(response, convo) {
@@ -144,7 +144,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
-        convo.ask('It soundes like you want to organize ideas or concepts. How many ideas are you working with?', function(response, convo) {
+        convo.ask('It sounds like you want to organize ideas or concepts. How many ideas are you working with?', function(response, convo) {
             var ideasNum = parseInt(response.text, 10);
 
             if (ideasNum < 4) {
