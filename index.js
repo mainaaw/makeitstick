@@ -41,10 +41,17 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 })
 
 //Section B1 - B2.6
+
 //Section B1
+//insert example into initial response
+//https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb
+//Ask whether this is right
+//if yes = ask for number of ideas and display the blank template
+//if no = "try describing it a different way" or route to expert
+
 controller.hears(['ideas','brainstorming', 'brainstorm','Brainstorm'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('It sounds like you want to organize ideas from a brainstorm. About how many ideas are you working with?', function(response, convo) {
+      convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. About how many ideas are you working with?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum < 6) {
@@ -66,7 +73,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     var attachments = [{
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
-    text: 'Here is a chart that might work for your '+ response.text + ' or other brainstorming ideas. What do you think?',
+    text: 'Here is a chart that might work for '+ response.text + ' or other brainstorming ideas. What do you think?',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
     unfurl_media:true,
     color: '#FF0000'
@@ -83,7 +90,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     var attachments = [{
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
-    text: 'Here is a chart that might work for your '+ response.text + ' and other brainstorming ideas. What do you think?',
+    text: 'Here is a chart that might work for '+ response.text + ' and other brainstorming ideas. What do you think?',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
     unfurl_media: true,
     color: '#FF0000'
@@ -100,7 +107,7 @@ var showFewIdeasHoneyComb = function(response, convo) {
     var attachments = [{
     fallback: 'Honeycomb Brainstorm',
     title: 'Honeycomb Brainstorm',
-    text: 'Here is a chart that might work for your '+ response.text + ' and other brainstorming ideas. What do you think?',
+    text: 'Here is a chart that might work for '+ response.text + ' and other brainstorming ideas. What do you think?',
     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
     unfurl_media: true,
     color: '#FF0000'
@@ -118,9 +125,10 @@ var showFewIdeasHoneyComb = function(response, convo) {
 })
 
 //Section B2
+
 controller.hears(['Concept','concept', 'Mindmap','mindmap'], ['direct_message', 'direct_mention'], function (bot, message) {
 var askType = function(err, convo) {
-      convo.ask('It soundes like you want to organize ideas or concepts. How many big ideas are you working with?', function(response, convo) {
+      convo.ask('It soundes like you want to organize ideas or concepts. How many ideas are you working with?', function(response, convo) {
         var ideasNum = parseInt(response.text, 10);
         
         if (ideasNum < 4) {
@@ -194,7 +202,14 @@ var showFewIdeas = function(response, convo) {
   })
 
 //Section C1 - C3
+
 //Comparison C1
+//insert example into initial response
+//https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC1.Example.png?alt=media&token=efcc1bea-8035-4a5e-a242-5e5958c90a03
+//Ask whether this is right
+//if yes = display the blank template
+//if no = "try describing it a different way" or route to expert
+
 controller.hears(['compare','comparison', 'Comparison','compare', 'criteria', 'Criteria','2x2','two things','multiple variables'], ['direct_message', 'direct_mention'], function (bot, message) {
     var attachments = [
     {
