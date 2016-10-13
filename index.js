@@ -53,11 +53,11 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', function(response, convo) {
-            var answer = response.text;
-            convo.next();
-            if (answer == 'yes' || 'Yes' || 'YES') {
-                convo.ask('About how many ideas are you working with?',
+        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. Is this correct?', [
+        {
+            pattern:bot.utterances.yes,
+            callback: function(response,convo) {
+            convo.ask('About how many ideas are you working with?',
                     function(response, convo) {
                         var ideasNum = parseInt(response.text, 10);
                         if (ideasNum < 6) {
@@ -70,20 +70,26 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                             showHighNumIdeasHoneyComb(response, convo);
                             convo.next();
                         }
-                    }
-                );
-
-            } else if (answer == 'no' || 'No' || 'NO') {
-                convo.say('Hmm... Could you try describing it a different way?');
-                convo.next();
-            } else {
-                convo.say('Let me connect you to an expert');
-                convo.next();
+            });
+        }            
+        },
+        {
+            pattern:bot.utterances.no,
+            callback: function(response,convo) {
+            convo.say('Hmm... Could you try describing it a different way?');
+            convo.next();
+        }
+        },
+        {
+            default: true,
+            callback: function(response,convo) {
+            convo.say('Let me connect you to an expert');
+            convo.next();
             }
+        }
+        ]);
 
-        });
     };
-
     var showFewIdeasHoneyComb = function(response, convo) {
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
@@ -146,8 +152,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
-
-
         convo.ask('It sounds like you want to organize ideas or concepts. Is this true?',[
 
         {
@@ -177,6 +181,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         }
     },
     {
+        default: true,
         callback: function(response,convo) {
         convo.say('Let me connect you to an expert');
         convo.next();
