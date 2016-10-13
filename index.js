@@ -52,6 +52,8 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var askType = function(err, convo) {
+        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. About how many ideas are you working with?', function(response, convo) {
+            var ideasNum = parseInt(response.text, 10);
             var example = [{
                 fallback: 'Test',
                 title: 'Test',
@@ -60,13 +62,9 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 unfurl_media: true,
                 color: '#FF0000'
             }];
-        convo.say(example);
-        convo.ask('It sounds like you want to organize ideas from a brainstorm, like this one. About how many ideas are you working with?', function(response, convo) {
-            var ideasNum = parseInt(response.text, 10);
-
             if (ideasNum < 6) {
                 showFewIdeasHoneyComb(response, convo);
-                convo.next();
+                convo.say(example);
             } else if (ideasNum > 5 && ideasNum < 13) {
 
                 showMediumNumIdeasHoneyComb(response, convo);
