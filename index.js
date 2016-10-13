@@ -39,7 +39,6 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
         }
     });
 })
-
 //Section B1 - B2.6
 
 //Section B1 
