@@ -98,6 +98,13 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             callback: function(response,convo) {
             convo.say('Hmm... Could you try describing it a different way?');
         }
+        },
+        {
+            default:true,
+            callback: function(response,convo) {
+            convo.say('Let me connect you to an expert');
+            convo.next();
+            }
         }
         ]);
 
