@@ -1517,6 +1517,8 @@ controller.hears(['thanks', 'thx', 'thank you'], ['direct_message', 'direct_ment
 
 controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, message) {
 
+
+    bot.reply(message, 'Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. Want to talk to my boss? \n')
                 // begin of POST request to AWS-API
                 var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
                 var method = 'POST';
@@ -1544,6 +1546,4 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
                 request.send(postData);
                 // end of POST request to AWS-API
-
-    bot.reply(message, 'Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. Want to talk to my boss? \n')
 })
