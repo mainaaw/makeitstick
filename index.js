@@ -87,13 +87,13 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             default: true,
             callback: function(response, convo) {
 
-                // POST request test
+                // begin of POST request to AWS-API
                 var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
                 var method = 'POST';
                 var testData = {
                     "Records": [{
                         "Sns": {
-                            "Subject": "Relay Message",
+                            "Subject": "Help Request",
                             "Message": response.text
                         }
                     }]
@@ -113,8 +113,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
                 request.send(postData);
-                // end of POST request test
-                
+                // end of POST request to AWS-API
+
                 convo.say('Let me connect you to an expert');
                 convo.next();
             }
@@ -1516,5 +1516,34 @@ controller.hears(['thanks', 'thx', 'thank you'], ['direct_message', 'direct_ment
 })
 
 controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, message) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
     bot.reply(message, 'Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. Want to talk to my boss? \n')
 })
