@@ -271,8 +271,6 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 //if no = "try describing it a different way" or route to expert
 
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
-
-
     var showBlank = function(response, convo) {
 
     var initial_with_blank = {
@@ -336,7 +334,7 @@ var showComparison = function(response, convo) {
         console.log(err, resp)
     })
 }
-bot.startConversation(message, askBlank);
+bot.startConversation(message, showBlank);
 });
 
 //Comparison C3
