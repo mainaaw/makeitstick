@@ -52,7 +52,8 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas from a brainstorm. Is this correct?', [
+        convo.ask('It sounds like you want to organize ideas from a brainstorm. Would you be looking for something such as this?', [
+            showFewIdeasHoneyComb(response, convo);
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
@@ -76,15 +77,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             pattern:bot.utterances.no,
             callback: function(response,convo) {
             convo.say('Hmm... Could you try describing it a different way?');
-            convo.next();
         }
-        },
-        {
-            default: true,
-            callback: function(response,convo) {
-            convo.say('Let me connect you to an expert');
-            convo.next();
-            }
         }
         ]);
 
