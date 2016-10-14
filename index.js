@@ -273,6 +273,25 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
+    var showBlank = function(response, convo) {
+
+    var initial_with_blank = {
+      text: 'It sounds like you want to represent a comparison of mutiple variables. Here is a sample diagram that you could you use.',
+      attachments: [
+        {
+          fallback: 'Comparison',
+          title: 'Sample Comparison Diagram',
+          image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC1.Example.png?alt=media&token=efcc1bea-8035-4a5e-a242-5e5958c90a03',
+          unfurl_media: true,
+          color: '#7CD197'
+        }
+      ]
+    }
+        convo.say(initial_with_blank);
+        askType(response,convo);
+        convo.next()
+    };
+
 
     var askType = function(response, convo) {
         convo.ask('It sounds like you\'re going for a 2x2. Is this true?',[
@@ -317,7 +336,7 @@ var showComparison = function(response, convo) {
         console.log(err, resp)
     })
 }
-bot.startConversation(message, askType);
+bot.startConversation(message, askBlank);
 });
 
 //Comparison C3
