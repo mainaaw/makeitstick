@@ -53,7 +53,6 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('It sounds like you want to organize ideas from a brainstorm. Would you be looking for something such as this?', [
-            showFewIdeasHoneyComb(response, convo);
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
