@@ -52,23 +52,6 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
-        callback: function(response,convo) {
-            var attachments = [{
-            fallback: 'Honeycomb Brainstorm',
-            title: 'Honeycomb Brainstorm',
-            text: 'Here is a blank that might work for you and other brainstorming ideas. What do you think?',
-            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
-            unfurl_media: true,
-            color: '#FF0000'
-        }]
-
-        bot.reply(message, {
-            attachments: attachments
-        }, function(err, resp) {
-            0
-            console.log(err, resp)
-        })
-        };
         convo.ask('It sounds like you want to organize ideas from a brainstorm. Would you be looking for something such as this?', [
         {
             pattern:bot.utterances.yes,
