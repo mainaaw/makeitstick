@@ -83,19 +83,23 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             callback: function(response, convo) {
 
             	// POST request test
+            	var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+            	var method = 'POST';
+            	var postData = 'stuff stuff stuff';
+            	var async = true;
+
             	var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
-                xhr.send();
+                var request = new XMLHttpRequest();
 
-                xhr.addEventListener("readystatechange", processRequest, false);
-
-                function processRequest(e) {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        alert(response);
-                    }
+                request.onload = function() {
+                	var status = request.status;
+                	var data = request.responseText;
                 }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
                 // end of POST request test
 
                 convo.say('Hmm... Could you try describing it a different way?');
