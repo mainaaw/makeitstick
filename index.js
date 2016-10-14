@@ -54,29 +54,18 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 
     var showBlank = function(response, convo) {
-        convo.say('It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.');
 
-        var initial_with_blank = {
-      'text': 'this is a pre-text',
-      'attachments': [
+    var initial_with_blank = {
+      text: 'It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.',
+      attachments: [
         {
-          'fallback': 'To be useful, I need your to invite me in a channel.',
-          'title': 'How can I help you?',
-          'text': ' To be useful, I need your to invite me in a channel ',
-          'color': '#7CD197'
+          fallback: 'Brainstorming',
+          title: 'Sample Brainstorming Diagram',
+          image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb',
+          unfurl_media: true,
+          color: '#7CD197'
         }
       ]
-        //     username: "Stick",
-        //     text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
-
-        //     attachments : [{
-        //     fallback: 'Honeycomb Brainstorm',
-        //     title: 'Honeycomb Brainstorm',
-        //     text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
-        //     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
-        //     unfurl_media: true,
-        //     color: '#FF0000'
-        // }]
         }
 
         convo.say(initial_with_blank);
