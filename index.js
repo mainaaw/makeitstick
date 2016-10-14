@@ -57,8 +57,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         convo.say('It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.');
 
         var initial_with_blank = {
-
-      'username': 'My bot' ,
       'text': 'this is a pre-text',
       'attachments': [
         {
@@ -67,8 +65,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
           'text': ' To be useful, I need your to invite me in a channel ',
           'color': '#7CD197'
         }
-      ],
-      'icon_url': 'http://lorempixel.com/48/48'
+      ]
         //     username: "Stick",
         //     text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
 
