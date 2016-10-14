@@ -88,7 +88,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             	var postData = 'stuff stuff stuff';
             	var async = true;
 
-            	var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
+            	// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
                 var request = new XMLHttpRequest();
 
                 request.onload = function() {
