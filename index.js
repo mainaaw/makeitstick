@@ -82,18 +82,25 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-            	// POST request test
-            	var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-            	var method = 'POST';
-            	var postData = 'stuff stuff stuff';
-            	var async = true;
+                // POST request test
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var postData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Relay Message",
+                            "Message": "blah blah blah"
+                        }
+                    }]
+                }
+                var async = true;
 
-            	// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
                 var request = new XMLHttpRequest();
 
                 request.onload = function() {
-                	var status = request.status;
-                	var data = request.responseText;
+                    var status = request.status;
+                    var data = request.responseText;
                 }
 
                 request.open(method, url, async);
