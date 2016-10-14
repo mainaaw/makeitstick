@@ -31,15 +31,15 @@ controller.on('bot_channel_join', function(bot, message) {
 })
 
 controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function(bot, message) {
-    controller.storage.users.get(message.user, function(err, user) {
-        if (user && user.name) {
-            bot.reply(message, 'Hi, <@' + message.user + '>! I hope you\'re doing well today.');
-        } else {
-            bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today?')
-        }
-    });
-})
-//Section B1 - B2.6
+        controller.storage.users.get(message.user, function(err, user) {
+            if (user && user.name) {
+                bot.reply(message, 'Hi, <@' + message.user + '>! I hope you\'re doing well today.');
+            } else {
+                bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today?')
+            }
+        });
+    })
+    //Section B1 - B2.6
 
 //Section B1 
 //insert example into initial response
@@ -55,65 +55,77 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
     var showBlank = function(response, convo) {
 
-    var initial_with_blank = {
-      text: 'It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.',
-      attachments: [
-        {
-          fallback: 'Brainstorming',
-          title: 'Sample Brainstorming Diagram',
-          image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb',
-          unfurl_media: true,
-          color: '#7CD197'
+        var initial_with_blank = {
+            text: 'It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Brainstorming',
+                title: 'Sample Brainstorming Diagram',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
         }
-      ]
-    }
         convo.say(initial_with_blank);
-        askType(response,convo);
+        askType(response, convo);
         convo.next()
     };
 
     var askType = function(response, convo) {
-        convo.ask('Would you be looking for something such as this?',[
-        {
-            pattern:bot.utterances.yes,
-            callback: function(response,convo) {
-                numOptions(response,convo);
+
+        convo.ask('Would you be looking for something such as this?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
                 convo.next();
-        }            
-        },
-        {
-            pattern:bot.utterances.no,
-            callback: function(response,convo) {
-            convo.say('Hmm... Could you try describing it a different way?');
-            convo.next();
-        }
-        },
-        {
-            default:true,
-            callback: function(response,convo) {
-            convo.say('Let me connect you to an expert');
-            convo.next();
             }
-        }
-        ]);
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+            	// POST request test
+            	var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', "https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy", true);
+                xhr.send();
+
+                xhr.addEventListener("readystatechange", processRequest, false);
+
+                function processRequest(e) {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        alert(response);
+                    }
+                }
+                // end of POST request test
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
 
     };
 
-    var numOptions = function(response,convo) {
+    var numOptions = function(response, convo) {
         convo.ask('About how many ideas are you working with?',
-                    function(response, convo) {
-                        var ideasNum = parseInt(response.text, 10);
-                        if (ideasNum < 6) {
-                            showFewIdeasHoneyComb(response, convo);
-                            convo.next();
-                        } else if (ideasNum > 5 && ideasNum < 13) {
-                            showMediumNumIdeasHoneyComb(response, convo);
-                            convo.next();
-                        } else {
-                            showHighNumIdeasHoneyComb(response, convo);
-                            convo.next();
-                        }
-            });    
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum < 6) {
+                    showFewIdeasHoneyComb(response, convo);
+                    convo.next();
+                } else if (ideasNum > 5 && ideasNum < 13) {
+                    showMediumNumIdeasHoneyComb(response, convo);
+                    convo.next();
+                } else {
+                    showHighNumIdeasHoneyComb(response, convo);
+                    convo.next();
+                }
+            });
     }
 
 
@@ -179,42 +191,38 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas or concepts. Is this true?',[
-        {
+        convo.ask('It sounds like you want to organize ideas or concepts. Is this true?', [{
             pattern: bot.utterances.yes,
-            callback: function(response,convo) {
-            convo.ask('About how many ideas are you working with?',function(response, convo) { 
-            var ideasNum = parseInt(response.text, 10);
-            if (ideasNum < 4) {
-                showFewIdeas(response, convo);
-                convo.next();
-            } else if (ideasNum > 3 && ideasNum < 6) {
-                showMediumNumIdeas(response, convo);
-                convo.next();
-            } else {
-                showHighNumIdeas(response, convo);
-                convo.next();
+            callback: function(response, convo) {
+                convo.ask('About how many ideas are you working with?', function(response, convo) {
+                    var ideasNum = parseInt(response.text, 10);
+                    if (ideasNum < 4) {
+                        showFewIdeas(response, convo);
+                        convo.next();
+                    } else if (ideasNum > 3 && ideasNum < 6) {
+                        showMediumNumIdeas(response, convo);
+                        convo.next();
+                    } else {
+                        showHighNumIdeas(response, convo);
+                        convo.next();
                     }
-             });
+                });
             }
-        },
-    {
-        pattern: bot.utterances.no,
-        callback: function(response,convo) {
-        convo.say('Hmm... Could you try describing it a different way?');
-        convo.next();
-        }
-    },
-    {
-        default: true,
-        callback: function(response,convo) {
-        convo.say('Let me connect you to an expert');
-        convo.next();
-        }
-    }
-    ]);
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
 
-};
+    };
 
     var showFewIdeas = function(response, convo) {
         var attachments = [{
@@ -286,119 +294,109 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
     var showBlank = function(response, convo) {
 
-    var initial_with_blank = {
-      text: 'It sounds like you want to represent a comparison of mutiple variables. Here is a sample diagram that you could you use.',
-      attachments: [
-        {
-          fallback: 'Comparison',
-          title: 'Sample Comparison Diagram',
-          image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC1.Example.png?alt=media&token=efcc1bea-8035-4a5e-a242-5e5958c90a03',
-          unfurl_media: true,
-          color: '#7CD197'
+        var initial_with_blank = {
+            text: 'It sounds like you want to represent a comparison of mutiple variables. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Comparison',
+                title: 'Sample Comparison Diagram',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC1.Example.png?alt=media&token=efcc1bea-8035-4a5e-a242-5e5958c90a03',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
         }
-      ]
-    }
         convo.say(initial_with_blank);
-        askType(response,convo);
+        askType(response, convo);
         convo.next()
     };
 
     var askType = function(response, convo) {
-        convo.ask('Would you like a diagram such as this?',[
-        {
-            pattern:bot.utterances.yes,
-            callback: function(response,convo) {
-            showComparison(response, convo);
-            convo.next();
+        convo.ask('Would you like a diagram such as this?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                showComparison(response, convo);
+                convo.next();
             }
-        },
-        {
-            pattern:bot.utterances.no,
-            callback: function(response,convo) {
-            convo.say('Hmm... Could you try describing it a different way?');
-            convo.next();
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
             }
-        },
-        {
-            default:true,
-            callback: function(response,convo) {
-            convo.say('Let me connect you to an expert');
-            convo.next();
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
             }
-        }
-    ])
+        }])
     }
 
-var showComparison = function(response, convo) {
-    var attachments = [{
-        fallback: '2x2 Comparison',
-        title: '2x2 Comparison',
-        text: 'Here is a chart that might work well to capture comparison of multiple criteria.',
-        image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC1.jpg?alt=media&token=c2795e6b-a320-45e9-b189-71b5613960fd',
-        unfurl_media: true,
-        color: '#FF0000'
-    }]
+    var showComparison = function(response, convo) {
+        var attachments = [{
+            fallback: '2x2 Comparison',
+            title: '2x2 Comparison',
+            text: 'Here is a chart that might work well to capture comparison of multiple criteria.',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC1.jpg?alt=media&token=c2795e6b-a320-45e9-b189-71b5613960fd',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
 
-    bot.reply(message, {
-        attachments: attachments
-    }, function(err, resp) {
-        0
-        console.log(err, resp)
-    })
-}
-bot.startConversation(message, showBlank);
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    }
+    bot.startConversation(message, showBlank);
 });
 
 //Comparison C3
 controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'solution', 'before and after'], ['direct_message', 'direct_mention'], function(bot, message) {
 
-var askType = function(err, convo) {
-        convo.ask('It sounds like you\'re looking to capture a change of state. Is this true?',[
-        {
-            pattern:bot.utterances.yes,
-            callback: function(response,convo) {
-            showBeforeAfter(response, convo);
-            convo.next();
+    var askType = function(err, convo) {
+        convo.ask('It sounds like you\'re looking to capture a change of state. Is this true?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                showBeforeAfter(response, convo);
+                convo.next();
             }
-        },
-        {
-            pattern:bot.utterances.no,
-            callback: function(response,convo) {
-            convo.say('Hmm... Could you try describing it a different way?');
-            convo.next();
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
             }
-        },
-        {
-            default:true,
-            callback: function(response,convo) {
-            convo.say('Let me connect you to an expert');
-            convo.next();
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
             }
-        }
-    ])
+        }])
     }
 
 
 
-var showBeforeAfter = function(response, convo) {
-    var attachments = [{
-        fallback: 'Before + After',
-        title: 'Before + After',
-        text: 'Here is a chart that might work well for you to explain a before and after situation like yours. What do you think?',
-        image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC3.jpg?alt=media&token=e648194f-f021-4376-bd37-fd5bf5bfc4d3',
-        unfurl_media: true,
-        color: '#FF0000'
-    }]
-    bot.reply(message, {
-        attachments: attachments
-    }, function(err, resp) {
-        0
-        console.log(err, resp)
-    })
-}
+    var showBeforeAfter = function(response, convo) {
+        var attachments = [{
+            fallback: 'Before + After',
+            title: 'Before + After',
+            text: 'Here is a chart that might work well for you to explain a before and after situation like yours. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC3.jpg?alt=media&token=e648194f-f021-4376-bd37-fd5bf5bfc4d3',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    }
 
 
-bot.startConversation(message, askType);
+    bot.startConversation(message, askType);
 });
 
 //Comparison C2
