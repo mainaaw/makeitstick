@@ -48,8 +48,6 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 //if yes = ask for number of ideas and display the blank template
 //if no = "try describing it a different way" or route to expert
 
-// test reboot
-
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
@@ -82,6 +80,13 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
                 // POST request test
                 var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
                 var method = 'POST';
@@ -109,13 +114,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
                 request.send(postData);
                 // end of POST request test
-
-                convo.say('Hmm... Could you try describing it a different way?');
-                convo.next();
-            }
-        }, {
-            default: true,
-            callback: function(response, convo) {
+                
                 convo.say('Let me connect you to an expert');
                 convo.next();
             }
