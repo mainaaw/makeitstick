@@ -54,10 +54,12 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 
     var showBlank = function(err, convo) {
+        callback: function(response,convo) {
         convo.say('It sounds like you want to organize ideas from a brainstorm');
         showFewIdeasHoneyComb(response, convo);
         askType(response,convo);
         convo.next()
+    }
     };
 
     var askType = function(err, convo) {
