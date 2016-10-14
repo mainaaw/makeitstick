@@ -57,16 +57,29 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         convo.say('It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.');
 
         var initial_with_blank = {
-            username: "Stick",
-            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
-            attachments : [{
-            fallback: 'Honeycomb Brainstorm',
-            title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
-            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
-            unfurl_media: true,
-            color: '#FF0000'
-        }]
+
+      'username': 'My bot' ,
+      'text': 'this is a pre-text',
+      'attachments': [
+        {
+          'fallback': 'To be useful, I need your to invite me in a channel.',
+          'title': 'How can I help you?',
+          'text': ' To be useful, I need your to invite me in a channel ',
+          'color': '#7CD197'
+        }
+      ],
+      'icon_url': 'http://lorempixel.com/48/48'
+        //     username: "Stick",
+        //     text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
+
+        //     attachments : [{
+        //     fallback: 'Honeycomb Brainstorm',
+        //     title: 'Honeycomb Brainstorm',
+        //     text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
+        //     image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
+        //     unfurl_media: true,
+        //     color: '#FF0000'
+        // }]
         }
 
         convo.say(initial_with_blank);
