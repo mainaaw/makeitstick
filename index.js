@@ -108,7 +108,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' or other brainstorming ideas. What do you think?',
+            text: 'Here is a chart that might work for ' + response.text + ' or other brainstorming ideas.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
             unfurl_media: true,
             color: '#FF0000'
@@ -290,7 +290,6 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
         convo.next()
     };
 
-
     var askType = function(response, convo) {
         convo.ask('It sounds like you\'re going for a 2x2. Is this true?',[
         {
@@ -321,7 +320,7 @@ var showComparison = function(response, convo) {
     var attachments = [{
         fallback: '2x2 Comparison',
         title: '2x2 Comparison',
-        text: 'Here is a chart that might work well to capture comparison of multiple criteria. What do you think?',
+        text: 'Here is a chart that might work well to capture comparison of multiple criteria.',
         image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC1.jpg?alt=media&token=c2795e6b-a320-45e9-b189-71b5613960fd',
         unfurl_media: true,
         color: '#FF0000'
