@@ -85,6 +85,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             pattern:bot.utterances.no,
             callback: function(response,convo) {
             convo.say('Hmm... Could you try describing it a different way?');
+            convo.next();
         }
         },
         {
