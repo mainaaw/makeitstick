@@ -51,8 +51,17 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 // test reboot
 
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(err, convo) {
+        convo.say('It sounds like you want to organize ideas from a brainstorm');
+        showFewIdeasHoneyComb(response, convo);
+        askType(response,convo);
+        convo.next()
+    };
+
     var askType = function(err, convo) {
-        convo.ask('It sounds like you want to organize ideas from a brainstorm. Would you be looking for something such as this?', [
+        convo.ask('Would you be looking for something such as this?', [
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
@@ -137,7 +146,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         })
     };
 
-    bot.startConversation(message, askType);
+    bot.startConversation(message, showBlank);
 
 })
 
