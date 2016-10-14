@@ -68,8 +68,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
       ]
     }
         convo.say(initial_with_blank);
-        askType(response,convo);
-        convo.next()
+        // askType(response,convo);
+        // convo.next()
     };
 
     var askType = function(response, convo) {
@@ -133,7 +133,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas. What do you think?',
+            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
             unfurl_media: true,
             color: '#FF0000'
@@ -151,7 +151,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas. What do you think?',
+            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
             unfurl_media: true,
             color: '#FF0000'
@@ -298,7 +298,7 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
     };
 
     var askType = function(response, convo) {
-        convo.ask('It sounds like you\'re going for a 2x2. Is this true?',[
+        convo.ask('Would you like a diagram such as this?',[
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
