@@ -53,13 +53,11 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
-    var showBlank = function(err, convo) {
-        callback: function(response,convo) {
+    var showBlank = function(response, convo) {
         convo.say('It sounds like you want to organize ideas from a brainstorm');
         showFewIdeasHoneyComb(response, convo);
         askType(response,convo);
         convo.next()
-    }
     };
 
     var askType = function(err, convo) {
