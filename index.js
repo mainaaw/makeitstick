@@ -68,8 +68,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
       ]
     }
         convo.say(initial_with_blank);
-        // askType(response,convo);
-        // convo.next()
+        askType(response,convo);
+        convo.next()
     };
 
     var askType = function(response, convo) {
@@ -77,20 +77,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
-            convo.ask('About how many ideas are you working with?',
-                    function(response, convo) {
-                        var ideasNum = parseInt(response.text, 10);
-                        if (ideasNum < 6) {
-                            showFewIdeasHoneyComb(response, convo);
-                            convo.next();
-                        } else if (ideasNum > 5 && ideasNum < 13) {
-                            showMediumNumIdeasHoneyComb(response, convo);
-                            convo.next();
-                        } else {
-                            showHighNumIdeasHoneyComb(response, convo);
-                            convo.next();
-                        }
-            });
+                numOptions(response,convo);
+                convo.next();
         }            
         },
         {
@@ -109,6 +97,23 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         ]);
 
     };
+
+    var numOptions = function(response,convo) {
+        convo.ask('About how many ideas are you working with?',
+                    function(response, convo) {
+                        var ideasNum = parseInt(response.text, 10);
+                        if (ideasNum < 6) {
+                            showFewIdeasHoneyComb(response, convo);
+                            convo.next();
+                        } else if (ideasNum > 5 && ideasNum < 13) {
+                            showMediumNumIdeasHoneyComb(response, convo);
+                            convo.next();
+                        } else {
+                            showHighNumIdeasHoneyComb(response, convo);
+                            convo.next();
+                        }
+            });    
+    }
 
 
     var showFewIdeasHoneyComb = function(response, convo) {
