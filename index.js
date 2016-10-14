@@ -51,7 +51,6 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
 // test reboot
 
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
-
     var askType = function(err, convo) {
         convo.ask('It sounds like you want to organize ideas from a brainstorm. Is this correct?', [
         {
@@ -302,11 +301,40 @@ var showComparison = function(response, convo) {
     })
 }
 bot.startConversation(message, askType);
-
 });
 
 //Comparison C3
 controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'solution', 'before and after'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+var askType = function(err, convo) {
+        convo.ask('It sounds like you\'re looking to capture a change of state. Is this true?',[
+        {
+            pattern:bot.utterances.yes,
+            callback: function(response,convo) {
+            showBeforeAfter(response, convo);
+            convo.next();
+            }
+        },
+        {
+            pattern:bot.utterances.no,
+            callback: function(response,convo) {
+            convo.say('Hmm... Could you try describing it a different way?');
+            convo.next();
+            }
+        },
+        {
+            default:true,
+            callback: function(response,convo) {
+            convo.say('Let me connect you to an expert');
+            convo.next();
+            }
+        }
+    ])
+    }
+
+
+
+var showBeforeAfter = function(response, convo) {
     var attachments = [{
         fallback: 'Before + After',
         title: 'Before + After',
@@ -315,13 +343,16 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
         unfurl_media: true,
         color: '#FF0000'
     }]
-
     bot.reply(message, {
         attachments: attachments
     }, function(err, resp) {
         0
         console.log(err, resp)
     })
+}
+
+
+bot.startConversation(message, askType);
 });
 
 //Comparison C2
