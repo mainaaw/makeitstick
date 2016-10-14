@@ -1519,9 +1519,9 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
     bot.startConversation(message, function(err, convo) {
         convo.ask('Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. Want to talk to my boss? \n', function(response, convo) {
-            
+
             // begin of POST request to AWS-API
-            var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+            var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
             var method = 'POST';
             var testData = {
                 "Records": [{
@@ -1552,7 +1552,4 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             convo.next();
         })
     });
-
-    // bot.reply(message, 'Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. Want to talk to my boss? \n')
-
 })
