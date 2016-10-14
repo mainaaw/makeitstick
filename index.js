@@ -66,15 +66,14 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
           color: '#7CD197'
         }
       ]
-        }
-
+    }
         convo.say(initial_with_blank);
         askType(response,convo);
         convo.next()
     };
 
     var askType = function(response, convo) {
-        convo.ask('Would you be looking for something such as this?', [
+        convo.ask('Would you be looking for something such as this?',[
         {
             pattern:bot.utterances.yes,
             callback: function(response,convo) {
@@ -273,7 +272,9 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
 
-    var askType = function(err, convo) {
+
+
+    var askType = function(response, convo) {
         convo.ask('It sounds like you\'re going for a 2x2. Is this true?',[
         {
             pattern:bot.utterances.yes,
