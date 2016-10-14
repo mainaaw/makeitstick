@@ -89,7 +89,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                     "Records": [{
                         "Sns": {
                             "Subject": "Relay Message",
-                            "Message": "blah blah blah"
+                            "Message": response.text
                         }
                     }]
                 }
