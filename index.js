@@ -2241,9 +2241,11 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
             request.send(postData);
             // end of POST request to AWS-API
+
+            convo.say('Alright, thank you!');
+            convo.next();
             
             };
-
 
             bot.startConversation(message, notUnderstanding);
         });
