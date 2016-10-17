@@ -8,10 +8,6 @@ var controller = Botkit.slackbot({
     debug: false
 })
 
-function(message) {
-
-}
-
 // Assume single team mode if we have a SLACK_TOKEN
 if (token) {
     console.log('Starting in single-team mode')
