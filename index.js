@@ -2210,7 +2210,9 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             convo.next();
         }
 
-        }] )}
+        }] 
+
+        )
         var askForFeedback = function(response, convo) { 
             // begin of POST request to AWS-API
             var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
@@ -2241,5 +2243,8 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             // end of POST request to AWS-API
 
         }
+        
+    }
+        
         )}
     );
