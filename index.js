@@ -2188,8 +2188,31 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
         {
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
-                convo.ask('Great, what would you like us to know?', function(response,convo) {
-               // begin of POST request to AWS-API
+            convo.ask('Great, what would you like us to know?', function(response,convo) {
+            askForFeedback(response,convo);
+            convo.next();
+            });   
+            }
+        },
+        {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+            convo.say('Alright, thank you!');
+            convo.next();
+        }
+
+        },
+        {
+            default:true,
+            callback: function(response, convo) {
+            convo.say('Sorry I didn\'t understand that.');
+            convo.repeat();
+            convo.next();
+        }
+
+        }] )}
+        var askForFeedback = function(response, convo) { 
+            // begin of POST request to AWS-API
             var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
             var method = 'POST';
             var testData = {
@@ -2216,27 +2239,7 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
             request.send(postData);
             // end of POST request to AWS-API
-                convo.next();
-            });   
-            }
-        },
-        {
-            pattern: bot.utterances.no,
-            callback: function(response, convo) {
-            convo.say('Alright, thank you!');
-            convo.next();
-        }
 
-        },
-        {
-            default:true,
-            callback: function(response, convo) {
-            convo.say('Sorry I didn\'t understand that.');
-            convo.repeat();
-            convo.next();
         }
-
-        }]
-        )}
         )}
     );
