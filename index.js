@@ -3079,7 +3079,7 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
                 if (ideasNum > 0 && ideasNum <= 3) {
                     showThreeSegments(response, convo);
                     convo.next();
-                } else if (ideasNum >= 4)) {
+                } else if (ideasNum >= 4) {
                     showFourSegments(response, convo);
                     convo.next();
                 }
