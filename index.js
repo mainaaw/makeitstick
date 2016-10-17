@@ -41,12 +41,7 @@ controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function
     })
     //Section B1 - B2.6
 
-//Section B1 
-//insert example into initial response
-//https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB1.Example.png?alt=media&token=0cabda0c-233e-46e9-826e-4ca26e6a1fdb
-//Ask whether this is right
-//if yes = ask for number of ideas and display the blank template
-//if no = "try describing it a different way" or route to expert
+//Section B1
 
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
@@ -70,7 +65,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
     var askType = function(response, convo) {
 
-        convo.ask('Would you be looking for something such as this?', [{
+        convo.ask('Do you think something like this could work?', [{
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 numOptions(response, convo);
@@ -199,6 +194,160 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 })
 
 //Section B2
+//https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB2.Example.png?alt=media&token=eb4c20da-08e5-4bd6-9360-6b2d7cc76ae9
+
+
+controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to organize ideas or concepts.',
+            attachments: [{
+                fallback: 'Organizing Thoughts',
+                title: 'Sample Concept Map',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FB2.Example.png?alt=media&token=eb4c20da-08e5-4bd6-9360-6b2d7cc76ae9',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('About how many ideas are you working with?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum < 4) {
+                    showFewIdeas(response, convo);
+                    convo.next();
+                } else if (ideasNum > 3 && ideasNum < 6) {
+                    showMediumNumIdeas(response, convo);
+                    convo.next();
+                } else {
+                    showHighNumIdeas(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showFewIdeas = function(response, convo) {
+        var attachments = [{
+          fallback: 'Concept Map',
+          title: 'Concept Map',
+          text: 'Here is a chart that might work for your ' + response.text + ' concepts. What do you think?',
+          image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.3.jpg?alt=media&token=1d8da986-bb09-4e2c-a7d9-8340ab0df91b',
+          unfurl_media: true,
+          color: '#EF84B6'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showMediumNumIdeas = function(response, convo) {
+        var attachments = [{
+            fallback: 'Concept Map',
+            title: 'Concept Map',
+            text: 'Here is a chart that might work for your ' + response.text + ' concepts. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.4.jpg?alt=media&token=783c4970-247b-4f71-b94a-734214ff8cb9',
+            unfurl_media: true,
+            color: '#EF84B6'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showHighNumIdeas = function(response, convo) {
+        var attachments = [{
+            fallback: 'Concept Map',
+            title: 'Concept Map',
+            text: 'Here is a chart that might work for your ' + response.text + ' concepts. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.6.jpg?alt=media&token=b03de50f-02a9-410a-a53d-bf53d7d3d359',
+            unfurl_media: true,
+            color: '#EF84B6'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
+//B2 - Original
 
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
@@ -292,15 +441,11 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
     bot.startConversation(message, askType);
 
 })
+*/
 
 //Section C1 - C3
 
 //Comparison C1
-//insert example into initial response
-//https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC1.Example.png?alt=media&token=efcc1bea-8035-4a5e-a242-5e5958c90a03
-//Ask whether this is right
-//if yes = display the blank template
-//if no = "try describing it a different way" or route to expert
 
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
     var showBlank = function(response, convo) {
@@ -365,6 +510,68 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
 //Comparison C3
 controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'solution', 'before and after'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to represent a change between two states. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Before and After',
+                title: 'Before and After Diagram',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC3.Example.png?alt=media&token=dcf62117-50ca-45a1-b77e-81ba82b85631',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+        convo.ask('Would you like a diagram such as this?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                showComparison(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }])
+    }
+
+    var showComparison = function(response, convo) {
+        var attachments = [{
+            fallback: 'Before and After',
+            title: 'Before and After',
+            text: 'Here is a chart that might work well for you to explain a before and after situation like yours. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC3.jpg?alt=media&token=e648194f-f021-4376-bd37-fd5bf5bfc4d3',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    }
+    bot.startConversation(message, showBlank);
+});
+
+/*
+controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'solution', 'before and after'], ['direct_message', 'direct_mention'], function(bot, message) {
+
     var askType = function(err, convo) {
         convo.ask('It sounds like you\'re looking to capture a change of state. Is this true?', [{
             pattern: bot.utterances.yes,
@@ -409,8 +616,143 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
 
     bot.startConversation(message, askType);
 });
+*/
 
 //Comparison C2
+
+controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alternatives', 'Alternatives', 'choice', 'choices', 'options', 'Options', 'pros and cons'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to frame a decision. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Decision',
+                title: 'Sample Decision Diagram',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FC2.Example.png?alt=media&token=72e3d2ec-2427-4cf2-b487-b11d3c045f7f',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('Are you making a decision between 2 or 3 alternatives?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                 if (ideasNum == 2) {
+                    showTwoOptions(response, convo);
+                    convo.next();
+                } else if (ideasNum == 3) {
+                    showThreeOptions(response, convo);
+                    convo.next();
+                } else {
+                    convo.say('Let me connect you to an expert');
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showTwoOptions = function(response, convo) {
+        var attachments = [{
+            fallback: 'Decision Making',
+            title: 'Decision Making',
+            text: 'Here is a chart that might work to frame this ' + response.text + ' decision. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.2.jpg?alt=media&token=4aa98f4a-f580-400c-8c28-289f3bf96935',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showThreeOptions = function(response, convo) {
+        var attachments = [{
+            fallback: 'Decision Making',
+            title: 'Decision Making',
+            text: 'Here is a chart that might work to frame this ' + response.text + ' decision. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.3.jpg?alt=media&token=13cec4f2-7197-4f22-a386-cb7c1843ea93',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
 controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alternatives', 'Alternatives', 'choice', 'choices', 'options', 'Options', 'pros and cons'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('Are you making a decision between 2 or 3 alternatives?', function(response, convo) {
@@ -467,8 +809,163 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
 
     bot.startConversation(message, askType);
 });
+*/
 
 // List L1.3 ~ L1.5
+//List L1
+
+controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes', 'user quotes', 'interview quotes', 'interviews', 'interview insights', 'insights from interviews'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to capture insights from interviews.',
+            attachments: [{
+                fallback: 'Interview Themes',
+                title: 'Sample Interview Theme Map',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FL1.Example.png?alt=media&token=1c542b8f-0b34-4879-ae50-dd4d73042a04',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('About how many themes are you working with?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 3) {
+                    showThreeThemes(response, convo);
+                    convo.next();
+                } else if (ideasNum == 4) {
+                    showFourThemes(response, convo);
+                    convo.next();
+                } else {
+                    showFiveThemes(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showThreeThemes = function(response, convo) {
+        var attachments = [{
+          fallback: 'Interview Themes',
+          title: 'Interview Themes',
+          text: 'Here is a chart that might work to capture this. What do you think?',
+          image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.3.jpg?alt=media&token=856baf7b-05c7-4451-8a4b-f78edb31bf05',
+          unfurl_media: true,
+          color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourThemes = function(response, convo) {
+        var attachments = [{
+            fallback: 'Interview Themes',
+            title: 'Interview Themes',
+            text: 'Here is a chart that might work to capture this. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.4.jpg?alt=media&token=a15f2896-617c-4a4e-9478-fdfaed0cc730',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFiveThemes = function(response, convo) {
+        var attachments = [{
+            fallback: 'Interview Themes',
+            title: 'Interview Themes',
+            text: 'Here is a chart that might work to capture your concepts. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.5.jpg?alt=media&token=fe1f7c75-d9e5-46ed-86e4-b6fa7b4c4ba7',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
+L1 Original Code
+
 controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes', 'user quotes', 'interview quotes', 'interviews', 'interview insights', 'insights from interviews'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many themes do you have?', function(response, convo) {
@@ -543,84 +1040,72 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
     bot.startConversation(message, askType);
 
 })
-
-// List L2.2 ~ L2.4 - DELETE
-/* 
-controller.hears(['big idea', 'vision', 'Big idea', 'Vision'], ['direct_message', 'direct_mention'], function (bot, message) {
-var askType = function(err, convo) {
-      convo.ask('How many supporting ideas do you have?', function(response, convo) {
-        var ideasNum = parseInt(response.text, 10);
-        
-        if (ideasNum > 0 && ideasNum <= 2) {
-        showTwoIdeas(response, convo);
-        convo.next();
-      } else if (ideasNum == 3) {
-        showThreeIdeas(response, convo);
-        convo.next();
-        } 
-         else {
-          showFourIdeas(response,convo);
-          convo.next();
-         }
-      });
-    };
-
-var showTwoIdeas = function(response, convo) {
-    var attachments = [{
-    fallback: 'Big Ideas',
-    title: 'Big Ideas',
-    text: 'Here is the best chart to capture '+ response.text + ' big ideas.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.2.jpg?alt=media&token=721a958d-9f3f-407b-837d-4ab6225efd79',
-    unfurl_media:true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-  };
-var showThreeIdeas = function(response, convo) {
-    var attachments = [{
-    fallback: 'Big Ideas',
-    title: 'Big Ideas',
-    text: 'Here is the best chart to capture ' + response.text + ' big ideas.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.3.jpg?alt=media&token=7c3a4ade-0a7b-4f10-9a14-9f455b66421a',
-    unfurl_media: true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-    })
-  };
-
-var showFourIdeas = function(response, convo) {
-    var attachments = [{
-    fallback: 'Big Ideas',
-    title: 'Big Ideas',
-    text: 'Here is the best chart to capture ' + response.text + ' big ideas.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL2.4.jpg?alt=media&token=e2dc50a6-d07a-4ec2-a99b-b7b117c8577a',
-    unfurl_media: true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-    })
-  };
-
- bot.startConversation(message, askType);
-
-})
 */
 
 // List L3
+
+controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact', 'product features', 'product feature', 'feature benefit', 'features and benefits'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to represent the features and benefits for your product. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Feature Benefit Impact Map',
+                title: 'Feature Benefit Impact Map',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FL3.Example.png?alt=media&token=15f8d8c5-6ec1-43db-ae93-ac89d9377b22',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+        convo.ask('Would you like a diagram such as this?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                showComparison(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }])
+    }
+
+    var showComparison = function(response, convo) {
+        var attachments = [{
+            fallback: 'Feature Benefit Impact Map',
+            title: 'Feature Benefit Impact Map',
+            text: 'Here is a chart that might work well for you to explain a before and after situation like yours. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL3.jpg?alt=media&token=d57a6914-0aa5-414e-a9b0-0840a5d4e5dc',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    }
+    bot.startConversation(message, showBlank);
+});
+
+/*
 controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact', 'product features', 'product feature', 'feature benefit', 'features and benefits'], ['direct_message', 'direct_mention'], function(bot, message) {
     var attachments = [{
         title: 'Feature Benefit Impact Map',
@@ -638,8 +1123,164 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
     })
 
 })
+*/
 
-// List L4.3 ~ L4.6
+// List L4
+
+controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team members', 'organization', 'panel'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to introduce a team or company. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Team Page',
+                title: 'Sample Team Page',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FL4.Example.png?alt=media&token=a2b69a6d-5572-4f87-a1a3-f2b9c22a3037',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('How many team members do you have?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 3) {
+                    showThreeTeams(response, convo);
+                    convo.next();
+                } else if (ideasNum == 4) {
+                    showFourTeams(response, convo);
+                    convo.next();
+                } else {
+                    showSixTeams(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showThreeTeams = function(response, convo) {
+        var attachments = [{
+            fallback: 'Team',
+            title: 'Team',
+            text: 'Try this classic for' + response.text + '.',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.3.jpg?alt=media&token=5a7aee79-a12f-48a6-bcfa-3b7cbb7d7496',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourTeams = function(response, convo) {
+        var attachments = [{
+            fallback: 'Team',
+            title: 'Team',
+            text: 'Try this classic for' + response.text + '.',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.4.jpg?alt=media&token=e7623b89-5661-402f-b78d-ae4269ee0e85',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showSixTeams = function(response, convo) {
+        var attachments = [{
+            fallback: 'Team',
+            title: 'Team',
+            text: 'Try this classic for ' + response.text + ' teams. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.6.jpg?alt=media&token=97a1a0ae-1e82-42d0-a29d-3ab2c92de311',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
+
+/L4 Original Code
+
 controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team members', 'organization', 'panel'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many team members do you have?', function(response, convo) {
@@ -714,8 +1355,144 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
     bot.startConversation(message, askType);
 
 })
+*/
 
-// List L5.1 ~ L5.2
+
+// List L5
+
+controller.hears(['user testing', 'user test', 'user test summary', 'user test results', 'user research', 'observations', 'observing users'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to show results from a user test. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'User Test Summary',
+                title: 'Sample User Test Summary',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FL5.Example.png?alt=media&token=7a2a1a93-d213-43ce-85a6-eb2838cbdd63',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('Do you want a "high level" or "detailed" chart?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                 if (ideasNum == 'high level') {
+                    showHighLevel(response, convo);
+                    convo.next();
+                } else if (ideasNum == 'detailed') {
+                    showDetailed(response, convo);
+                    convo.next();
+                } else {
+                    convo.say('Let me connect you to an expert');
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showHighLevel = function(response, convo) {
+        var attachments = [{
+            fallback: 'High Level User Test Summary',
+            title: 'User Test Summary',
+            text: 'Here is a chart that is good for showing user test summaries. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL5.1.jpg?alt=media&token=d3b45c96-8cbb-4fef-8000-0ca1f6914a0a',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showDetailed = function(response, convo) {
+        var attachments = [{
+            fallback: 'User Test Summary',
+            title: 'Detailed User Test Summary',
+            text: 'Here is a good chart for showing more detailed summaries of user testing and ' + response.text + ' What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL5.2.jpg?alt=media&token=b2b58fb3-abce-489f-86e2-d0ee28e4fe05',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
 controller.hears(['user testing', 'user test', 'user test summary', 'user test results', 'user research', 'observations', 'observing users'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('Do you want a "high level" or "detailed" chart?', function(response, convo) {
@@ -769,8 +1546,72 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
     bot.startConversation(message, askType);
 
 })
+*/
 
 // List L6
+
+controller.hears(['product market fit', 'product market', 'product use case'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to represent product market fit. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Product User Impact',
+                title: 'Product User Impact',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FL6.Example.png?alt=media&token=a5cdb9c8-5f5a-4676-b9bd-bb22f395436a',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+        convo.ask('Would you like a diagram such as this?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                showComparison(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }])
+    }
+
+    var showComparison = function(response, convo) {
+        var attachments = [{
+            fallback: 'Product User Impact',
+            title: 'Product User Impact',
+            text: 'Here is a chart that might work well for you to explain the impact of your product. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL6.jpg?alt=media&token=e78f741a-059c-4965-8bf9-3933afbe5e24',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    }
+    bot.startConversation(message, showBlank);
+});
+
+/*
 controller.hears(['product market fit', 'product market', 'product use case'], ['direct_message', 'direct_mention'], function(bot, message) {
     var attachments = [{
         title: 'Product User Impact',
@@ -788,8 +1629,175 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
     })
 
 })
+*/
 
-// Process P1.3 ~ P1.6
+// Process P1
+
+controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'Linear', 'Flow', 'Series', 'Action', 'roadmap', 'plan'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to show a linear process. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Linear Process',
+                title: 'Sample Linear Process Diagram',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FP1.Example.png?alt=media&token=fac7516a-cc28-414b-bd4e-99654d04a585',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('About how many steps are you working with?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 3) {
+                    showThreeSteps(response, convo);
+                    convo.next();
+                } else if (ideasNum == 4) {
+                    showFourSteps(response, convo);
+                    convo.next();
+                } else if (ideasNum == 5) {
+                    showFiveSteps(response, convo);
+                    convo.next();
+                } else {
+                    showSixSteps(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showThreeSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Linear Process',
+            title: 'Linear Process',
+            text: 'What about this classic chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.3.jpg?alt=media&token=ce9bf061-4c38-4ce5-a89f-d32a7111a9da',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Linear Process',
+            title: 'Linear Process',
+            text: 'What about this classic chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.4.jpg?alt=media&token=513331ea-00af-44db-8c51-f94c55265249',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFiveSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Linear Process',
+            title: 'Linear Process',
+            text: 'What about this classic chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.5.jpg?alt=media&token=fbfa6ffe-8d90-4b58-be8c-cc8e54b05724',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showSixSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Linear Process',
+            title: 'Linear Process',
+            text: 'What about this classic chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP1.6.jpg?alt=media&token=244ca743-7bba-49a2-b43d-ca3645294269',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+    bot.startConversation(message, showBlank);
+
+})
+
+
+/*
 controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'Linear', 'Flow', 'Series', 'Action', 'roadmap', 'plan'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many steps are you working with?', function(response, convo) {
@@ -886,8 +1894,193 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
     bot.startConversation(message, askType);
 
 })
+*/
 
-// Process P3.2 ~ P3.6
+// Process P3
+
+controller.hears([['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process', 'loop', 'Loop'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to show a cyclical process. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Cycle',
+                title: 'Sample Cycle',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FP3.Example.png?alt=media&token=54c0a240-0875-4e9f-ace7-b26c298b946b',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('How many steps are in the prcess you want to show?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 2) {
+                    showTwoSteps(response, convo);
+                    convo.next();
+                } else if (ideasNum == 3) {
+                    showThreeSteps(response, convo);
+                    convo.next();
+                } else if (ideasNum == 4) {
+                    showFourSteps(response, convo);
+                    convo.next();
+                } else if (ideasNum == 5) {
+                    showFiveSteps(response, convo);
+                    convo.next();
+                } else {
+                    showSixSteps(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+    var showTwoSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Cyclical Process',
+            title: 'Cyclical Process',
+            text: 'For your cyclical process, what about this chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.2.jpg?alt=media&token=ef04d847-72c4-4e71-a1c5-4c9753bedd43',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showThreeSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Cyclical Process',
+            title: 'Cyclical Process',
+            text: 'For your cyclical process, what about this chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.3.jpg?alt=media&token=e3d22d26-f40f-49a6-b8c2-196e81e42c4f',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Cyclical Process',
+            title: 'Cyclical Process',
+            text: 'For your cyclical process, what about this chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.4.jpg?alt=media&token=3adff828-ffff-4e54-ae26-9d4030bc813f',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFiveSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Cyclical Process',
+            title: 'Cyclical Process',
+            text: 'For your cyclical process, what about this chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.5.jpg?alt=media&token=14efcce6-c4c7-41b5-a33b-ca9691fd1e22',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showSixSteps = function(response, convo) {
+        var attachments = [{
+            fallback: 'Cyclical Process',
+            title: 'Cyclical Process',
+            text: 'For your cyclical process, what about this chart to capture ' + response.text + ' processes?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP3.6.jpg?alt=media&token=414ecce0-1bd2-410d-b83f-ff3ea2b916e7',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
 controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process', 'loop', 'Loop'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many steps are you working with?', function(response, convo) {
@@ -1005,48 +2198,174 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
     bot.startConversation(message, askType);
 
 })
-
-// Process P4 - DELETE
-/*
-controller.hears(['hypothesis', 'experiment', 'lean', 'methodology', 'Hypothesis', 'Experiment', 'Lean', 'Methodology'], ['direct_message', 'direct_mention'], function (bot, message) {
-  var attachments = [{
-    title: 'Hypothesis Testing Result',
-    text: 'Try a hypothesis testing result to better convey this information.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP4.jpg?alt=media&token=2f351250-70a2-4762-8908-800a346dc324',
-    unfurl_media:true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-
-})
 */
 
-// Process P5 - DELETE
-/*
-controller.hears(['use case', 'case', 'Use case', 'Case'], ['direct_message', 'direct_mention'], function (bot, message) {
-  var attachments = [{
-    title: 'Use Case',
-    text: 'Try a use case chart to better convey this information.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP5.jpg?alt=media&token=e8601a64-c69f-4669-aa85-325516b6f195',
-    unfurl_media:true,
-    color: '#FF0000'
-  }]
+// Process P6
 
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
+controller.hears([['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 'Progress', 'milestones', 'Milestones'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to show a timeline with milestones. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Milestones',
+                title: 'Sample Process with Milestones',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FP6.Example.png?alt=media&token=bfe1bee9-5db1-4142-9af7-f9600411fdb1',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('How many milestones are you working with?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 3) {
+                    showThreeMilestones(response, convo);
+                    convo.next();
+                } else if (ideasNum == 4) {
+                    showFourMilestones(response, convo);
+                    convo.next();
+                } else if (ideasNum == 5) {
+                    showFiveMilestones(response, convo);
+                    convo.next();
+                } else {
+                    showSixMilestones(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showThreeMilestones = function(response, convo) {
+        var attachments = [{
+            fallback: 'Milestone Timeline',
+            title: 'Milestone Timeline',
+            text: 'What about this classic chart to capture ' + response.text + '?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.3.jpg?alt=media&token=0062c3d5-1e53-4976-8f50-d742cb5997f7',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourMilestones = function(response, convo) {
+        var attachments = [{
+            fallback: 'Milestone Timeline',
+            title: 'Milestone Timeline',
+            text: 'What about this classic chart to capture ' + response.text + '?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.4.jpg?alt=media&token=3fb223ce-dbdb-41e7-a6f0-9dc330e50cb6',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFiveMilestones = function(response, convo) {
+        var attachments = [{
+            fallback: 'Milestone Timeline',
+            title: 'Milestone Timeline',
+            text: 'What about this classic chart to capture ' + response.text + '?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.5.jpg?alt=media&token=f992f3d5-c6d2-4286-b548-cf8c85ad979e',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showSixMilestones = function(response, convo) {
+        var attachments = [{
+            fallback: 'Milestone Timeline',
+            title: 'Milestone Timeline',
+            text: 'What about this classic chart to capture ' + response.text + '?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FP6.6.jpg?alt=media&token=3fdd8305-0690-421c-8fc9-951297a9dda3',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+    bot.startConversation(message, showBlank);
 
 })
-*/
 
-// Process P6.3 ~ P6.6
+/*
 controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 'Progress', 'milestones', 'Milestones'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many milestones are you working with?', function(response, convo) {
@@ -1143,8 +2462,175 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
     bot.startConversation(message, askType);
 
 })
+*/
 
 // Structure S1 ~ S5
+// Structure S1
+
+controller.hears([['vision', 'mission', 'values', 'culture', 'program', 'principles', 'tenants', 'big idea'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to show a big idea with key tenants. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Pillars',
+                title: 'Sample Pillars',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FS1.Example.png?alt=media&token=eb248c47-a5eb-4405-8852-4161b8870dca',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('How many pillars are you working with?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 3) {
+                    showThreePillars(response, convo);
+                    convo.next();
+                } else if (ideasNum == 4) {
+                    showFourPillars(response, convo);
+                    convo.next();
+                } else if (ideasNum == 5) {
+                    showFivePillars(response, convo);
+                    convo.next();
+                } else {
+                    showSixPillars(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showThreePillars = function(response, convo) {
+        var attachments = [{
+            fallback: 'Pillars',
+            title: 'Pillars',
+            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.3.jpg?alt=media&token=0675895e-091f-4524-b60f-713583948b14',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourPillars = function(response, convo) {
+        var attachments = [{
+            fallback: 'Pillars',
+            title: 'Pillars',
+            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.4.jpg?alt=media&token=7b188f17-fbba-44ee-b660-39bde5e39ada',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFivePillars = function(response, convo) {
+        var attachments = [{
+            fallback: 'Pillars',
+            title: 'Pillars',
+            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.5.jpg?alt=media&token=6006ff18-6386-485c-86b6-412234a13ff8',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showSixPillars = function(response, convo) {
+        var attachments = [{
+            fallback: 'Pillars',
+            title: 'Pillars',
+            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.6.jpg?alt=media&token=45285394-fb98-44ea-9110-1cf1362361d7',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
 controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principles', 'tenants', 'big idea'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many pillars are you working with?', function(response, convo) {
@@ -1241,28 +2727,164 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
     bot.startConversation(message, askType);
 
 })
-
-// Structure S2 - DELETE
-/*
-controller.hears(['meeting','agenda','schedule','Meeting', 'Agenda', 'Schedule'], ['direct_message', 'direct_mention'], function (bot, message) {
-  var attachments = [{
-    title: 'Agenda chart',
-    text: 'Try an agenda chart to better convey this information.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS2.jpg?alt=media&token=c99df5c7-0509-44cc-999b-af3d545a20f9',
-    unfurl_media:true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-
-})
 */
 
-// Structure S3.2 ~ S3.5
+// Structure S3
+
+controller.hears(['define user', 'target user', 'user groups', 'target customer'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to define your target user based on a set of attributes. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'User Groups',
+                title: 'Sample User Groups',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FS3.Example.png?alt=media&token=59721729-9e1f-44c5-8699-ca9bebc609be',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('About how many attributes are you working with?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 2) {
+                    showTwoGroups(response, convo);
+                    convo.next();
+                } else if (ideasNum == 3)) {
+                    showThreeGroups(response, convo);
+                    convo.next();
+                } else {
+                    showFourGroups(response, convo);
+                    convo.next();
+                }
+            });
+    }
+
+
+    var showTwoGroups = function(response, convo) {
+        var attachments = [{
+            fallback: 'User Groups',
+            title: 'User Groups',
+            text: 'Here is a good chart that might work for ' + response.text + ' because it is good for showing user groups and defining target users. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.2.jpg?alt=media&token=38761a80-7f32-4344-a47e-986a524e7eca',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showThreeGroups = function(response, convo) {
+        var attachments = [{
+            fallback: 'User Groups',
+            title: 'User Groups',
+            text: 'Here is a good chart that might work for ' + response.text + ' because it is good for showing user groups and defining target users. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.3.jpg?alt=media&token=91428c1a-93e4-45af-9dca-e86ba9b60cf7',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourGroups = function(response, convo) {
+        var attachments = [{
+            fallback: 'User Groups',
+            title: 'User Groups',
+            text: 'Here is a good chart that might work for ' + response.text + ' because it is good for showing user groups and defining target users. What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.4.jpg?alt=media&token=f2d7a575-661c-4114-88bc-d15b8e9e7d50',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+
+/*
+S3 Original Code
+
 controller.hears(['define user', 'target user', 'user groups', 'target customer'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many attributes are you working with?', function(response, convo) {
@@ -1338,124 +2960,139 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
     bot.startConversation(message, askType);
 
 })
-
-// Structure S4.1 ~ S4.5 - DELETE
-/*
-controller.hears(['need', 'finding','Need', 'Finding'], ['direct_message', 'direct_mention'], function (bot, message) {
-var askType = function(err, convo) {
-      convo.ask('Which level of need (5 - self-actualization, esteem, safety, 1 - physiological) do you require?', function(response, convo) {
-        var ideasNum = parseInt(response.text, 10);
-        
-        if (ideasNum == 1) {
-        showOneNeeds(response, convo);
-        convo.next();
-      } else if (ideasNum == 2) {
-        showTwoNeeds(response, convo);
-        convo.next();
-      } else if (ideasNum == 3) {
-        showThreeNeeds(response, convo);
-        convo.next();
-      } else if (ideasNum == 4) {
-        showFourNeeds(response, convo);
-        convo.next();
-      } else {
-        showFiveNeeds(response,convo);
-        convo.next();
-       }
-    });
-  };
-
-  var showOneNeeds = function(response, convo) {
-    var attachments = [{
-    fallback: 'Needs Diagram',
-    title: 'Needs Diagram',
-    text: 'Here is the best chart to capture '+ response.text + ' need.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.1.jpg?alt=media&token=f2064cc3-e465-4fe4-8faf-4d11fcf699d3',
-    unfurl_media:true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-  };
-
-  var showTwoNeeds = function(response, convo) {
-    var attachments = [{
-    fallback: 'Needs Diagram',
-    title: 'Needs Diagram',
-    text: 'Here is the best chart to capture '+ response.text + ' needs.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.2.jpg?alt=media&token=dc6cdd87-963f-4259-83dc-213f3514c450',
-    unfurl_media:true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-  })
-  };
-
-  var showThreeNeeds = function(response, convo) {
-    var attachments = [{
-    fallback: 'Needs Diagram',
-    title: 'Needs Diagram',
-    text: 'Here is the best chart to capture ' + response.text + ' needs.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.3.jpg?alt=media&token=08864d63-b6e6-4e65-a03f-78554be19c21',
-    unfurl_media: true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-    })
-  };
-
-  var showFourNeeds = function(response, convo) {
-    var attachments = [{
-    fallback: 'Needs Diagram',
-    title: 'Needs Diagram',
-    text: 'Here is the best chart to capture ' + response.text + ' needs.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.4.jpg?alt=media&token=a681be0f-edb6-475c-9e47-4b78e7847186',
-    unfurl_media: true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-    })
-  };
-
-  var showFiveNeeds = function(response, convo) {
-    var attachments = [{
-    fallback: 'Needs Diagram',
-    title: 'Needs Diagram',
-    text: 'Here is the best chart to capture ' + response.text + ' needs.',
-    image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS4.5.jpg?alt=media&token=4b9d10ed-fee3-4f60-ad26-3c66069e774a',
-    unfurl_media: true,
-    color: '#FF0000'
-  }]
-
-  bot.reply(message, {
-    attachments: attachments
-  }, function (err, resp) {0
-    console.log(err, resp)
-    })
-  };
-
- bot.startConversation(message, askType);
-
-})
 */
 
-// Structure S5.3 ~ S5.4
+
+// Structure S5
+
+controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment customers', 'customer segmentation', 'segmentation'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+    var showBlank = function(response, convo) {
+
+        var initial_with_blank = {
+            text: 'It sounds like you want to segment your customers. Here is a sample diagram that you could you use.',
+            attachments: [{
+                fallback: 'Customer Segmentation',
+                title: 'Customer Segmentation',
+                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FS5.Example.png?alt=media&token=36603e21-cb48-4500-a0e7-9a081cba0793',
+                unfurl_media: true,
+                color: '#7CD197'
+            }]
+        }
+        convo.say(initial_with_blank);
+        askType(response, convo);
+        convo.next()
+    };
+
+    var askType = function(response, convo) {
+
+        convo.ask('Do you think something like this could work?', [{
+            pattern: bot.utterances.yes,
+            callback: function(response, convo) {
+                numOptions(response, convo);
+                convo.next();
+            }
+        }, {
+            pattern: bot.utterances.no,
+            callback: function(response, convo) {
+
+                convo.say('Hmm... Could you try describing it a different way?');
+                convo.next();
+            }
+        }, {
+            default: true,
+            callback: function(response, convo) {
+
+                // begin of POST request to AWS-API
+                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var method = 'POST';
+                var testData = {
+                    "Records": [{
+                        "Sns": {
+                            "Subject": "Help Request",
+                            "Message": response.text
+                        }
+                    }]
+                }
+                var postData = JSON.stringify(testData);
+                var async = true;
+
+                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                }
+
+                request.open(method, url, async);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                request.send(postData);
+                // end of POST request to AWS-API
+
+                convo.say('Let me connect you to an expert');
+                convo.next();
+            }
+        }]);
+
+    };
+
+    var numOptions = function(response, convo) {
+        convo.ask('How many segments do you have?',
+            function(response, convo) {
+                var ideasNum = parseInt(response.text, 10);
+                if (ideasNum > 0 && ideasNum <= 3) {
+                    showThreeSegments(response, convo);
+                    convo.next();
+                } else if (ideasNum >= 4)) {
+                    showFourSegments(response, convo);
+                    convo.next();
+                }
+            });
+    };
+
+    var showThreeSegments = function(response, convo) {
+        var attachments = [{
+            fallback: 'Customer Segmentation',
+            title: 'Customer Segmentation',
+            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.3.png?alt=media&token=8ec168b5-e08f-4a5a-9c2e-1091345ea469',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    var showFourSegments = function(response, convo) {
+        var attachments = [{
+            fallback: 'Customer Segmentation',
+            title: 'Customer Segmentation',
+            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? What do you think?',
+            image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.4.png?alt=media&token=100c11ad-89c3-4d98-a38c-5df402988314',
+            unfurl_media: true,
+            color: '#FF0000'
+        }]
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+    bot.startConversation(message, showBlank);
+
+})
+
+/*
 controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment customers', 'customer segmentation', 'segmentation'], ['direct_message', 'direct_mention'], function(bot, message) {
     var askType = function(err, convo) {
         convo.ask('How many segments do you have?', function(response, convo) {
@@ -1511,10 +3148,15 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
 
 })
 
+*/
+
+//Thanks
+
 controller.hears(['thanks', 'thx', 'thank you'], ['direct_message', 'direct_mention'], function(bot, message) {
     bot.reply(message, 'No problem <@' + message.user + '>!')
 })
 
+//Conversation Initiation
 controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, message) {
 
     bot.startConversation(message, function(err, convo) {
