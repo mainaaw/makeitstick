@@ -1791,8 +1791,6 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
             unfurl_media: true,
             color: '#FF0000'
         }]
-
-
         bot.reply(message, {
             attachments: attachments
         }, function(err, resp) {
@@ -2653,7 +2651,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
             color: '#FF0000'
         }]
 
-        
+
         bot.reply(message, {
             attachments: attachments
         }, function(err, resp) {
@@ -2848,7 +2846,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
                 if (ideasNum > 0 && ideasNum <= 2) {
                     showTwoGroups(response, convo);
                     convo.next();
-                } else if (ideasNum == 3)) {
+                } else if (ideasNum == 3) {
                     showThreeGroups(response, convo);
                     convo.next();
                 } else {
