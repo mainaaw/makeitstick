@@ -2182,7 +2182,7 @@ controller.hears(['thanks', 'thx', 'thank you'], ['direct_message', 'direct_ment
 //Conversation Initiation
 controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, message) {
 
-    bot.startConversation(message, function(err, convo) {
+    var notUnderstanding = function(response,convo) {
         convo.ask('Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. \n Would you like to leave anonymous feedback or leave your email for us to get back to you?',  [
 
         {
@@ -2208,11 +2208,11 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             convo.say('Sorry I didn\'t understand that.');
             convo.repeat();
             convo.next();
-        }
+            }
+        } ] 
 
-        }] 
+        )};
 
-        )
         var askForFeedback = function(response, convo) { 
             // begin of POST request to AWS-API
             var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
@@ -2241,10 +2241,9 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
             request.send(postData);
             // end of POST request to AWS-API
+            
+            };
 
-        }
-        
-    }
-        
-        )}
-    );
+
+            bot.startConversation(message, notUnderstanding);
+        });
