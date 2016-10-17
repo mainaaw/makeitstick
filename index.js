@@ -1792,6 +1792,16 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
             color: '#FF0000'
         }]
 
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
+
     bot.startConversation(message, showBlank);
 
 })
@@ -1898,7 +1908,7 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
 
 // Process P3
 
-controller.hears([['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process', 'loop', 'Loop'], ['direct_message', 'direct_mention'], function(bot, message) {
+controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process', 'loop', 'Loop'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var showBlank = function(response, convo) {
 
@@ -2076,6 +2086,15 @@ controller.hears([['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process
             color: '#FF0000'
         }]
 
+
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
     bot.startConversation(message, showBlank);
 
 })
@@ -2202,7 +2221,7 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
 
 // Process P6
 
-controller.hears([['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 'Progress', 'milestones', 'Milestones'], ['direct_message', 'direct_mention'], function(bot, message) {
+controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 'Progress', 'milestones', 'Milestones'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
     var showBlank = function(response, convo) {
@@ -2361,6 +2380,14 @@ controller.hears([['milestone', 'timeline', 'progress', 'Milestone', 'Timeline',
             color: '#FF0000'
         }]
 
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
+
     bot.startConversation(message, showBlank);
 
 })
@@ -2467,7 +2494,7 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
 // Structure S1 ~ S5
 // Structure S1
 
-controller.hears([['vision', 'mission', 'values', 'culture', 'program', 'principles', 'tenants', 'big idea'], ['direct_message', 'direct_mention'], function(bot, message) {
+controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principles', 'tenants', 'big idea'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
     var showBlank = function(response, convo) {
@@ -2625,6 +2652,15 @@ controller.hears([['vision', 'mission', 'values', 'culture', 'program', 'princip
             unfurl_media: true,
             color: '#FF0000'
         }]
+
+        
+        bot.reply(message, {
+            attachments: attachments
+        }, function(err, resp) {
+            0
+            console.log(err, resp)
+        })
+    };
 
     bot.startConversation(message, showBlank);
 
