@@ -2190,6 +2190,7 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             callback: function(response, convo) {
             askForFeedback(response,convo);
             convo.say('Gotcha. Thanks!');
+            convo.next();
             }
         },
         {
@@ -2240,8 +2241,6 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
             request.send(postData);
             // end of POST request to AWS-API
-            })
-            };
-
+            })};
             bot.startConversation(message, notUnderstanding);
         });
