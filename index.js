@@ -39,6 +39,7 @@ var postToCommentbox = function(response, convo) {
 
 }
 
+-
 // Assume single team mode if we have a SLACK_TOKEN
 if (token) {
     console.log('Starting in single-team mode')
@@ -63,44 +64,44 @@ controller.on('bot_channel_join', function(bot, message) {
 
 
 controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], function(bot, message) {
-        controller.storage.users.get(message.user, function(err, user) { 
-                bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type `help` to get assistance.')
-            
+        controller.storage.users.get(message.user, function(err, user) {
+                bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type `help` to get :speaking_head_in_silhouette: assistance.')
+
         });
     })
 
 controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, message) {
-   
+
 
 var showMenu = function(response, convo) {
-    
+
     var message_with_Attachments = {
 
-    text: 'I\'m here to help. Here\'s what I can do',
+    text: 'Hi, I\'m Spencer. I\'m Stick\'s design intern :wink:, and I\'m here to help you. Here\'s what I can do :muscle:',
     attachments : [{
     //pretext: ':car: :car:',
-    title: 'brainstorming, mindmap',
-    text: 'I can show you the best ways of consolidating multiple ideas',
+    title: ':thinking_face: Organize Ideas',
+    text: 'I can show you the best ways of summarizing brainstorms :thunder_cloud_and_rain: or how to build mindmaps.',
     color: '#7CD197'
   },
   {
-    title: 'decision, change of state, comparison',
-    text: 'I can give you the best ways of presenting a comparison',
+    title: ':scales: Compare Things',
+    text: 'I can give you the best ways of presenting a comparison, show a problem and solution, or the change from :seedling: to :deciduous_tree:.',
     color: '#EF84B6'
   },
   {
-    title: 'features, team members, interview insights',
-    text: 'Lists can be tricky to handle and I can show you the best ways to do it.',
+    title: ':busts_in_silhouette: Listing People or Ideas',
+    text: 'Lists of product features, team members, interview insights can be boring but I can show you a more :eyes: way to show them.',
     color: '#A17DF1'
   },
   {
-    title: 'linear, cycles, milestones',
-    text: 'I will provide you with the most appropriate ways to capture different processes.',
+    title: ':hourglass_flowing_sand: Showing a Process',
+    text: 'I can quickly generate process maps for linear or cyclical :film_frames:, or timelines with milestones.',
     color: '#F5B279'
   },
   {
-    title: 'segmentation, target user, mission',
-    text: 'If you have this broad idea you would like to break down, I can help with that as well.',
+    title: ':cake:: :birthday: Show Parts of a Whole',
+    text: 'If you have this broad idea you would like to break down :hammer_and_pick:, like customer segmentation, targeting users, or a mission and vision, I can help with that, too.',
     color: '#7CD197'
   }]
 }
@@ -119,7 +120,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to organize ideas from a brainstorm. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to organize :bulb: from a brainstorm. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'Brainstorming',
                 title: 'Sample Brainstorming Diagram',
@@ -144,7 +145,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         }, {
             pattern: bot.utterances.no,
             callback: function(response, convo) {
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -179,7 +180,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -187,7 +188,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
     };
 
     var numOptions = function(response, convo) {
-        convo.ask('About how many ideas are you working with?',
+        convo.ask('About how many :bulb: ideas  are you working with?',
             function(response, convo) {
                 var ideasNum = parseInt(response.text, 10);
                 if (ideasNum < 6) {
@@ -208,7 +209,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' or more brainstorming ideas.What do you think?',
+            text: 'Here is a chart that might work for :thunder_cloud_and_rain:. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
             unfurl_media: true,
             color: '#FF0000'
@@ -226,7 +227,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
+            text: 'Here is a chart that might work for :thunder_cloud_and_rain:. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
             unfurl_media: true,
             color: '#FF0000'
@@ -244,7 +245,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' and other brainstorming ideas.',
+            text: 'Here is a chart that might work.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.20.jpg?alt=media&token=01aef010-7815-4f21-93f7-9b7452181b35',
             unfurl_media: true,
             color: '#FF0000'
@@ -271,7 +272,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to organize ideas or concepts.',
+            text: 'It sounds like you want to organize :bulb: ideas or concepts.',
             attachments: [{
                 fallback: 'Organizing Thoughts',
                 title: 'Sample Concept Map',
@@ -297,7 +298,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -332,7 +333,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -340,7 +341,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
     };
 
     var numOptions = function(response, convo) {
-        convo.ask('About how many ideas are you working with?',
+        convo.ask('About how many :bulb: ideas are you working with?',
             function(response, convo) {
                 var ideasNum = parseInt(response.text, 10);
                 if (ideasNum < 4) {
@@ -361,7 +362,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         var attachments = [{
           fallback: 'Concept Map',
           title: 'Concept Map',
-          text: 'Here is a chart that might work for your ' + response.text + ' concepts. What do you think?',
+          text: 'Here is a chart that might work. What do you think?',
           image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.3.jpg?alt=media&token=1d8da986-bb09-4e2c-a7d9-8340ab0df91b',
           unfurl_media: true,
           color: '#EF84B6'
@@ -379,7 +380,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         var attachments = [{
             fallback: 'Concept Map',
             title: 'Concept Map',
-            text: 'Here is a chart that might work for your ' + response.text + ' concepts. What do you think?',
+            text: 'Here is a chart that might work. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.4.jpg?alt=media&token=783c4970-247b-4f71-b94a-734214ff8cb9',
             unfurl_media: true,
             color: '#EF84B6'
@@ -397,7 +398,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         var attachments = [{
             fallback: 'Concept Map',
             title: 'Concept Map',
-            text: 'Here is a chart that might work for your ' + response.text + ' concepts. What do you think?',
+            text: 'Here is a chart that might work. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.6.jpg?alt=media&token=b03de50f-02a9-410a-a53d-bf53d7d3d359',
             unfurl_media: true,
             color: '#EF84B6'
@@ -425,7 +426,7 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to represent a comparison of mutiple variables. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to represent a comparison of mutiple variables. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'Comparison',
                 title: 'Sample Comparison Diagram',
@@ -449,13 +450,13 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
         }, {
             pattern: bot.utterances.no,
             callback: function(response, convo) {
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }])
@@ -465,7 +466,7 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
         var attachments = [{
             fallback: '2x2 Comparison',
             title: '2x2 Comparison',
-            text: 'Here is a chart that might work well to capture comparison of multiple criteria.',
+            text: 'Here is a chart that might work well for this :scales:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC1.jpg?alt=media&token=c2795e6b-a320-45e9-b189-71b5613960fd',
             unfurl_media: true,
             color: '#FF0000'
@@ -511,13 +512,13 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
         }, {
             pattern: bot.utterances.no,
             callback: function(response, convo) {
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }])
@@ -527,7 +528,7 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
         var attachments = [{
             fallback: 'Before and After',
             title: 'Before and After',
-            text: 'Here is a chart that might work well for you to explain a before and after situation like yours. What do you think?',
+            text: 'Here is a chart that might work well here. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC3.jpg?alt=media&token=e648194f-f021-4376-bd37-fd5bf5bfc4d3',
             unfurl_media: true,
             color: '#FF0000'
@@ -551,7 +552,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to frame a decision. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to frame a decision. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'Decision',
                 title: 'Sample Decision Diagram',
@@ -577,7 +578,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -612,7 +613,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -630,7 +631,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
                     showThreeOptions(response, convo);
                     convo.next();
                 } else {
-                    convo.say('Let me connect you to an expert');
+                    convo.say(':bellhop_bell: Let me connect you to an expert');
                     convo.next();
                 }
             });
@@ -641,7 +642,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
         var attachments = [{
             fallback: 'Decision Making',
             title: 'Decision Making',
-            text: 'Here is a chart that might work to frame this ' + response.text + ' decision. What do you think?',
+            text: 'Here is a chart that might work to frame this decision :scales:. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.2.jpg?alt=media&token=4aa98f4a-f580-400c-8c28-289f3bf96935',
             unfurl_media: true,
             color: '#FF0000'
@@ -659,7 +660,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
         var attachments = [{
             fallback: 'Decision Making',
             title: 'Decision Making',
-            text: 'Here is a chart that might work to frame this ' + response.text + ' decision. What do you think?',
+            text: 'Here is a chart that might work to frame this :scales: decision. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.3.jpg?alt=media&token=13cec4f2-7197-4f22-a386-cb7c1843ea93',
             unfurl_media: true,
             color: '#FF0000'
@@ -713,7 +714,7 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -748,7 +749,7 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -838,7 +839,7 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to represent the features and benefits for your product. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to represent the features and benefits for your product. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'Feature Benefit Impact Map',
                 title: 'Feature Benefit Impact Map',
@@ -862,13 +863,13 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
         }, {
             pattern: bot.utterances.no,
             callback: function(response, convo) {
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }])
@@ -928,7 +929,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -963,7 +964,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -1057,7 +1058,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to show results from a user test. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to show results from a user test. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'User Test Summary',
                 title: 'Sample User Test Summary',
@@ -1083,7 +1084,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -1118,7 +1119,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -1136,7 +1137,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
                     showDetailed(response, convo);
                     convo.next();
                 } else {
-                    convo.say('Let me connect you to an expert');
+                    convo.say(':bellhop_bell: Let me connect you to an expert');
                     convo.next();
                 }
             });
@@ -1214,13 +1215,13 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
         }, {
             pattern: bot.utterances.no,
             callback: function(response, convo) {
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }])
@@ -1254,7 +1255,7 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to show a linear process. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to show a linear process. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'Linear Process',
                 title: 'Sample Linear Process Diagram',
@@ -1280,7 +1281,7 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -1315,7 +1316,7 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -1452,7 +1453,7 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -1487,7 +1488,7 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -1622,7 +1623,7 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to show a timeline with milestones. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to show a timeline with milestones. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'Milestones',
                 title: 'Sample Process with Milestones',
@@ -1648,7 +1649,7 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -1683,7 +1684,7 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -1824,7 +1825,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -1859,7 +1860,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -1909,7 +1910,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         var attachments = [{
             fallback: 'Pillars',
             title: 'Pillars',
-            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            text: 'This is a good chart for high-level :bulb: ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.4.jpg?alt=media&token=7b188f17-fbba-44ee-b660-39bde5e39ada',
             unfurl_media: true,
             color: '#FF0000'
@@ -1927,7 +1928,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         var attachments = [{
             fallback: 'Pillars',
             title: 'Pillars',
-            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            text: 'This is a good chart for high-level :bulb: ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.5.jpg?alt=media&token=6006ff18-6386-485c-86b6-412234a13ff8',
             unfurl_media: true,
             color: '#FF0000'
@@ -1971,7 +1972,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
-            text: 'It sounds like you want to define your target user based on a set of attributes. Here is a sample diagram that you could you use.',
+            text: 'It :rabbit: sounds like you want to define your target user based on a set of attributes. Here is a sample diagram that you could you use.',
             attachments: [{
                 fallback: 'User Groups',
                 title: 'Sample User Groups',
@@ -1997,7 +1998,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -2032,7 +2033,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
                 request.send(postData);
                 // end of POST request to AWS-API
 
-                convo.say('Let me connect you to an expert');
+                convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
         }]);
@@ -2061,7 +2062,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         var attachments = [{
             fallback: 'User Groups',
             title: 'User Groups',
-            text: 'Here is a good chart that might work for ' + response.text + ' because it is good for showing user groups and defining target users. What do you think?',
+            text: 'Here is a good chart that might work here for :busts_in_silhouette:. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.2.jpg?alt=media&token=38761a80-7f32-4344-a47e-986a524e7eca',
             unfurl_media: true,
             color: '#FF0000'
@@ -2079,7 +2080,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         var attachments = [{
             fallback: 'User Groups',
             title: 'User Groups',
-            text: 'Here is a good chart that might work for ' + response.text + ' because it is good for showing user groups and defining target users. What do you think?',
+            text: 'Here is a good chart that might work for :busts_in_silhouette:. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.3.jpg?alt=media&token=91428c1a-93e4-45af-9dca-e86ba9b60cf7',
             unfurl_media: true,
             color: '#FF0000'
@@ -2097,7 +2098,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         var attachments = [{
             fallback: 'User Groups',
             title: 'User Groups',
-            text: 'Here is a good chart that might work for ' + response.text + ' because it is good for showing user groups and defining target users. What do you think?',
+            text: 'Here is a good chart that might work for :busts_in_silhouette:. What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.4.jpg?alt=media&token=f2d7a575-661c-4114-88bc-d15b8e9e7d50',
             unfurl_media: true,
             color: '#FF0000'
@@ -2149,7 +2150,7 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
             pattern: bot.utterances.no,
             callback: function(response, convo) {
 
-                convo.say('Hmm... Could you try describing it a different way?');
+                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
                 convo.next();
             }
         }, {
@@ -2281,11 +2282,11 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             convo.next();
             }
         }
-        ] 
+        ]
 
         )};
 
-        var askForFeedback = function(response, convo) { 
+        var askForFeedback = function(response, convo) {
             // begin of POST request to AWS-API
             convo.ask('Great, what would you like us to know?', function(response,convo) {
             var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
