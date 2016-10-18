@@ -461,6 +461,7 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
+                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -472,7 +473,8 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }])
@@ -538,9 +540,8 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
         }, {
             default: true,
             callback: function(response, convo) {
-
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -561,6 +562,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
                     convo.say(':bellhop_bell: Let me connect you to an expert');
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -647,8 +649,8 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
         }, {
             default: true,
             callback: function(response, convo) {
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -669,6 +671,7 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
                     showFiveThemes(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -757,6 +760,7 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
+                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -768,7 +772,8 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }])
@@ -834,8 +839,8 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
         }, {
             default: true,
             callback: function(response, convo) {
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -856,6 +861,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
                     showSixTeams(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -961,8 +967,8 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
         }, {
             default: true,
             callback: function(response, convo) {
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -983,6 +989,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
                     convo.say(':bellhop_bell: Let me connect you to an expert');
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -1053,6 +1060,7 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
+                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -1064,7 +1072,8 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }])
@@ -1130,8 +1139,8 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
         }, {
             default: true,
             callback: function(response, convo) {
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -1155,6 +1164,7 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
                     showSixSteps(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -1274,9 +1284,8 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
         }, {
             default: true,
             callback: function(response, convo) {
-
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -1303,6 +1312,7 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
                     showSixSteps(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -1443,10 +1453,8 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
         }, {
             default: true,
             callback: function(response, convo) {
-
-                
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -1470,6 +1478,7 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
                     showSixMilestones(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,text);
             });
     }
 
@@ -1593,9 +1602,8 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         }, {
             default: true,
             callback: function(response, convo) {
-
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -1619,6 +1627,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
                     showSixPillars(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -1739,8 +1748,8 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         }, {
             default: true,
             callback: function(response, convo) {
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -1761,6 +1770,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
                     showFourGroups(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -1863,9 +1873,8 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
         }, {
             default: true,
             callback: function(response, convo) {
-
-
-                convo.say('Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -1883,6 +1892,7 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
                     showFourSegments(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     };
 
