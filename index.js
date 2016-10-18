@@ -122,8 +122,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
                 // begin of POST request to AWS-API
                 var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                //var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction';
-
                 var method = 'POST';
                 var testData = {
                     "Records": [{
@@ -2260,7 +2258,7 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             // begin of POST request to AWS-API
             convo.ask('Great, what would you like us to know?', function(response,convo) {
             //var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
-            var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction';
+            var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
 
             var method = 'POST';
             var testData = {
