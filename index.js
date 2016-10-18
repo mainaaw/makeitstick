@@ -39,7 +39,7 @@ var postToCommentbox = function(response, convo) {
 
 }
 
--
+
 // Assume single team mode if we have a SLACK_TOKEN
 if (token) {
     console.log('Starting in single-team mode')
