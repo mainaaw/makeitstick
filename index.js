@@ -888,7 +888,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
         var attachments = [{
             fallback: 'Team',
             title: 'Team',
-            text: 'Try this classic for' + response.text + '.',
+            text: 'Try this classic for ' + response.text + '.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.4.jpg?alt=media&token=e7623b89-5661-402f-b78d-ae4269ee0e85',
             unfurl_media: true,
             color: '#FF0000'
