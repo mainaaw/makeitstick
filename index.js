@@ -70,7 +70,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         }, {
             pattern: bot.utterances.no,
             callback: function(response, convo) {
-
                 convo.say('Hmm... Could you try describing it a different way?');
                 convo.next();
             }
@@ -2241,8 +2240,8 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
             request.send(postData);
             // end of POST request to AWS-API
-            })
              convo.next();
+            })
         };
             bot.startConversation(message, notUnderstanding);
         });
