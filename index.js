@@ -39,9 +39,9 @@ controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], fu
     })
 
 controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, message) {
-    convo.say('I\'m here to help. Here\'s what I can do');
+   
 
-
+var showMenu = function(response, convo) {
     var attachments = [{
     //pretext: ':car: :car:',
     title: '`brainstorming`, `mindmap`',
@@ -68,9 +68,14 @@ controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], f
     text: 'If you have this broad idea you would like to break down, I can help with that as well.',
     color: '#7CD197'
   }]
-
-
+convo.say('I\'m here to help. Here\'s what I can do');
 convo.say(attachments);
+
+    bot.startConversation(message, showMenu);
+
+}
+
+
 
 
 })
