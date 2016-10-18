@@ -174,11 +174,11 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                     showHighNumIdeasHoneyComb(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
     var promptUserComment = function(response,convo) {
-
             convo.ask('What do you think?', function(response,convo) {
             postToCommentbox(response,convo);
             convo.next();
