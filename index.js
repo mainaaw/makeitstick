@@ -42,7 +42,10 @@ controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], f
    
 
 var showMenu = function(response, convo) {
-    var attachments = [{
+    var message_with_Attachments = {
+    text: 'I\'m here to help. Here\'s what I can do',
+    attachments = [
+    {
     //pretext: ':car: :car:',
     title: '`brainstorming`, `mindmap`',
     text: 'I can show you the best ways of consolidating multiple ideas',
@@ -68,9 +71,10 @@ var showMenu = function(response, convo) {
     text: 'If you have this broad idea you would like to break down, I can help with that as well.',
     color: '#7CD197'
   }]
-convo.say('I\'m here to help. Here\'s what I can do');
-convo.say(attachments);
 }
+convo.say(message_with_Attachments);
+};
+
   bot.startConversation(message, showMenu);
 
 })
