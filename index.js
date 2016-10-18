@@ -32,7 +32,7 @@ controller.on('bot_channel_join', function(bot, message) {
 
 controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function(bot, message) {
         controller.storage.users.get(message.user, function(err, user) { 
-                bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type help to get assistance.')
+                bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type `help` to get assistance.')
             
         });
     })
@@ -2241,6 +2241,8 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
 
             request.send(postData);
             // end of POST request to AWS-API
-            })};
+            }
+            convo.next();
+            )};
             bot.startConversation(message, notUnderstanding);
         });
