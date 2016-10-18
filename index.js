@@ -152,35 +152,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
-
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -204,12 +177,20 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             });
     }
 
+    var promptUserComment = function(response,convo) {
+
+            convo.ask('What do you think?', function(response,convo) {
+            postToCommentbox(response,convo);
+            convo.next();
+            })
+    }
+
 
     var showFewIdeasHoneyComb = function(response, convo) {
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for :thunder_cloud_and_rain:. What do you think?',
+            text: 'Here is a chart that might work for :thunder_cloud_and_rain:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
             unfurl_media: true,
             color: '#FF0000'
@@ -227,7 +208,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for :thunder_cloud_and_rain:. What do you think?',
+            text: 'Here is a chart that might work for :thunder_cloud_and_rain:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.12.jpg?alt=media&token=5c4a8c87-0bb0-48ee-bc2a-d4907e7424ed',
             unfurl_media: true,
             color: '#FF0000'
