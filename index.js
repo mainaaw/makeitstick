@@ -158,7 +158,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         }, {
             default: true,
             callback: function(response, convo) {
-
                 convo.say(':confused: I\'m sorry I didn\'t quite catch that');
                 convo.repeat();
                 convo.next();
@@ -284,35 +283,6 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         }, {
             default: true,
             callback: function(response, convo) {
-
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
-
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
@@ -565,33 +535,6 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
 
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
@@ -700,34 +643,6 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
         }, {
             default: true,
             callback: function(response, convo) {
-
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
 
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
@@ -916,34 +831,6 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
-
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
@@ -1070,34 +957,6 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
         }, {
             default: true,
             callback: function(response, convo) {
-
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
 
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
@@ -1268,34 +1127,6 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
-
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
@@ -1440,33 +1271,6 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
 
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
@@ -1636,33 +1440,7 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
+                
 
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
@@ -1812,33 +1590,6 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
 
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
@@ -1985,34 +1736,6 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
-
                 convo.say(':bellhop_bell: Let me connect you to an expert');
                 convo.next();
             }
@@ -2137,33 +1860,6 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
             default: true,
             callback: function(response, convo) {
 
-                // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
-                var method = 'POST';
-                var testData = {
-                    "Records": [{
-                        "Sns": {
-                            "Subject": "Help Request",
-                            "Message": response.text
-                        }
-                    }]
-                }
-                var postData = JSON.stringify(testData);
-                var async = true;
-
-                var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status;
-                    var data = request.responseText;
-                }
-
-                request.open(method, url, async);
-                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-                request.send(postData);
-                // end of POST request to AWS-API
 
                 convo.say('Let me connect you to an expert');
                 convo.next();
