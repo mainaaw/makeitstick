@@ -30,12 +30,50 @@ controller.on('bot_channel_join', function(bot, message) {
     bot.reply(message, "I'm here!")
 })
 
-controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], function(bot, message) {
         controller.storage.users.get(message.user, function(err, user) { 
                 bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type `help` to get assistance.')
             
         });
     })
+
+controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, message) {
+    convo.say('I\'m here to help. Here\'s what I can do');
+
+
+    var attachments = [{
+    //pretext: ':car: :car:',
+    title: '`brainstorming`, `mindmap`',
+    text: 'I can show you the best ways of consolidating multiple ideas',
+    color: '#7CD197'
+  },
+  {
+    title: '`decision`, `change of state`, `comparison`',
+    text: 'I can give you the best ways of presenting a comparison',
+    color: '#EF84B6'
+  },
+  {
+    title: '`features`, `team members`, `interview insights`',
+    text: 'Lists can be tricky to handle and I can show you the best ways to do it.',
+    color: '#A17DF1'
+  },
+  {
+    title: '`linear`,`cycles`, `milestones`',
+    text: 'I will provide you with the most appropriate ways to capture different processes.',
+    color: '#F5B279'
+  },
+  {
+    title: '`segmentation`, `target user`, `mission`',
+    text: 'If you have this broad idea you would like to break down, I can help with that as well.',
+    color: '#7CD197'
+  }]
+
+
+convo.say(attachments);
+
+
+})
     //Section B1 - B2.6
 
 //Section B1
@@ -134,7 +172,7 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
         var attachments = [{
             fallback: 'Honeycomb Brainstorm',
             title: 'Honeycomb Brainstorm',
-            text: 'Here is a chart that might work for ' + response.text + ' or other brainstorming ideas.What do you think?',
+            text: 'Here is a chart that might work for ' + response.text + ' or more brainstorming ideas.What do you think?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB1.6.jpg?alt=media&token=939cca69-b3e2-4407-b7ed-d18dc2019379',
             unfurl_media: true,
             color: '#FF0000'
@@ -918,7 +956,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
         var attachments = [{
             fallback: 'Team',
             title: 'Team',
-            text: 'Try this classic for' + response.text + '.',
+            text: 'Try this classic for ' + response.text + '.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.3.jpg?alt=media&token=5a7aee79-a12f-48a6-bcfa-3b7cbb7d7496',
             unfurl_media: true,
             color: '#FF0000'
