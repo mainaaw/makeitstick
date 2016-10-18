@@ -314,7 +314,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         var attachments = [{
           fallback: 'Concept Map',
           title: 'Concept Map',
-          text: 'Here is a chart that might work. What do you think?',
+          text: 'Here is a chart that might work.',
           image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.3.jpg?alt=media&token=1d8da986-bb09-4e2c-a7d9-8340ab0df91b',
           unfurl_media: true,
           color: '#EF84B6'
@@ -332,7 +332,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         var attachments = [{
             fallback: 'Concept Map',
             title: 'Concept Map',
-            text: 'Here is a chart that might work. What do you think?',
+            text: 'Here is a chart that might work.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.4.jpg?alt=media&token=783c4970-247b-4f71-b94a-734214ff8cb9',
             unfurl_media: true,
             color: '#EF84B6'
@@ -350,7 +350,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         var attachments = [{
             fallback: 'Concept Map',
             title: 'Concept Map',
-            text: 'Here is a chart that might work. What do you think?',
+            text: 'Here is a chart that might work.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FB2.6.jpg?alt=media&token=b03de50f-02a9-410a-a53d-bf53d7d3d359',
             unfurl_media: true,
             color: '#EF84B6'
@@ -484,7 +484,7 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
         var attachments = [{
             fallback: 'Before and After',
             title: 'Before and After',
-            text: 'Here is a chart that might work well here. What do you think?',
+            text: 'Here is a chart that might work well here.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC3.jpg?alt=media&token=e648194f-f021-4376-bd37-fd5bf5bfc4d3',
             unfurl_media: true,
             color: '#FF0000'
@@ -571,7 +571,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
         var attachments = [{
             fallback: 'Decision Making',
             title: 'Decision Making',
-            text: 'Here is a chart that might work to frame this decision :scales:. What do you think?',
+            text: 'Here is a chart that might work to frame this decision :scales:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.2.jpg?alt=media&token=4aa98f4a-f580-400c-8c28-289f3bf96935',
             unfurl_media: true,
             color: '#FF0000'
@@ -589,7 +589,7 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
         var attachments = [{
             fallback: 'Decision Making',
             title: 'Decision Making',
-            text: 'Here is a chart that might work to frame this :scales: decision. What do you think?',
+            text: 'Here is a chart that might work to frame this :scales: decision. ',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FC2.3.jpg?alt=media&token=13cec4f2-7197-4f22-a386-cb7c1843ea93',
             unfurl_media: true,
             color: '#FF0000'
@@ -680,7 +680,7 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
         var attachments = [{
           fallback: 'Interview Themes',
           title: 'Interview Themes',
-          text: 'Here is a chart that might work to capture this. What do you think?',
+          text: 'Here is a chart that might work to capture this.',
           image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.3.jpg?alt=media&token=856baf7b-05c7-4451-8a4b-f78edb31bf05',
           unfurl_media: true,
           color: '#FF0000'
@@ -698,7 +698,7 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
         var attachments = [{
             fallback: 'Interview Themes',
             title: 'Interview Themes',
-            text: 'Here is a chart that might work to capture this. What do you think?',
+            text: 'Here is a chart that might work to capture this.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.4.jpg?alt=media&token=a15f2896-617c-4a4e-9478-fdfaed0cc730',
             unfurl_media: true,
             color: '#FF0000'
@@ -716,7 +716,7 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
         var attachments = [{
             fallback: 'Interview Themes',
             title: 'Interview Themes',
-            text: 'Here is a chart that might work to capture your concepts. What do you think?',
+            text: 'Here is a chart that might work to capture your concepts.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL1.5.jpg?alt=media&token=fe1f7c75-d9e5-46ed-86e4-b6fa7b4c4ba7',
             unfurl_media: true,
             color: '#FF0000'
@@ -783,7 +783,7 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
         var attachments = [{
             fallback: 'Feature Benefit Impact Map',
             title: 'Feature Benefit Impact Map',
-            text: 'Here is a chart that might work well for you to explain a before and after situation like yours. What do you think?',
+            text: 'Here is a chart that might work well for you to explain a before and after situation like yours.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL3.jpg?alt=media&token=d57a6914-0aa5-414e-a9b0-0840a5d4e5dc',
             unfurl_media: true,
             color: '#FF0000'
@@ -906,7 +906,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
         var attachments = [{
             fallback: 'Team',
             title: 'Team',
-            text: 'Try this classic for ' + response.text + ' teams. What do you think?',
+            text: 'Try this classic for ' + response.text + ' teams.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL4.6.jpg?alt=media&token=97a1a0ae-1e82-42d0-a29d-3ab2c92de311',
             unfurl_media: true,
             color: '#FF0000'
@@ -998,7 +998,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
         var attachments = [{
             fallback: 'High Level User Test Summary',
             title: 'User Test Summary',
-            text: 'Here is a chart that is good for showing user test summaries. What do you think?',
+            text: 'Here is a chart that is good for showing user test summaries.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL5.1.jpg?alt=media&token=d3b45c96-8cbb-4fef-8000-0ca1f6914a0a',
             unfurl_media: true,
             color: '#FF0000'
@@ -1016,7 +1016,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
         var attachments = [{
             fallback: 'User Test Summary',
             title: 'Detailed User Test Summary',
-            text: 'Here is a good chart for showing more detailed summaries of user testing and ' + response.text + ' What do you think?',
+            text: 'Here is a good chart for showing more detailed summaries of user testing and ' + response.text + '.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL5.2.jpg?alt=media&token=b2b58fb3-abce-489f-86e2-d0ee28e4fe05',
             unfurl_media: true,
             color: '#FF0000'
@@ -1083,7 +1083,7 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
         var attachments = [{
             fallback: 'Product User Impact',
             title: 'Product User Impact',
-            text: 'Here is a chart that might work well for you to explain the impact of your product. What do you think?',
+            text: 'Here is a chart that might work well for you to explain the impact of your product.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FL6.jpg?alt=media&token=e78f741a-059c-4965-8bf9-3933afbe5e24',
             unfurl_media: true,
             color: '#FF0000'
@@ -1293,7 +1293,7 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
     };
 
     var numOptions = function(response, convo) {
-        convo.ask('How many steps are in the prcess you want to show?',
+        convo.ask('How many steps are in the process you want to show?',
             function(response, convo) {
                 var ideasNum = parseInt(response.text, 10);
                 if (ideasNum > 0 && ideasNum <= 2) {
@@ -1636,7 +1636,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         var attachments = [{
             fallback: 'Pillars',
             title: 'Pillars',
-            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. Does it work for what you are trying to show?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.3.jpg?alt=media&token=0675895e-091f-4524-b60f-713583948b14',
             unfurl_media: true,
             color: '#FF0000'
@@ -1654,7 +1654,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         var attachments = [{
             fallback: 'Pillars',
             title: 'Pillars',
-            text: 'This is a good chart for high-level :bulb: ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            text: 'This is a good chart for high-level :bulb: ideas like ' + response.text + ' and vision and mission statements. Does it work for what you are trying to show?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.4.jpg?alt=media&token=7b188f17-fbba-44ee-b660-39bde5e39ada',
             unfurl_media: true,
             color: '#FF0000'
@@ -1672,7 +1672,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         var attachments = [{
             fallback: 'Pillars',
             title: 'Pillars',
-            text: 'This is a good chart for high-level :bulb: ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            text: 'This is a good chart for high-level :bulb: ideas like ' + response.text + ' and vision and mission statements. Does it work for what you are trying to show?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.5.jpg?alt=media&token=6006ff18-6386-485c-86b6-412234a13ff8',
             unfurl_media: true,
             color: '#FF0000'
@@ -1690,7 +1690,7 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
         var attachments = [{
             fallback: 'Pillars',
             title: 'Pillars',
-            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. What do you think? Does it work for what you are trying to show?',
+            text: 'This is a good chart for high-level ideas like ' + response.text + ' and vision and mission statements. Does it work for what you are trying to show?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS1.6.jpg?alt=media&token=45285394-fb98-44ea-9110-1cf1362361d7',
             unfurl_media: true,
             color: '#FF0000'
@@ -1779,7 +1779,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         var attachments = [{
             fallback: 'User Groups',
             title: 'User Groups',
-            text: 'Here is a good chart that might work here for :busts_in_silhouette:. What do you think?',
+            text: 'Here is a good chart that might work here for :busts_in_silhouette:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.2.jpg?alt=media&token=38761a80-7f32-4344-a47e-986a524e7eca',
             unfurl_media: true,
             color: '#FF0000'
@@ -1797,7 +1797,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         var attachments = [{
             fallback: 'User Groups',
             title: 'User Groups',
-            text: 'Here is a good chart that might work for :busts_in_silhouette:. What do you think?',
+            text: 'Here is a good chart that might work for :busts_in_silhouette:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.3.jpg?alt=media&token=91428c1a-93e4-45af-9dca-e86ba9b60cf7',
             unfurl_media: true,
             color: '#FF0000'
@@ -1815,7 +1815,7 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
         var attachments = [{
             fallback: 'User Groups',
             title: 'User Groups',
-            text: 'Here is a good chart that might work for :busts_in_silhouette:. What do you think?',
+            text: 'Here is a good chart that might work for :busts_in_silhouette:.',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/makeitstick-f8aa8.appspot.com/o/Templates%2FS3.4.jpg?alt=media&token=f2d7a575-661c-4114-88bc-d15b8e9e7d50',
             unfurl_media: true,
             color: '#FF0000'
@@ -1900,7 +1900,7 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
         var attachments = [{
             fallback: 'Customer Segmentation',
             title: 'Customer Segmentation',
-            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? What do you think?',
+            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation?',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.3.png?alt=media&token=8ec168b5-e08f-4a5a-9c2e-1091345ea469',
             unfurl_media: true,
             color: '#FF0000'
@@ -1918,7 +1918,7 @@ controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment custome
         var attachments = [{
             fallback: 'Customer Segmentation',
             title: 'Customer Segmentation',
-            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? What do you think?',
+            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? ',
             image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.4.png?alt=media&token=100c11ad-89c3-4d98-a38c-5df402988314',
             unfurl_media: true,
             color: '#FF0000'
