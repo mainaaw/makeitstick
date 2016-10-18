@@ -121,7 +121,9 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
             callback: function(response, convo) {
 
                 // begin of POST request to AWS-API
-                var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                //var url = 'https://m2y8iizru7.execute-api.us-west-2.amazonaws.com/test/mydemoawsproxy';
+                var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction';
+
                 var method = 'POST';
                 var testData = {
                     "Records": [{
