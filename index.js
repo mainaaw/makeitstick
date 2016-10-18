@@ -2,14 +2,42 @@ var Botkit = require('botkit')
 
 var token = process.env.SLACK_TOKEN
 
-//var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
-
-
 var controller = Botkit.slackbot({
     // reconnect to Slack RTM when connection goes bad
     retry: Infinity,
     debug: false
 })
+
+var postToCommentbox = function(response, convo) {
+    // begin of POST request to AWS-API
+            var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
+            var method = 'POST';
+            var testData = {
+                "Records": [{
+                    "Sns": {
+                        "Subject": "Help Request",
+                        "Message": response.text
+                    }
+                }]
+            }
+            var postData = JSON.stringify(testData);
+            var async = true;
+
+            var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+            var request = new XMLHttpRequest();
+
+            request.onload = function() {
+                var status = request.status;
+                var data = request.responseText;
+            }
+
+            request.open(method, url, async);
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            request.send(postData);
+            // end of POST request to AWS-API
+
+}
 
 // Assume single team mode if we have a SLACK_TOKEN
 if (token) {
