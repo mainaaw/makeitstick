@@ -283,7 +283,8 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }]);
@@ -304,6 +305,7 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
                     showHighNumIdeas(response, convo);
                     convo.next();
                 }
+                promptUserComment(response,convo);
             });
     }
 
@@ -395,6 +397,7 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
+                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -406,7 +409,8 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
         }, {
             default: true,
             callback: function(response, convo) {
-                convo.say(':bellhop_bell: Let me connect you to an expert');
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
                 convo.next();
             }
         }])
