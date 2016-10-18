@@ -2,6 +2,9 @@ var Botkit = require('botkit')
 
 var token = process.env.SLACK_TOKEN
 
+//var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
+
+
 var controller = Botkit.slackbot({
     // reconnect to Slack RTM when connection goes bad
     retry: Infinity,
@@ -2257,9 +2260,7 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
         var askForFeedback = function(response, convo) { 
             // begin of POST request to AWS-API
             convo.ask('Great, what would you like us to know?', function(response,convo) {
-            //var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
-            var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
-
+            var url = 'https://ti9khi4hx5.execute-api.us-west-2.amazonaws.com/prod/relay';
             var method = 'POST';
             var testData = {
                 "Records": [{
