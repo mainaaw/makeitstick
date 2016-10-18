@@ -70,13 +70,8 @@ var showMenu = function(response, convo) {
   }]
 convo.say('I\'m here to help. Here\'s what I can do');
 convo.say(attachments);
-
-    bot.startConversation(message, showMenu);
-
 }
-
-
-
+  bot.startConversation(message, showMenu);
 
 })
     //Section B1 - B2.6
