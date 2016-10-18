@@ -39,6 +39,13 @@ var postToCommentbox = function(response, convo) {
 
 }
 
+var promptUserComment = function(response,convo) {
+            convo.ask('What do you think?', function(response,convo) {
+            postToCommentbox(response,convo);
+            convo.say(':+1: :+1:');
+            convo.next();
+            })
+    }
 
 // Assume single team mode if we have a SLACK_TOKEN
 if (token) {
@@ -177,14 +184,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                 promptUserComment(response,convo);
             });
     }
-
-    var promptUserComment = function(response,convo) {
-            convo.ask('What do you think?', function(response,convo) {
-            postToCommentbox(response,convo);
-            convo.next();
-            })
-    }
-
 
     var showFewIdeasHoneyComb = function(response, convo) {
         var attachments = [{
