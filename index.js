@@ -48,27 +48,27 @@ var showMenu = function(response, convo) {
     text: 'I\'m here to help. Here\'s what I can do',
     attachments : [{
     //pretext: ':car: :car:',
-    title: '`brainstorming`, `mindmap`',
+    title: 'brainstorming, mindmap',
     text: 'I can show you the best ways of consolidating multiple ideas',
     color: '#7CD197'
   },
   {
-    title: '`decision`, `change of state`, `comparison`',
+    title: 'decision, change of state, comparison',
     text: 'I can give you the best ways of presenting a comparison',
     color: '#EF84B6'
   },
   {
-    title: '`features`, `team members`, `interview insights`',
+    title: 'features, team members, interview insights',
     text: 'Lists can be tricky to handle and I can show you the best ways to do it.',
     color: '#A17DF1'
   },
   {
-    title: '`linear`,`cycles`, `milestones`',
+    title: 'linear, cycles, milestones',
     text: 'I will provide you with the most appropriate ways to capture different processes.',
     color: '#F5B279'
   },
   {
-    title: '`segmentation`, `target user`, `mission`',
+    title: 'segmentation, target user, mission',
     text: 'If you have this broad idea you would like to break down, I can help with that as well.',
     color: '#7CD197'
   }]
