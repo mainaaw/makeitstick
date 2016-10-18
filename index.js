@@ -42,10 +42,11 @@ controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], f
    
 
 var showMenu = function(response, convo) {
+    
     var message_with_Attachments = {
+
     text: 'I\'m here to help. Here\'s what I can do',
-    attachments = [
-    {
+    attachments : [{
     //pretext: ':car: :car:',
     title: '`brainstorming`, `mindmap`',
     text: 'I can show you the best ways of consolidating multiple ideas',
