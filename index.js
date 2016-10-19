@@ -882,6 +882,7 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
             0
             console.log(err, resp)
         })
+        
     };
 
     var showFourTeams = function(response, convo) {
@@ -1836,105 +1837,105 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
 
 // Structure S5
 
-controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment customers', 'customer segmentation', 'segmentation'], ['direct_message', 'direct_mention'], function(bot, message) {
+// controller.hears(['segment', 'customer', 'Segment', 'Customer', 'segment customers', 'customer segmentation', 'segmentation'], ['direct_message', 'direct_mention'], function(bot, message) {
 
-    var showBlank = function(response, convo) {
+//     var showBlank = function(response, convo) {
 
-        var initial_with_blank = {
-            text: 'It sounds like you want to segment your customers. Here is a sample diagram that you could you use.',
-            attachments: [{
-                fallback: 'Customer Segmentation',
-                title: 'Customer Segmentation',
-                image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FS5.Example.png?alt=media&token=36603e21-cb48-4500-a0e7-9a081cba0793',
-                unfurl_media: true,
-                color: '#7CD197'
-            }]
-        }
-        convo.say(initial_with_blank);
-        askType(response, convo);
-        convo.next()
-    };
+//         var initial_with_blank = {
+//             text: 'It sounds like you want to segment your customers. Here is a sample diagram that you could you use.',
+//             attachments: [{
+//                 fallback: 'Customer Segmentation',
+//                 title: 'Customer Segmentation',
+//                 image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/Examples%2FS5.Example.png?alt=media&token=36603e21-cb48-4500-a0e7-9a081cba0793',
+//                 unfurl_media: true,
+//                 color: '#7CD197'
+//             }]
+//         }
+//         convo.say(initial_with_blank);
+//         askType(response, convo);
+//         convo.next()
+//     };
 
-    var askType = function(response, convo) {
+//     var askType = function(response, convo) {
 
-        convo.ask('Do you think something like this could work?', [{
-            pattern: bot.utterances.yes,
-            callback: function(response, convo) {
-                numOptions(response, convo);
-                convo.next();
-            }
-        }, {
-            pattern: bot.utterances.no,
-            callback: function(response, convo) {
+//         convo.ask('Do you think something like this could work?', [{
+//             pattern: bot.utterances.yes,
+//             callback: function(response, convo) {
+//                 numOptions(response, convo);
+//                 convo.next();
+//             }
+//         }, {
+//             pattern: bot.utterances.no,
+//             callback: function(response, convo) {
 
-                convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
-                convo.next();
-            }
-        }, {
-            default: true,
-            callback: function(response, convo) {
-                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
-                convo.repeat();
-                convo.next();
-            }
-        }]);
+//                 convo.say(':thinking_face: Hmm... Could you try describing it a different way?');
+//                 convo.next();
+//             }
+//         }, {
+//             default: true,
+//             callback: function(response, convo) {
+//                 convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+//                 convo.repeat();
+//                 convo.next();
+//             }
+//         }]);
 
-    };
+//     };
 
-    var numOptions = function(response, convo) {
-        convo.ask('How many segments do you have?',
-            function(response, convo) {
-                var ideasNum = parseInt(response.text, 10);
-                if (ideasNum > 0 && ideasNum <= 3) {
-                    showThreeSegments(response, convo);
-                    convo.next();
-                } else if (ideasNum >= 4) {
-                    showFourSegments(response, convo);
-                    convo.next();
-                }
-                promptUserComment(response,convo);
-            });
-    };
+//     var numOptions = function(response, convo) {
+//         convo.ask('How many segments do you have?',
+//             function(response, convo) {
+//                 var ideasNum = parseInt(response.text, 10);
+//                 if (ideasNum > 0 && ideasNum <= 3) {
+//                     showThreeSegments(response, convo);
+//                     convo.next();
+//                 } else if (ideasNum >= 4) {
+//                     showFourSegments(response, convo);
+//                     convo.next();
+//                 }
+//                 promptUserComment(response,convo);
+//             });
+//     };
 
-    var showThreeSegments = function(response, convo) {
-        var attachments = [{
-            fallback: 'Customer Segmentation',
-            title: 'Customer Segmentation',
-            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation?',
-            image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.3.png?alt=media&token=8ec168b5-e08f-4a5a-9c2e-1091345ea469',
-            unfurl_media: true,
-            color: '#FF0000'
-        }]
+//     var showThreeSegments = function(response, convo) {
+//         var attachments = [{
+//             fallback: 'Customer Segmentation',
+//             title: 'Customer Segmentation',
+//             text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation?',
+//             image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.3.png?alt=media&token=8ec168b5-e08f-4a5a-9c2e-1091345ea469',
+//             unfurl_media: true,
+//             color: '#FF0000'
+//         }]
 
-        bot.reply(message, {
-            attachments: attachments
-        }, function(err, resp) {
-            0
-            console.log(err, resp)
-        })
-    };
+//         bot.reply(message, {
+//             attachments: attachments
+//         }, function(err, resp) {
+//             0
+//             console.log(err, resp)
+//         })
+//     };
 
-    var showFourSegments = function(response, convo) {
-        var attachments = [{
-            fallback: 'Customer Segmentation',
-            title: 'Customer Segmentation',
-            text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? ',
-            image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.4.png?alt=media&token=100c11ad-89c3-4d98-a38c-5df402988314',
-            unfurl_media: true,
-            color: '#FF0000'
-        }]
+//     var showFourSegments = function(response, convo) {
+//         var attachments = [{
+//             fallback: 'Customer Segmentation',
+//             title: 'Customer Segmentation',
+//             text: 'What about this one to capture ' + response.text + ' because it is good for customer segmentation? ',
+//             image_url: 'https://firebasestorage.googleapis.com/v0/b/stickbot-2d7a3.appspot.com/o/S5.4.png?alt=media&token=100c11ad-89c3-4d98-a38c-5df402988314',
+//             unfurl_media: true,
+//             color: '#FF0000'
+//         }]
 
-        bot.reply(message, {
-            attachments: attachments
-        }, function(err, resp) {
-            0
-            console.log(err, resp)
-        })
-    };
+//         bot.reply(message, {
+//             attachments: attachments
+//         }, function(err, resp) {
+//             0
+//             console.log(err, resp)
+//         })
+//     };
 
-    bot.startConversation(message, showBlank);
+//     bot.startConversation(message, showBlank);
 
-})
+// })
 
 //Thanks
 
