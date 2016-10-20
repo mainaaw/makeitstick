@@ -31,10 +31,7 @@ var controller = Botkit.slackbot({
 //     require('beepboop-botkit').start(controller, { debug: true })
 //  }
 //  //------->>>>>>>Single team end
-
-
 //var controller = Botkit.slackbot()
-
 // Beepboop manages the hosting infrastructure for your bot and  publishes events
 // when a team adds, updates, or removes the bot, thereby enabling multitenancy
 // (multiple team instances of bot in one bot process). The beepboop-botkit package
@@ -44,6 +41,22 @@ var controller = Botkit.slackbot({
 var beepboop = require('./resfile.js')
 beepboop.start(controller, {
   debug: true
+})
+
+
+// Send the user who added the bot to their team a welcome message the first time it's connected
+beepboop.on('botkit.rtm.started', function (bot, resource, meta) {
+  var slackUserId = resource.SlackUserID
+
+  if (meta.isNew && slackUserId) {
+    bot.api.im.open({ user: slackUserId }, function (err, response) {
+      if (err) {
+        return console.log(err)
+      }
+      var dmChannel = response.channel.id
+      bot.say({channel: dmChannel, text: 'Thanks for adding me to your team!Type `help` to get :speaking_head_in_silhouette: assistance.'})
+    })
+  }
 })
 
 
