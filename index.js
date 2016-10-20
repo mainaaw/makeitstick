@@ -104,14 +104,14 @@ controller.on('bot_channel_join', function(bot, message) {
     bot.reply(message, "I'm here!")
 })
 
-controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], function(bot, evt) {
+controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], function(bot, message) {
         controller.storage.users.get(message.user, function(err, user) {
                 bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type `help` to get :speaking_head_in_silhouette: assistance.')
 
         });
     })
 
-controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, evt) {
+controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, message) {
 
 
 var showMenu = function(response, convo) {
@@ -155,7 +155,7 @@ convo.say(message_with_Attachments);
 
 //Section B1 - B2.6
 //Section B1
-controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, evt) {
+controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var showBlank = function(response, convo) {
 
