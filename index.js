@@ -7,11 +7,11 @@ var Botkit = require('botkit')
 // var token = process.env.SLACK_TOKEN
 
 
-// var controller = Botkit.slackbot({
-//     // reconnect to Slack RTM when connection goes bad
-//     retry: Infinity,
-//     debug: false
-// })
+var controller = Botkit.slackbot({
+    // reconnect to Slack RTM when connection goes bad
+    retry: Infinity,
+    debug: false
+})
 
 // //Assume single team mode if we have a SLACK_TOKEN
 // if (token) {
@@ -33,7 +33,7 @@ var Botkit = require('botkit')
 //  //------->>>>>>>Single team end
 
 
-var controller = Botkit.slackbot()
+//var controller = Botkit.slackbot()
 
 // Beepboop manages the hosting infrastructure for your bot and  publishes events
 // when a team adds, updates, or removes the bot, thereby enabling multitenancy
