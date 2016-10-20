@@ -2,6 +2,8 @@ var Botkit = require('botkit')
 
 var token = process.env.SLACK_TOKEN
 
+var Resourcer = require('./lib/resourcer.js')
+
 var controller = Botkit.slackbot({
     // reconnect to Slack RTM when connection goes bad
     retry: Infinity,
@@ -62,6 +64,12 @@ if (token) {
 } else {
     console.log('Starting in Beep Boop multi-team mode')
     require('beepboop-botkit').start(controller, { debug: true })
+}
+
+module.exports = {
+  start: function (options) {
+    return Resourcer(options).connect()
+  }
 }
 
 controller.on('bot_channel_join', function(bot, message) {
