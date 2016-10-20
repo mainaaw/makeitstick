@@ -11,7 +11,7 @@ var controller = Botkit.slackbot()
 // listens for those events handles and starting/stopping the given team bot for you.
 // It is the develper's responsiblity to ensure any state stored outside of the configs
 // set in the project's bot.yml supports multitency (if you allow multiple teams to run your bot)
-var beepboop = require('../resfile.js')
+var beepboop = require('./resfile.js')
 beepboop.start(controller, {
   debug: true
 })
