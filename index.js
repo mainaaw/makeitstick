@@ -45,19 +45,19 @@ beepboop.start(controller, {
 
 
 // Send the user who added the bot to their team a welcome message the first time it's connected
-beepboop.on('botkit.rtm.started', function (bot, resource, meta) {
-  var slackUserId = resource.SlackUserID
+// beepboop.on('botkit.rtm.started', function (bot, resource, meta) {
+//   var slackUserId = resource.SlackUserID
 
-  if (meta.isNew && slackUserId) {
-    bot.api.im.open({ user: slackUserId }, function (err, response) {
-      if (err) {
-        return console.log(err)
-      }
-      var dmChannel = response.channel.id
-      bot.say({channel: dmChannel, text: 'Thanks for adding me to your team!Type `help` to get :speaking_head_in_silhouette: assistance.'})
-    })
-  }
-})
+//   if (meta.isNew && slackUserId) {
+//     bot.api.im.open({ user: slackUserId }, function (err, response) {
+//       if (err) {
+//         return console.log(err)
+//       }
+//       var dmChannel = response.channel.id
+//       bot.say({channel: dmChannel, text: 'Thanks for adding me to your team!Type `help` to get :speaking_head_in_silhouette: assistance.'})
+//     })
+//   }
+// })
 
 
 var postToCommentbox = function(response, convo) {
@@ -104,14 +104,14 @@ controller.on('bot_channel_join', function(bot, message) {
     bot.reply(message, "I'm here!")
 })
 
-controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], function(bot, message) {
+controller.hears(['hello', 'hi','hey'], ['direct_message', 'direct_mention'], function(bot, evt) {
         controller.storage.users.get(message.user, function(err, user) {
                 bot.reply(message, 'Hi, <@' + message.user + '>! What can I help you show today? \n Type `help` to get :speaking_head_in_silhouette: assistance.')
 
         });
     })
 
-controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, message) {
+controller.hears(['help', 'Help','HELP'], ['direct_message','direct_mention'], function(bot, evt) {
 
 
 var showMenu = function(response, convo) {
@@ -155,7 +155,7 @@ convo.say(message_with_Attachments);
 
 //Section B1 - B2.6
 //Section B1
-controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
+controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, evt) {
 
     var showBlank = function(response, convo) {
 
