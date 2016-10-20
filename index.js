@@ -7,7 +7,6 @@ var controller = Botkit.slackbot({
     retry: Infinity,
     debug: false
 })
-
 var postToCommentbox = function(response, convo) {
     // begin of POST request to AWS-API
             var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
@@ -118,10 +117,9 @@ convo.say(message_with_Attachments);
   bot.startConversation(message, showMenu);
 
 })
-    //Section B1 - B2.6
 
+//Section B1 - B2.6
 //Section B1
-
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
     var showBlank = function(response, convo) {
