@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 
 var Botkit = require('botkit')
 
@@ -91,13 +91,13 @@ var postToCommentbox = function(response, convo) {
 
 }
 
-var promptUserComment = function(response,convo) {
-            convo.ask('What do you think?', function(response,convo) {
-            postToCommentbox(response,convo);
-            convo.say(':+1: :+1:');
-            convo.next();
-            })
-    }
+// var promptUserComment = function(response,convo) {
+//             convo.ask('What do you think?', function(response,convo) {
+//             postToCommentbox(response,convo);
+//             convo.say(':+1: :+1:');
+//             convo.next();
+//             })
+//     }
 
 
 controller.on('bot_channel_join', function(bot, message) {
@@ -213,7 +213,6 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
                     showHighNumIdeasHoneyComb(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -338,7 +337,6 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
                     showHighNumIdeas(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -430,7 +428,6 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
-                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -494,7 +491,6 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
-                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -592,10 +588,10 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
                     showThreeOptions(response, convo);
                     convo.next();
                 } else {
-                    convo.say(':bellhop_bell: Let me connect you to an expert');
-                    convo.next();
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
+                convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -704,7 +700,6 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
                     showFiveThemes(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -793,7 +788,6 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
-                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -894,7 +888,6 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
                     showSixTeams(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -1020,10 +1013,10 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
                     showDetailed(response, convo);
                     convo.next();
                 } else {
-                    convo.say(':bellhop_bell: Let me connect you to an expert');
-                    convo.next();
+                convo.say(':confused: I\'m sorry I didn\'t quite catch that');
+                convo.repeat();
+                convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -1094,7 +1087,6 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
             pattern: bot.utterances.yes,
             callback: function(response, convo) {
                 showComparison(response, convo);
-                promptUserComment(response,convo);
                 convo.next();
             }
         }, {
@@ -1198,7 +1190,6 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
                     showSixSteps(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -1346,7 +1337,6 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
                     showSixSteps(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -1512,7 +1502,6 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
                     showSixMilestones(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,text);
             });
     }
 
@@ -1661,7 +1650,6 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
                     showSixPillars(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -1804,7 +1792,6 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
                     showFourGroups(response, convo);
                     convo.next();
                 }
-                promptUserComment(response,convo);
             });
     }
 
@@ -1926,7 +1913,6 @@ controller.hears(['define user', 'target user', 'user groups', 'target customer'
 //                     showFourSegments(response, convo);
 //                     convo.next();
 //                 }
-//                 promptUserComment(response,convo);
 //             });
 //     };
 
