@@ -1005,7 +1005,7 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
     var numOptions = function(response, convo) {
         convo.ask('Do you want a "high level" or "detailed" chart?',
             function(response, convo) {
-                var ideasNum = parseInt(response.text, 10);
+                var ideasNum = response.text;
                  if (ideasNum == 'high level') {
                     showHighLevel(response, convo);
                     convo.next();
