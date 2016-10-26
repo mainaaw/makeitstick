@@ -1,10 +1,10 @@
  'use strict'
 
-var Botkit = require('botkit')
+var Botkit = require('botkit');
 
 
 // //----->>>>>>Single team start
-// var token = process.env.SLACK_TOKEN
+ var token = process.env.SLACK_TOKEN
 
 
 var controller = Botkit.slackbot({
@@ -13,23 +13,23 @@ var controller = Botkit.slackbot({
     debug: false
 })
 
-// //Assume single team mode if we have a SLACK_TOKEN
-// if (token) {
-//     console.log('Starting in single-team mode')
-//     controller.spawn({
-//             token: token
-//         }).startRTM(function(err, bot, payload) {
-//             if (err) {
-//                 throw new Error(err)
-//             }
+//Assume single team mode if we have a SLACK_TOKEN
+if (token) {
+    console.log('Starting in single-team mode')
+    controller.spawn({
+            token: token
+        }).startRTM(function(err, bot, payload) {
+            if (err) {
+                throw new Error(err)
+            }
 
-//             console.log('Connected to Slack RTM')
-//         })
-//         // Otherwise assume multi-team mode - setup beep boop resourcer connection
-// } else {
-//     console.log('Starting in Beep Boop multi-team mode')
-//     require('beepboop-botkit').start(controller, { debug: true })
-//  }
+            console.log('Connected to Slack RTM')
+        })
+        // Otherwise assume multi-team mode - setup beep boop resourcer connection
+} else {
+    console.log('Starting in Beep Boop multi-team mode')
+    require('beepboop-botkit').start(controller, { debug: true })
+ }
 //  //------->>>>>>>Single team end
 //var controller = Botkit.slackbot()
 // Beepboop manages the hosting infrastructure for your bot and  publishes events
@@ -38,10 +38,10 @@ var controller = Botkit.slackbot({
 // listens for those events handles and starting/stopping the given team bot for you.
 // It is the develper's responsiblity to ensure any state stored outside of the configs
 // set in the project's bot.yml supports multitency (if you allow multiple teams to run your bot)
-var beepboop = require('./resfile.js')
-beepboop.start(controller, {
-  debug: true
-})
+// var beepboop = require('./resfile.js')
+// beepboop.start(controller, {
+//   debug: true
+// })
 
 
 // Send the user who added the bot to their team a welcome message the first time it's connected
@@ -88,7 +88,6 @@ var postToCommentbox = function(response, convo) {
 
             request.send(postData);
             // end of POST request to AWS-API
-
 }
 
 // var promptUserComment = function(response,convo) {
