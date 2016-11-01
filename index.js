@@ -9,7 +9,7 @@ var Botkit = require('botkit');
 if (!process.env.DASHBOT_API_KEY) {
   throw new Error('"DASHBOT_API_KEY" environment variable must be defined');
 }
- ---Dashbot data capture
+ //---Dashbot data capture
  var dashbot = process.env.DASHBOT_API_KEY
 
 
