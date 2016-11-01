@@ -6,11 +6,11 @@ var Botkit = require('botkit');
 // //----->>>>>>Single team start
  var token = process.env.SLACK_TOKEN
 
-// if (!process.env.DASHBOT_API_KEY) {
-//   throw new Error('"DASHBOT_API_KEY" environment variable must be defined');
-// }
- //---Dashbot data capture
- //var dashbot = process.env.DASHBOT_API_KEY
+if (!process.env.DASHBOT_API_KEY) {
+  throw new Error('"DASHBOT_API_KEY" environment variable must be defined');
+}
+ ---Dashbot data capture
+ var dashbot = process.env.DASHBOT_API_KEY
 
 
 
