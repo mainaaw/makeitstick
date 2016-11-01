@@ -18,8 +18,8 @@ var controller = Botkit.slackbot({
     debug: false
 })
 
-controller.middleware.receive.use(dashbot.receive);
-controller.middleware.send.use(dashbot.send);
+// controller.middleware.receive.use(dashbot.receive);
+// controller.middleware.send.use(dashbot.send);
 
 
 //Assume single team mode if we have a SLACK_TOKEN
