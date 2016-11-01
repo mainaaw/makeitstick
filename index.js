@@ -6,12 +6,21 @@ var Botkit = require('botkit');
 // //----->>>>>>Single team start
  var token = process.env.SLACK_TOKEN
 
+if (!process.env.DASHBOT_API_KEY) {
+  throw new Error('"DASHBOT_API_KEY" environment variable must be defined');
+}
+ //---Dashbot data capture
+ var dashbot = process.env.DASHBOT_API_KEY
+
+
 
 var controller = Botkit.slackbot({
     // reconnect to Slack RTM when connection goes bad
     retry: Infinity,
     debug: false
 })
+controller.middleware.receive.use(dashbot.receive);
+controller.middleware.send.use(dashbot.send);
 
 //Assume single team mode if we have a SLACK_TOKEN
 if (token) {
