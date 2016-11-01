@@ -8,10 +8,9 @@ var Botkit = require('botkit');
 //---Dashbot data capture
  var dashbot = process.env.DASHBOT_API_KEY
 
-if (!process.env.DASHBOT_API_KEY) {
-  throw new Error('"DASHBOT_API_KEY" environment variable must be defined');
-}
-
+// if (!process.env.DASHBOT_API_KEY) {
+//   throw new Error('"DASHBOT_API_KEY" environment variable must be defined');
+// }
 
 var controller = Botkit.slackbot({
     // reconnect to Slack RTM when connection goes bad
