@@ -319,6 +319,8 @@ controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direc
 
 controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+        postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -445,6 +447,8 @@ controller.hears(['Concept', 'concept', 'Mindmap', 'mindmap'], ['direct_message'
 //Comparison C1
 
 controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 'Criteria', '2x2', 'two things', 'multiple variables'], ['direct_message', 'direct_mention'], function(bot, message) {
+    postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -507,6 +511,8 @@ controller.hears(['compare', 'comparison', 'Comparison', 'compare', 'criteria', 
 
 //Comparison C3
 controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'solution', 'before and after'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -572,6 +578,8 @@ controller.hears(['before', 'after', 'change of state', 'change', 'problem', 'so
 
 controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alternatives', 'Alternatives', 'choice', 'choices', 'options', 'Options', 'pros and cons'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -681,6 +689,8 @@ controller.hears(['decision', 'Decision', 'alternative', 'Alternative', 'alterna
 //List L1
 
 controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes', 'user quotes', 'interview quotes', 'interviews', 'interview insights', 'insights from interviews'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -805,6 +815,8 @@ controller.hears(['interview', 'quote', 'theme', 'Interview', 'Quote', 'quotes',
 
 controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact', 'product features', 'product feature', 'feature benefit', 'features and benefits'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+        postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -869,6 +881,8 @@ controller.hears(['feature', 'benefit', 'impact', 'features', 'Benefit', 'Impact
 
 controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team members', 'organization', 'panel'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -998,6 +1012,8 @@ controller.hears(['team', 'member', 'Team', 'Member', 'board', 'advisors', 'team
 controller.hears(['user testing', 'user test', 'user test summary', 'user test results', 'user research', 'observations', 'observing users'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
+        postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -1104,6 +1120,8 @@ controller.hears(['user testing', 'user test', 'user test summary', 'user test r
 
 controller.hears(['product market fit', 'product market', 'product use case'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+        postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -1168,6 +1186,8 @@ controller.hears(['product market fit', 'product market', 'product use case'], [
 
 controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'Linear', 'Flow', 'Series', 'Action', 'roadmap', 'plan'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -1312,6 +1332,8 @@ controller.hears(['process', 'linear', 'flow', 'series', 'action', 'Process', 'L
 // Process P3
 
 controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process', 'loop', 'Loop'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -1481,6 +1503,8 @@ controller.hears(['repeating', 'cycle', 'Repeating', 'Cycle', 'cyclical process'
 controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 'Progress', 'milestones', 'Milestones'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
+        postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -1629,6 +1653,8 @@ controller.hears(['milestone', 'timeline', 'progress', 'Milestone', 'Timeline', 
 controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principles', 'tenants', 'big idea'], ['direct_message', 'direct_mention'], function(bot, message) {
 
 
+        postQuestionsAsked(message);
+
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -1773,6 +1799,8 @@ controller.hears(['vision', 'mission', 'values', 'culture', 'program', 'principl
 // Structure S3
 
 controller.hears(['define user', 'target user', 'user groups', 'target customer'], ['direct_message', 'direct_mention'], function(bot, message) {
+
+        postQuestionsAsked(message);
 
     var showBlank = function(response, convo) {
 
@@ -2003,7 +2031,7 @@ controller.hears(['thanks', 'thx', 'thank you'], ['direct_message', 'direct_ment
 
 //Conversation Initiation
 controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, message) {
-
+    postQuestionsAsked(message);
     var notUnderstanding = function(response,convo) {
         convo.ask('Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. \n Would you like to leave anonymous feedback or leave your email for us to get back to you?',
         [
