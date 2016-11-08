@@ -76,7 +76,37 @@ var postToCommentbox = function(response, convo) {
             var testData = {
                 "Records": [{
                     "Sns": {
-                        "Subject": "Help Request",
+                        "Subject": "Feedback",
+                        "Message": response.text
+                    }
+                }]
+            }
+            var postData = JSON.stringify(testData);
+            var async = true;
+
+            var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+            var request = new XMLHttpRequest();
+
+            request.onload = function() {
+                var status = request.status;
+                var data = request.responseText;
+            }
+
+            request.open(method, url, async);
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            request.send(postData);
+            // end of POST request to AWS-API
+}
+
+var postQuestionsAsked = function(response) {
+    // begin of POST request to AWS-API
+            var url = 'https://mbk8u331s1.execute-api.us-west-2.amazonaws.com/stickproduction/commentrelay';
+            var method = 'POST';
+            var testData = {
+                "Records": [{
+                    "Sns": {
+                        "Subject": "Question Asked",
                         "Message": response.text
                     }
                 }]
@@ -165,6 +195,7 @@ convo.say(message_with_Attachments);
 //Section B1
 controller.hears(['ideas', 'brainstorming', 'brainstorm', 'Brainstorm'], ['direct_message', 'direct_mention'], function(bot, message) {
 
+    postQuestionsAsked(message);
     var showBlank = function(response, convo) {
 
         var initial_with_blank = {
@@ -2012,7 +2043,7 @@ controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, messa
             var testData = {
                 "Records": [{
                     "Sns": {
-                        "Subject": "Help Request",
+                        "Subject": "Feedback",
                         "Message": response.text
                     }
                 }]
