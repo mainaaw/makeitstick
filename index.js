@@ -2033,7 +2033,7 @@ controller.hears(['thanks', 'thx', 'thank you'], ['direct_message', 'direct_ment
 controller.hears('.*', ['direct_message', 'direct_mention'], function(bot, message) {
     postQuestionsAsked(message);
     var notUnderstanding = function(response,convo) {
-        convo.ask('Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. \n Reply *YES* if you would like to leave feedback or your email for us to contact you. \n Reply *NO* if not.'),
+        convo.ask('Sorry <@' + message.user + '>, I\'m still learning and I don\'t quite understand. \n Reply *YES* if you would like to leave feedback or your email for us to contact you. \n Reply *NO* if not.',
         [
 
         {
